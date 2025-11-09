@@ -1,12 +1,10 @@
 import React from "react";
-import Login from "./pages/login/login";
+import AppRouter from "./Routes.js";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <Login />
+      <AppRouter/>
     </div>
   );
 }
-
-export default App;
