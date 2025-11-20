@@ -10,19 +10,38 @@ export default function Register() {
     const [DataNasc,setNasc] = useState('')
     const [foto, setfoto] = useState(null)
     const [Preview,setPreview] = useState('./assets/semfoto.jpeg')
+    const [idade,setIdade] = useState('')
 
     useEffect(() => {
         return () => Preview && URL.revokeObjectURL(Preview)
     }, [Preview])
 
-
     function formataData(e){
        let v = e.target.value.replace(/\D/g, "") //só numeros
 
-        if(v.length > 2) v = v.slice(0,2) + "/" + v.slice(2)
-        if(v.length > 5) v = v.slice(0,5) + "/" + v.slice(5,9)
+        if(v.length > 2) v = v.slice(0,2) + "/" + v.slice(2) //insere a barra a partir do 2 numero
+        if(v.length > 5) v = v.slice(0,5) + "/" + v.slice(5,9) //insere a barra a partir do 5 numero
+        
+        const [dia, mes, ano] = v.split('/') //divide a data pelas barras
+
+        if(ano && ano.length === 4){
+            const data = new Date(ano, mes - 1, dia)
+            CalcIdade(data)
+        }
 
         setNasc(v)
+    }
+
+    function CalcIdade(data){
+        const hoje = new Date()
+        const nascimento = new Date(data)
+
+        let tempodevida = hoje.getFullYear() - nascimento.getFullYear()
+
+        let mes = hoje.getMonth() - nascimento.getMonth()
+        if(mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) tempodevida--
+
+        setIdade(tempodevida)
     }
 
 
@@ -31,42 +50,53 @@ export default function Register() {
 
         try {
             if(nome && email && senha && DataNasc){
+                if(senha.length < 6){
+                    toast.error("senha muito curta")
+                }else if(senha.length > 8){
+                    toast.error("senha muito longa")
+                }else{
+                    if(idade < 18){
+                        toast.warning('voce nao tem idade suficiente para usar o app')
+                    }else{
 
-                const formData = new FormData()
-                formData.append('nome',nome)
-                formData.append('email',email)
-                formData.append('senha',senha)
-                formData.append('dataNasc',DataNasc)
+                        const formData = new FormData()
+                        formData.append('nome',nome)
+                        formData.append('email',email)
+                        formData.append('senha',senha)
+                        formData.append('dataNasc',DataNasc)
+        
+                        if(foto instanceof File){
+                            formData.append('foto',foto) //só envia a foto se tiver um arquivo real
+                        }
+        
+                        //manda pro backend
+                        const res = await fetch('http://localhost:3000/register', {
+                            method: 'POST', //metodo para mandar dados 
+                            body: formData //manda todo o formulario pro back
+                        })
+            
+                        if(!res.ok) throw new Error('Erro ao enviar dados'); //lança um novo erro caso o back retorne diferente de ok
+            
+                        const data = await res.json()
+                        toast.success(data.msg)
+            
+                        setnome('')
+                        setemail('')
+                        setsenha('')
+                        setfoto(null)
+                        setNasc('')
+                    }
 
-                if(foto instanceof File){
-                    formData.append('foto',foto) //só envia a foto se tiver um arquivo real
                 }
 
-                //manda pro backend
-                const res = await fetch('http://localhost:3000/register', {
-                    method: 'POST', //metodo para mandar dados 
-                    body: formData //manda todo o formulario pro back
-                })
-    
-                if(!res.ok) throw new Error('Erro ao enviar dados'); //lança um novo erro caso o back retorne diferente de ok
-    
-                const data = await res.json()
-                toast.success(data.msg)
-    
-                setnome('')
-                setemail('')
-                setsenha('')
-                setfoto(null)
-                setNasc('')
-
             }else{
-                alert('Preencha todos os campos!')
+                toast.error("prencha todos os campos")
                 setnome('')
                 setemail('')
                 setsenha('')
                 setfoto(null)
                 setNasc('')
-            }   
+            }
 
         }catch(e){
             console.log("Erro:",e)
@@ -76,7 +106,7 @@ export default function Register() {
     return (
         <main id="CadConteiner">
             <section id="BemVindo">
-                <h1>CRIE SUA CONTA AGORA!</h1>
+               <h1>CRIE SUA CONTA AGORA!</h1>
             </section>
             <form id="formularioCad" onSubmit={e => EnviaBack(e)}>
                 <img src={Preview}  alt="foto de perfil"></img>
