@@ -1,0 +1,67 @@
+:root{
+    --CorSegundaria: #000000ff;
+    --CorTexto: #586f7cff;   
+    --CorPrimaria:#b8dbd9ff;
+    --CorDoBotao:#f4f4f9ff;
+}
+
+main{
+    background-color: var(--CorPrimaria);
+    height: 100vh;
+}
+
+#bemVindo h1{
+    display: flex;
+    flex-direction: column;
+    font-size: 72px;
+}
+
+#bemVindo{
+    margin-bottom: 30px;
+}
+
+.preto{
+    padding-left: 10px;
+}
+
+.branco{
+    padding-left: 10px;
+    color: white;
+    background-color: black;
+}
+
+.branco1{
+    padding-left: 10px;
+    color: white;
+    background-color: black;
+    width: 90%;
+}
+
+#form{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 0 auto;
+}
+
+#form input{
+    background-color: var(--CorPrimaria);
+    color: var(--CorTexto);
+    border-bottom: 1px solid white;
+    font-size: 14px;
+    font-weight: lighter;
+    margin: 20px 0;
+}
+
+#form input:hover{
+    outline: none;
+}
+
+#entrar_1{
+    font-size: 25px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    height: 50px;
+    box-shadow: 1px 1px 3px black;
+}
