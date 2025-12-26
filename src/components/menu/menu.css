@@ -1,0 +1,31 @@
+:root{
+    --CorSegundaria: #000000ff;
+    --CorTexto: #586f7cff;   
+    --CorPrimaria:#b8dbd9ff;
+    --CorDoBotao:#f4f4f9ff;
+}
+
+#FooterFeed{
+    position: fixed;
+    height: 60px;
+    width: 100%;
+    background-color: var(--CorSegundaria);
+    bottom: 0;
+    color: var(--CorDoBotao);
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#FooterFeed img{
+    width: 40px;
+    height: 40px;
+}
+
+.icon{
+    color: var(--CorDoBotao);
+    margin-top: 10px;
+    margin-right: 25px;
+    width: 40px;
+    height: 40px;
+}

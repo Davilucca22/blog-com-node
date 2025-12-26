@@ -1,0 +1,80 @@
+:root{
+    --CorSegundaria: #000000ff;
+    --CorTexto: #586f7cff;   
+    --CorPrimaria:#b8dbd9ff;
+    --CorDoBotao:#f4f4f9ff;
+}
+
+#infoUser{
+    display: flex;
+    flex-direction: column;
+}
+
+#infoUser img{
+    width: 100px;
+    height: 100px;
+}
+
+#contadores{
+    display: flex;
+    margin-left: 10px;
+}
+
+#textos{
+    margin: 10px;
+}
+
+#legendas{
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    gap: 10px;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    margin: 0 5px;
+}
+
+#conteinerHamburguer{
+    justify-self: end;
+}
+
+#hamburguer2{
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    color: var(--CorSegundaria);
+}
+#BThamburguer2{
+    background-color: var(--CorPrimaria);
+}
+
+#nomeP{
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#infoUser p {
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-bottom: 50px;
+}
+
+#Posts h1{
+    margin: 5px;
+}
+
+#imgs{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+#imgs img{
+    border-radius: 10px;
+    width: 170px;
+}

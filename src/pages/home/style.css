@@ -69,6 +69,11 @@
     text-decoration: none;
 }
 
+#entrar a{
+    color: var(--CorDoBotao);
+    text-decoration: none;
+}
+
 #entrar{
     color: white;
     background-color: var(--CorSegundaria);

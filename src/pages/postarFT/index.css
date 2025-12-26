@@ -1,0 +1,111 @@
+:root{
+    --CorSegundaria: #000000ff;
+    --CorTexto: #586f7cff;   
+    --CorPrimaria:#b8dbd9ff;
+    --CorDoBotao:#f4f4f9ff;
+}
+
+#conteinerAddfoto{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    justify-items: center;
+    align-items: center;
+}
+
+#conteinerAddfoto div{
+    display: flex;
+    margin: 0 auto;
+    height: 300px;
+    justify-self: center;
+}
+
+#addFT{
+    position: fixed;
+    opacity: 0;
+    height: 300px;
+    width: 100%;
+}
+
+#iconePlus{
+    margin-top: 150px;
+    width: 100px;
+    height: 100px;
+}
+
+#seta{
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    color: black;
+}
+
+#textoPost{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 300px;
+}
+
+#textoPost textarea{
+    margin:10px;
+    height: 70px;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+#textoPost textarea:focus{
+    outline: 0;
+}
+
+#textoPost button{
+    background-color: black;
+    color: whitesmoke;
+    width: 200px;
+    height: 50px;
+    margin: 20px auto;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px black;
+}
+
+#imgPost{
+    border-radius: 10px;
+    width: 300px;
+    height: 300px;
+    margin-top: 0;
+}   
+
+
+#modalPost{
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background-color: rgba(2, 2, 2, 0.8);
+    z-index: 999;
+    justify-items: center;
+    align-content: center;
+}
+
+#modalPost p{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#loading{
+    height: 100px;
+    width: 100px;
+    border: 12px solid black;
+    border-radius: 50%;
+    border-right-color: var(--CorPrimaria);
+    animation: rotate 1s ease infinite;
+    margin: 10px;
+}
+
+@keyframes rotate {
+    100%{
+        transform: rotate(360deg);
+    }
+}

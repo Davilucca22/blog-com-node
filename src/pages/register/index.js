@@ -14,7 +14,7 @@ export default function Register() {
 
     useEffect(() => {
         return () => Preview && URL.revokeObjectURL(Preview)
-    }, [Preview])
+    }, [Preview]) 
 
     function formataData(e){
        let v = e.target.value.replace(/\D/g, "") //só numeros
@@ -29,7 +29,7 @@ export default function Register() {
             CalcIdade(data)
         }
 
-        setNasc(v)
+        setNasc(v) 
     }
 
     function CalcIdade(data){
@@ -44,6 +44,15 @@ export default function Register() {
         setIdade(tempodevida)
     }
 
+    function mostraModal(){
+        const modal = document.getElementById('Rmodal')
+        modal.style.display = 'block'
+    }
+
+    function escondeModal(){
+        const modal = document.getElementById('Rmodal')
+        modal.style.display = 'none'
+    }
 
     async function EnviaBack(e) { //envia os dados para o backend
         e.preventDefault()
@@ -72,19 +81,32 @@ export default function Register() {
                         //manda pro backend
                         const res = await fetch('http://localhost:3000/register', {
                             method: 'POST', //metodo para mandar dados 
-                            body: formData //manda todo o formulario pro back
+                            body: formData, //manda todo o formulario pro back
+                            credentials:"include"
                         })
             
                         if(!res.ok) throw new Error('Erro ao enviar dados'); //lança um novo erro caso o back retorne diferente de ok
             
                         const data = await res.json()
-                        toast.success(data.msg)
-            
-                        setnome('')
-                        setemail('')
-                        setsenha('')
-                        setfoto(null)
-                        setNasc('')
+                        
+                        mostraModal()
+
+                        if(data.msg === 'Email ja cadastrado'){
+
+                            escondeModal()
+                            setemail('')
+                            toast.warning(data.msg)
+
+                        }else{
+
+                            setnome('')
+                            setemail('')
+                            setsenha('')
+                            setfoto(null)
+                            setNasc('')
+                            window.open('/feed')
+
+                        }
                     }
 
                 }
@@ -105,6 +127,9 @@ export default function Register() {
 
     return (
         <main id="CadConteiner">
+            <section id="Rmodal">
+               <div id="load"></div>
+            </section>
             <section id="BemVindo">
                <h1>CRIE SUA CONTA AGORA!</h1>
             </section>

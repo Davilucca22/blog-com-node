@@ -18,7 +18,7 @@ export default function BoasVindas(){
             <section id="conteinerBTN">
                 <button className="botao" id="comecar"><Link to={'/register'}>COMEÇAR AGORA</Link></button>
                 <span id="jaConta">JA TEM UMA CONTA?</span>
-                <button className="botao" id="entrar">ENTRAR</button>
+                <button className="botao" id="entrar"><Link to={'/login'}>ENTRAR</Link></button>
             </section>
         </main>
     )
