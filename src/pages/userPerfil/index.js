@@ -26,23 +26,24 @@ export default function PerfilUser() {
         })
     },[])
 
-    function mostramodal(){
-        const modal = document.getElementById('modal')
+    function mostramodal(id){
+        const modal = document.getElementById(id)
 
         modal.style.display = "block"
     }
-
-    function escondemodal(){
-        const modal = document.getElementById('modal')
+ 
+    function escondemodal(id){
+        const modal = document.getElementById(id)
 
         modal.style.display = "none"
     } 
     return (
         <div id="conteinerPerfil">
             <main>
+                <section id="modalFT"></section>
                 <section id="modal">
                 <div>
-                    <button onClick={escondemodal}>
+                    <button onClick={e => escondemodal("modal")}>
                         <IoArrowBackOutline id="back"/> 
                     </button>
                     <span>EDITAR PERFIL</span>
@@ -51,7 +52,7 @@ export default function PerfilUser() {
                 </section>
                 <section id="bio">
                     <div id="conteinerHamburguer">
-                        <button id="BThamburguer2" onClick={mostramodal}>
+                        <button id="BThamburguer2" onClick={e => mostramodal("modal")}>
                             <FiMenu id="hamburguer2" />
                         </button>
                     </div>
@@ -78,15 +79,16 @@ export default function PerfilUser() {
                         </div>
                         <p>lorem ipsm dolor fet</p>
                     </div>
-                    <div id="Posts">
-                        <h1>POSTAGENS</h1>
-                        <div id="imgs">
-                            {Posts.map((e,index) =>(
-                                <img src={e.imgURL} alt={index}></img>
-                            ))}
-                        </div>
-                    </div>
                 </section>
+                <div id="Posts">
+                    <h1>POSTAGENS</h1>
+                    <div id="imgs">
+                        {Posts.map((e,index) =>(
+                            <img src={e.imgURL} alt={index}></img>  
+                        ))}
+                    </div>
+                </div>
+                <footer id="footer"></footer>
             </main>
             <Menu /> {/* barra de menu no inferior da tela, usado em outras rotas */}
         </div>
