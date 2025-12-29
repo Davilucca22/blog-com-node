@@ -11,9 +11,8 @@ export default function PerfilUser() {
     const [Foto,setFoto] = useState(null)
     const [Posts,setPosts] = useState([])
 
-
     useEffect(() => {
-        fetch("http://localhost:3000/perfil",{
+        fetch("http://localhost:3000/session",{
             method:"GET",
             credentials:"include"
         }).then(res => res.json()

@@ -8,18 +8,27 @@ import "./feed.css"
 export default function Feed(){
     const [nome, setNome] = useState('')
     const [foto,setFoto] = useState(null)
+    const [dados,setDados] = useState([])
 
-    useEffect(() => { //busca os dados no backend
-        fetch("http://localhost:3000/feed",{
+    useEffect(() => { //dados dos posts
+        fetch("http://localhost:3000/feed?page=1",{
             method:"GET",
             credentials:"include"
         }).then(res => res.json())
-        .then(data =>{
-            console.log("dados recebidos")
-            setNome(data.name) 
-            setFoto(data.fotoPerfil)
+        .then(data =>{  
+            setDados(data.data)
+        })
+
+        fetch("http://localhost:3000/session",{ //dados apenas da sessao
+            method:"GET",
+            credentials:"include"
+        }).then(res => res.json())
+        .then(email => {
+            setNome(email.name)
+            setFoto(email.fotoPerfil)
         })
     },[])
+
 
     function mostramodal(){
         const modal = document.getElementById('modal')
@@ -55,6 +64,23 @@ export default function Feed(){
             </header>
             <main id="MainFeed">
                 <div id="vazio" /* apenas preenche o espaço vazio atras do heder no main, pro conteudo ficar pra baixo do header */></div>
+                {dados.map(val =>(
+                    <section>
+                        <div id="cabecalhoPost">
+                            <img src={val.fotoPerfil} alt="foto"></img>
+                            <span>{val.name}</span>
+                        </div>
+                        {val.posts.map(el => (
+
+                            <div id="imgPost">
+                                <img src={el.imgURL} alt="fotoPost"></img>
+                                <span>{el.textoPost}</span>
+                            </div>  
+                            
+                        ))}
+                    </section>
+                ))
+                }
             </main>
             <Menu/>
         </div>

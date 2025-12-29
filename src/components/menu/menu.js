@@ -10,7 +10,7 @@ export default function Menu() {
     const [img,setImg] = useState(null)
 
     useEffect(() =>{
-        fetch("http://localhost:3000/perfil",{
+        fetch("http://localhost:3000/session",{
             method:"GET",
             credentials:"include"
         }).then(res => res.json())
