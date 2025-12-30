@@ -1,6 +1,8 @@
 import react, { useEffect, useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import { IoArrowBackOutline } from "react-icons/io5";
+import { IoIosHeart } from "react-icons/io";
+import { FaRegComment } from "react-icons/fa";
 import { data } from "react-router-dom";
 import Menu from "../../components/menu/menu";
 import "./feed.css"
@@ -29,7 +31,6 @@ export default function Feed(){
         })
     },[])
 
-
     function mostramodal(){
         const modal = document.getElementById('modal')
 
@@ -40,6 +41,39 @@ export default function Feed(){
         const modal = document.getElementById('modal')
 
         modal.style.display = "none"
+    }
+
+    function curtir(id){
+
+        const coracao = document.getElementById(id)
+        coracao.style.color = "red"
+
+        let novaCurtida
+
+        dados.map(obj =>(
+            obj.posts.map(post => {
+                if(post._id === id){
+                    novaCurtida = post.curtidas + 1
+                    EnviaLike(id,novaCurtida)
+                }
+            })
+        ))
+
+
+    }
+
+    function EnviaLike(id,novaCurtida){
+        fetch("http://localhost:3000/curtida",{
+            method:"PUT",
+            credentials:"include",
+            headers:{
+              'Content-Type': 'application/json'  
+            },
+            body:JSON.stringify({
+                postId:id,
+                QTDcurtida:novaCurtida
+            })
+        })
     }
 
     return(
@@ -62,26 +96,39 @@ export default function Feed(){
                     <FiMenu id="hamburguer" />
                 </button>
             </header>
+
             <main id="MainFeed">
-                <div id="vazio" /* apenas preenche o espaço vazio atras do heder no main, pro conteudo ficar pra baixo do header */></div>
+
+                <div id="vazio" /* apenas preenche o espaço vazio atras do header no main, pro conteudo ficar pra baixo do header */></div>
+
                 {dados.map(val =>(
-                    <section>
-                        <div id="cabecalhoPost">
-                            <img src={val.fotoPerfil} alt="foto"></img>
+                    val.posts.map(el => (
+
+                        <section className="conteinerPost">
+
+                        <div className="cabecalhoPost">
+                            <img className="fotoP" src={val.fotoPerfil} alt="foto"></img>
                             <span>{val.name}</span>
                         </div>
-                        {val.posts.map(el => (
 
-                            <div id="imgPost">
-                                <img src={el.imgURL} alt="fotoPost"></img>
-                                <span>{el.textoPost}</span>
-                            </div>  
-                            
-                        ))}
-                    </section>
-                ))
+                        <div className="imgPost">
+                            <img src={el.imgURL} alt={el.textoPost}></img>
+                            <IoIosHeart onClick={e => curtir(el._id)} id={el._id} className="curtida"/>
+                            <span>{el.curtidas}</span>
+                            <FaRegComment id="comentario"/>
+                            {el.textoPost && 
+                                <span>{val.name}: {el.textoPost}</span>
+                            }
+                        </div>  
+                        </section>
+
+                        ))
+                    ))
                 }
+
             </main>
+
+            <footer id="vazio" /* apenas preenche o espaço vazio atras do heder no main, pro conteudo ficar pra baixo do header */></footer>
             <Menu/>
         </div>
     )
