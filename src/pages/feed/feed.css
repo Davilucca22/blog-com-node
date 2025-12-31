@@ -126,17 +126,28 @@
     height: 400px;
 }
 
-.imgPost span{
+.comentPost{
     display: block;
     margin-left: 10px;
+    margin-top: 5px;
+    font-size: 18px;
 }
 
 .imgPost svg{
     width: 25px;
     height: 25px;
-    margin-left: 5px;
 }
 
 .curtida{
     color: rgb(0, 0, 0);
+    margin-left: 5px;
+}
+
+.tres{
+    display: flex;
+    align-items: center;
+}
+
+.comentario{
+    margin-left: 10px;
 }

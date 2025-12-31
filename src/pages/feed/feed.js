@@ -46,33 +46,18 @@ export default function Feed(){
     function curtir(id){
 
         const coracao = document.getElementById(id)
+
         coracao.style.color = "red"
 
-        let novaCurtida
-
-        dados.map(obj =>(
-            obj.posts.map(post => {
-                if(post._id === id){
-                    novaCurtida = post.curtidas + 1
-                    EnviaLike(id,novaCurtida)
-                }
-            })
-        ))
-
-
-    }
-
-    function EnviaLike(id,novaCurtida){
-        fetch("http://localhost:3000/curtida",{
+        fetch(`http://localhost:3000/${id}/curtida`,{
             method:"PUT",
             credentials:"include",
             headers:{
               'Content-Type': 'application/json'  
-            },
-            body:JSON.stringify({
-                postId:id,
-                QTDcurtida:novaCurtida
-            })
+            }
+        }).then(res => res.json())
+        .then(data =>{  
+            setDados(data.data)
         })
     }
 
@@ -113,11 +98,13 @@ export default function Feed(){
 
                         <div className="imgPost">
                             <img src={el.imgURL} alt={el.textoPost}></img>
-                            <IoIosHeart onClick={e => curtir(el._id)} id={el._id} className="curtida"/>
-                            <span>{el.curtidas}</span>
-                            <FaRegComment id="comentario"/>
+                            <div className="tres">
+                                <IoIosHeart onClick={e => curtir(el._id)} id={el._id} className="curtida"/>
+                                <span className="numLikes">{el.curtidas}</span>
+                                <FaRegComment className="comentario"/>
+                            </div>
                             {el.textoPost && 
-                                <span>{val.name}: {el.textoPost}</span>
+                                <span className="comentPost">{val.name}: {el.textoPost}</span>
                             }
                         </div>  
                         </section>
