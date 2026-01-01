@@ -10,6 +10,8 @@ export default function PerfilUser() {
     const [Seguindo,setSeguindo] = useState(0)
     const [Foto,setFoto] = useState(null)
     const [Posts,setPosts] = useState([])
+    const [modal,setmodal] = useState(false)
+    const [sair,setSair] = useState(false)
 
     useEffect(() => {
         fetch("http://localhost:3000/session",{
@@ -25,33 +27,37 @@ export default function PerfilUser() {
         })
     },[])
 
-    function mostramodal(id){
-        const modal = document.getElementById(id)
 
-        modal.style.display = "block"
-    }
- 
-    function escondemodal(id){
-        const modal = document.getElementById(id)
-
-        modal.style.display = "none"
-    } 
     return (
         <div id="conteinerPerfil">
             <main>
                 <section id="modalFT"></section>
-                <section id="modal">
-                <div>
-                    <button onClick={e => escondemodal("modal")}>
-                        <IoArrowBackOutline id="back"/> 
+        {modal && 
+            <section id="modal">
+                {sair &&
+                <div id="ModalSair">
+                    <div id="confirmaSair">
+                        <p>SAIR?</p>
+                        <div id="BTNs">
+                            <button id="BTNcancel" onClick={() => setSair(false)}>Cancelar</button>
+                            <button id="BTNconfirm"><a href="/" >Confirma</a></button>
+                        </div>
+                    </div>
+                </div>
+                }
+                <div id="botoes">
+                    <button onClick={() => setmodal(false)}>
+                        <IoArrowBackOutline id="back"/>
                     </button>
                     <span>EDITAR PERFIL</span>
                     <span>TEMA</span>
+                    <span onClick={() => setSair(true)}>SAIR</span>
                 </div>
-                </section>
+            </section>
+        }
                 <section id="bio">
                     <div id="conteinerHamburguer">
-                        <button id="BThamburguer2" onClick={e => mostramodal("modal")}>
+                        <button id="BThamburguer2" onClick={() => setmodal(true)}>
                             <FiMenu id="hamburguer2" />
                         </button>
                     </div>

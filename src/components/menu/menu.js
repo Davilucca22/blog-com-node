@@ -26,6 +26,5 @@ export default function Menu() {
                 <a href="/perfil"><img src={img} alt="foto do usuario"></img></a>
             </div>
         </footer>
-
     )
 }

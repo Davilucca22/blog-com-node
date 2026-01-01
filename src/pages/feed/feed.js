@@ -3,7 +3,6 @@ import { FiMenu } from "react-icons/fi";
 import { IoArrowBackOutline } from "react-icons/io5";
 import { IoIosHeart } from "react-icons/io";
 import { FaRegComment } from "react-icons/fa";
-import { data } from "react-router-dom";
 import Menu from "../../components/menu/menu";
 import "./feed.css"
 
@@ -11,6 +10,8 @@ export default function Feed(){
     const [nome, setNome] = useState('')
     const [foto,setFoto] = useState(null)
     const [dados,setDados] = useState([])
+    const [modal,setmodal] = useState(false)
+    const [sair,setSair] = useState(false)
 
     useEffect(() => { //dados dos posts
         fetch("http://localhost:3000/feed?page=1",{
@@ -31,17 +32,6 @@ export default function Feed(){
         })
     },[])
 
-    function mostramodal(){
-        const modal = document.getElementById('modal')
-
-        modal.style.display = "block"
-    }
-
-    function escondemodal(){
-        const modal = document.getElementById('modal')
-
-        modal.style.display = "none"
-    }
 
     function curtir(id){
 
@@ -63,21 +53,35 @@ export default function Feed(){
 
     return(
         <div id="conteinerFeed">
+        {modal && 
             <section id="modal">
-                <div>
-                    <button onClick={escondemodal}>
+                {sair &&
+                <div id="ModalSair">
+                    <div id="confirmaSair">
+                        <p>SAIR?</p>
+                        <div id="BTNs">
+                            <button id="BTNcancel" onClick={() => setSair(false)}>Cancelar</button>
+                            <button id="BTNconfirm"><a href="/" >Confirma</a></button>
+                        </div>
+                    </div>
+                </div>
+                }
+                <div id="botoes">
+                    <button onClick={() => setmodal(false)}>
                         <IoArrowBackOutline id="back"/>
                     </button>
                     <span>EDITAR PERFIL</span>
                     <span>TEMA</span>
+                    <span onClick={() => setSair(true)}>SAIR</span>
                 </div>
             </section>
+        }
             <header id="HeaderFeed">
                 <span>
                     <img src={foto} alt="foto do usuario"></img>
                     <p>{nome}</p>
                 </span>
-                <button id="BThamburguer" onClick={mostramodal}>
+                <button id="BThamburguer" onClick={() => setmodal(true)}>
                     <FiMenu id="hamburguer" />
                 </button>
             </header>

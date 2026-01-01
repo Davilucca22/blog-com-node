@@ -51,9 +51,6 @@ main{
     font-size: 14px;
     font-weight: lighter;
     margin: 20px 0;
-}
-
-#form input:hover{
     outline: none;
 }
 
