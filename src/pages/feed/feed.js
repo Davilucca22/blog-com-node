@@ -19,8 +19,9 @@ export default function Feed(){
             credentials:"include"
         }).then(res => res.json())
         .then(data =>{  
-            setDados(data.data)
+            setDados(data)
         })
+
 
         fetch("http://localhost:3000/session",{ //dados apenas da sessao
             method:"GET",
@@ -32,22 +33,32 @@ export default function Feed(){
         })
     },[])
 
-
     function curtir(id){
 
         const coracao = document.getElementById(id)
-
         coracao.style.color = "red"
 
-        fetch(`http://localhost:3000/${id}/curtida`,{
+        fetch(`http://localhost:3000/${id}/curtida`,{ //envia o id do post pro back atualizar a curtida
             method:"PUT",
             credentials:"include",
             headers:{
               'Content-Type': 'application/json'  
             }
-        }).then(res => res.json())
-        .then(data =>{  
-            setDados(data.data)
+        })
+
+        setDados(prev =>{ //atualiza a curtida
+            return prev.map(item =>{
+                if(item.post._id === id){
+                    return{
+                        ...item,
+                        post:{
+                            ...item.post,
+                            curtidas: item.post.curtidas + 1
+                        }
+                    }
+                }
+                return item
+            })
         })
     }
 
@@ -90,10 +101,9 @@ export default function Feed(){
 
                 <div id="vazio" /* apenas preenche o espaço vazio atras do header no main, pro conteudo ficar pra baixo do header */></div>
 
-                {dados.map(val =>(
-                    val.posts.map(el => (
+                {dados.map((val,index) =>(
 
-                        <section className="conteinerPost">
+                        <section key={val.post._id} className="conteinerPost">
 
                         <div className="cabecalhoPost">
                             <img className="fotoP" src={val.fotoPerfil} alt="foto"></img>
@@ -101,19 +111,19 @@ export default function Feed(){
                         </div>
 
                         <div className="imgPost">
-                            <img src={el.imgURL} alt={el.textoPost}></img>
+                            <img src={val.post.imgURL} alt={val.post.textoPost}></img>
                             <div className="tres">
-                                <IoIosHeart onClick={e => curtir(el._id)} id={el._id} className="curtida"/>
-                                <span className="numLikes">{el.curtidas}</span>
+                                <IoIosHeart onClick={e => curtir(val.post._id)} id={val.post._id} className="curtida"/>
+                                <span className="numLikes" >{val.post.curtidas}</span>
                                 <FaRegComment className="comentario"/>
                             </div>
-                            {el.textoPost && 
-                                <span className="comentPost">{val.name}: {el.textoPost}</span>
+                            {val.post.textoPost && 
+                                <span className="comentPost">{val.name}: {val.post.textoPost}</span>
                             }
                         </div>  
+
                         </section>
 
-                        ))
                     ))
                 }
 
