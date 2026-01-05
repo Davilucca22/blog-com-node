@@ -3,6 +3,7 @@ import { FiMenu } from "react-icons/fi";
 import { IoArrowBackOutline } from "react-icons/io5";
 import { IoIosHeart } from "react-icons/io";
 import { FaRegComment } from "react-icons/fa";
+import { AiOutlineCheck, AiOutlineClose  } from "react-icons/ai";
 import Menu from "../../components/menu/menu";
 import "./feed.css"
 
@@ -12,6 +13,8 @@ export default function Feed(){
     const [dados,setDados] = useState([])
     const [modal,setmodal] = useState(false)
     const [sair,setSair] = useState(false)
+    const [verComent,setverComent] = useState('')
+    const [textComent,setTextComent] = useState('')
 
     useEffect(() => { //dados dos posts
         fetch("http://localhost:3000/feed?page=1",{
@@ -22,7 +25,6 @@ export default function Feed(){
             setDados(data)
         })
 
-
         fetch("http://localhost:3000/session",{ //dados apenas da sessao
             method:"GET",
             credentials:"include"
@@ -32,6 +34,19 @@ export default function Feed(){
             setFoto(email.fotoPerfil)
         })
     },[])
+
+    useEffect(() => { //trava o scroll quando os comentarios aparecerem
+
+        if(verComent !== ''){
+            document.body.style.overflow = 'hidden'
+        }else{
+            document.body.style.overflow = 'auto'
+        }
+
+        return () => {
+            document.body.style.overflow = 'auto'
+        }
+    },[verComent])
 
     function curtir(id){
 
@@ -58,6 +73,22 @@ export default function Feed(){
                     }
                 }
                 return item
+            })
+        })
+
+    }
+
+    function Addcomentario(){
+        fetch('http://localhost:3000/comentario',{
+            method:"PUT",
+            credentials:"include",
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                nome:nome,
+                foto:foto,
+                comentario:textComent
             })
         })
     }
@@ -103,7 +134,25 @@ export default function Feed(){
 
                 {dados.map((val,index) =>(
 
-                        <section key={val.post._id} className="conteinerPost">
+                        <section key={val.post._id} className="conteinerPost" id={index} >
+
+                        {verComent === index &&
+                            <div id="conteinerComent">
+                                <button type="button" id="sairComent" onClick={() => setverComent('')}><AiOutlineClose  /></button>
+                                <dl id="comentarios">
+                                {val.post.comentarios?.map(item => (
+                                        <div>
+                                            <dt className="user">{item.donoComentario}</dt>
+                                                <dd className="usercoment">{item.textoComentario}</dd>
+                                        </div>
+                                    ))}
+                                    </dl>
+                                <form id="digitaComent" onSubmit={Addcomentario}>
+                                    <input type="text" placeholder="digite aqui...." value={textComent} onChange={e => setTextComent(e.target.value)} ></input>
+                                    <button type="submit"><AiOutlineCheck /></button>
+                                </form>
+                            </div>
+                        }
 
                         <div className="cabecalhoPost">
                             <img className="fotoP" src={val.fotoPerfil} alt="foto"></img>
@@ -115,13 +164,16 @@ export default function Feed(){
                             <div className="tres">
                                 <IoIosHeart onClick={e => curtir(val.post._id)} id={val.post._id} className="curtida"/>
                                 <span className="numLikes" >{val.post.curtidas}</span>
-                                <FaRegComment className="comentario"/>
+                                <a href={`#${index}`} onClick={() => setverComent(index)} ><FaRegComment className="comentario"/></a>
                             </div>
                             {val.post.textoPost && 
+                                <div>
                                 <span className="comentPost">{val.name}: {val.post.textoPost}</span>
+                                </div>
                             }
-                        </div>  
 
+                        </div>  
+                        
                         </section>
 
                     ))

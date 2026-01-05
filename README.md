@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+## Blog com Node (Frontend)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicação front-end em React para um blog simples que consome um back-end separado (API). O projeto foi inicializado com Create React App e organiza páginas e componentes em `src/`.
 
-## Available Scripts
+**Tecnologias:**
+- React (v19)
+- react-router-dom
+- react-icons
+- react-toastify
 
-In the project directory, you can run:
+**Scripts principais:**
+- `npm install`: instala dependências.
+- `npm start`: inicia o servidor de desenvolvimento (padrão: http://localhost:3000).
+- `npm run build`: gera a versão de produção.
 
-### `npm start`
+**Observação:**
+Por padrão o front-consome endpoints em `http://localhost:3000` como evidenciado no código (ex.: `/feed?page=1`, `/session`, `/:id/curtida`). Se o back-end estiver em outra porta/host, ajuste as URLs nas chamadas `fetch`.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Estrutura principal do projeto**
+- `public/` : arquivos estáticos (index.html, assets).
+- `src/` : código-fonte React.
+	- `index.js` : entrada da aplicação.
+	- `App.js`, `Routes.js` : roteamento e configuração principal.
+	- `components/menu/` : componente de menu (menu.js, menu.css).
+	- `pages/` : páginas da aplicação:
+		- `feed/` : página principal de feed de posts (`feed.js`, `feed.css`).
+		- `home/` : página inicial (`index.js`, `style.css`).
+		- `login/` : tela de login (`login.js`, `login.css`).
+		- `postarFT/` : página para criar posts (`index.js`, `index.css`).
+		- `register/` : registro de usuário (`index.js`, `Register.css`).
+		- `userPerfil/` : perfil do usuário (`index.js`, `index.css`).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Pontos importantes (baseado no código atual)**
+- `src/pages/feed/feed.js`:
+	- Busca posts com `fetch("http://localhost:3000/feed?page=1")` e dados de sessão em `http://localhost:3000/session`.
+	- Implementa curtidas com `PUT` para `http://localhost:3000/:id/curtida`.
+	- Usa estados para armazenar `nome`, `foto`, `dados` (posts), e controlar modais/comentários.
+	- Usa `react-icons` para ícones (FiMenu, IoArrowBackOutline, IoIosHeart, FaRegComment, AiOutlineCheck).
 
-### `npm test`
+**Como rodar (desenvolvimento)**
+1. Instale as dependências:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+npm install
+```
 
-### `npm run build`
+2. Inicie a aplicação:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Abra http://localhost:3000 no navegador.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Se você tiver um back-end separado, inicie-o também e ajuste as rotas no front-end se necessário.
 
-### `npm run eject`
+**Boas práticas e próximos passos sugeridos**
+- Mover a URL base da API para uma variável de ambiente (`.env`) em vez de hardcode.
+- Substituir `document.getElementById` por manipulação via estado/props do React para evitar mutações diretas do DOM.
+- Centralizar chamadas HTTP em um utilitário (ex.: `src/services/api.js`) para facilitar manutenção.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Contribuição**
+- Faça um fork, crie uma branch com sua feature (`feature/nome`), e abra um Pull Request.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Contato**
+- Abra uma issue neste repositório para dúvidas, bugs ou sugestões.

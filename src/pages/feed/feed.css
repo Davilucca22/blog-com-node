@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 
+html{
+    scroll-behavior: smooth;
+}
+
 :root{
     --CorSegundaria: #000000ff;
     --CorTexto: #586f7cff;   
@@ -201,4 +205,61 @@
 #BTNconfirm a{
     text-decoration: none;
     color: black;
+}
+
+#conteinerComent{
+    position: absolute;
+    z-index: 1001;
+    background-color: rgb(3, 82, 85,1);
+    width: 100vw;
+    height: 80vh;
+    margin-top: 150px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 1px 1px 3px black;
+}
+
+#comentarios{
+    height: 65vh;
+    margin: 10px 0;
+    overflow: scroll;
+}
+
+#comentarios dt{
+    margin-left: 10px;
+}
+
+#comentarios dd{
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+#digitaComent{
+    display: flex;
+    width: 100%;
+    height: 5%;
+    border: 1px solid black;
+    font-size: 22px;
+    align-content: center;
+}
+
+#digitaComent input{
+    width: 85%;
+    outline: none;
+}
+
+#digitaComent button{
+    width: 15%;
+    background-color: var(--CorTexto);
+    height: 100%;
+}
+
+#conteinerComent button svg{
+    width: 20px;
+    height: 20px;
+}
+
+#sairComent{
+    margin: 5px 10px;
+    background-color: #035255;
 }
