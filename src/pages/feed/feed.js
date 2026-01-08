@@ -24,6 +24,22 @@ export default function Feed(){
         }).then(res => res.json())
         .then(data =>{  
             setDados(data)
+            setInterval(() => {
+                fetch("http://localhost:3000/attdados",{
+                    method:"PUT",
+                    credentials:"include",
+                    headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data
+                })
+            }).then(res => res.json())
+            .then(resp => {
+                setDados(resp) //passa os posts atualizados
+            })
+            }, 5000); // 5 seg
+
         })
 
         fetch("http://localhost:3000/session",{ //dados apenas da sessao
@@ -43,7 +59,6 @@ export default function Feed(){
         }else{
             document.body.style.overflow = 'auto'
         }
-
         return () => {
             document.body.style.overflow = 'auto'
         }
@@ -95,13 +110,23 @@ export default function Feed(){
                     foto:foto,
                     comentario:textComent
                 })
-            }).then(res => res.json())
-            .then(coments => {
-                console.log(coments)
             })
 
             setTextComent('')
-            toast.success("comentario enviado")
+
+            setDados(prev => {
+                return prev.map(item => {
+                    if(item.post._id === id)
+                        return{
+                    ...item,
+                    post:{
+                        ...item.post,
+                        comentarios:[...item.post.comentarios, {textoComentario:textComent, donoComentario:nome, fotoDono:foto}]
+                    }
+                    }
+                    return item     
+                })
+            })
 
         }catch(e){
             toast.error(e)
