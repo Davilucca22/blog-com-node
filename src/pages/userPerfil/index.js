@@ -6,6 +6,7 @@ import { IoArrowBackOutline } from "react-icons/io5";
 
 export default function PerfilUser() {
     const [nome,setNome] = useState('')
+    const [bio,setbio] = useState('')
     const [Seguidores,setSeguidores] = useState(0)
     const [Seguindo,setSeguindo] = useState(0)
     const [Foto,setFoto] = useState(null)
@@ -24,6 +25,7 @@ export default function PerfilUser() {
             setSeguidores(dados.infos.seguidores)
             setSeguindo(dados.infos.seguindo)
             setPosts(dados.posts)
+            setbio(dados.biografia)
         })
     },[])
 
@@ -82,7 +84,7 @@ export default function PerfilUser() {
                                 </div>
                             </div>
                         </div>
-                        <p>lorem ipsm dolor fet</p>
+                        <p>{bio}</p>
                     </div>
                 </section>
                 <div id="Posts">

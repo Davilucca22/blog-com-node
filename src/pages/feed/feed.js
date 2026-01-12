@@ -153,6 +153,7 @@ export default function Feed(){
                         <IoArrowBackOutline id="back"/>
                     </button>
                     <span><a href="/editperfil">EDITAR PERFIL</a></span>
+                    <span><a href="#">EDITAR INFORMAÇOES DE LOGIN</a></span>
                     <span>TEMA</span>
                     <span onClick={() => setSair(true)}>SAIR</span>
                 </div>

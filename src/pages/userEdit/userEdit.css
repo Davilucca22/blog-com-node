@@ -63,3 +63,12 @@
     margin: 10px;
     color: var(--CorSegundaria);
 }
+
+#biografia{
+    height: 190px;
+    padding: 10px;
+    resize: none;
+    outline: none;
+    border-radius: 10px;
+    
+}
