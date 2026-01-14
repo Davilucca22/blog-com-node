@@ -76,6 +76,11 @@ html{
     justify-content: center;
 }
 
+#botoes a{
+    color: var(--CorDoBotao);
+    text-decoration: none;
+}
+
 #back{
     display: block;
     width: 35px;

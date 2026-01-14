@@ -76,36 +76,3 @@
     height: 300px;
     margin-top: 0;
 }   
-
-
-#modalPost{
-    display: none;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    background-color: rgba(2, 2, 2, 0.8);
-    z-index: 999;
-    justify-items: center;
-    align-content: center;
-}
-
-#modalPost p{
-    font-size: 18px;
-    font-weight: bold;
-}
-
-#loading{
-    height: 100px;
-    width: 100px;
-    border: 12px solid black;
-    border-radius: 50%;
-    border-right-color: var(--CorPrimaria);
-    animation: rotate 1s ease infinite;
-    margin: 10px;
-}
-
-@keyframes rotate {
-    100%{
-        transform: rotate(360deg);
-    }
-}

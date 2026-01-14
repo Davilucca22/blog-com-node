@@ -1,8 +1,8 @@
 import react, { useEffect, useState } from "react";
 import { IoArrowBackOutline } from "react-icons/io5";
-
 import './userEdit.css'
 import { toast } from "react-toastify";
+import Loading from "../../components/loading/loading";
 
 export default function UserEdit(){
 
@@ -11,6 +11,7 @@ export default function UserEdit(){
     const [novafoto,setnovafoto] = useState(null)
     const [previw,setpreview] = useState('')
     const [bio,setbio] = useState('')
+    const [load,setload] = useState(false)
 
     useEffect(() => {
         return () => {
@@ -45,11 +46,8 @@ export default function UserEdit(){
         formadata.append("bio",bio)
         formadata.append("foto",foto) //foto atual
 
-        if(novafoto instanceof File){
+        if(novafoto){
             formadata.append("novafoto",novafoto) //se tiver uma nova foto, ela sera enviada para o banco de dados
-        }else{
-            toast.warning("formato de arquivo invalido")
-            return
         }
 
         try{
@@ -59,6 +57,7 @@ export default function UserEdit(){
                 credentials:"include"
             })
 
+            setload(false) //esconde a janela de loading
             toast.success('dados enviados')
             
             const data = await env.json()
@@ -72,13 +71,20 @@ export default function UserEdit(){
 
     return(
         <main>
+            {load && 
+               <Loading /> //tela de load
+            }
+
             <div id="backtoFeed"><a href="/feed"><IoArrowBackOutline /></a></div>
-            <form id="formularioUser" onSubmit={e => EnviaBack(e)}>
+            <form id="formularioUser" onSubmit={e => {
+                EnviaBack(e)
+                setload(true)
+                }}>
                 <div id="conteinerFTuser">
                         <img src={previw} alt="foto do usuario"></img>
                         <input type="file" onChange={e => {
                             const file = e.target.files[0]
-                            setnovafoto(file)
+                            setnovafoto(file) //mostra a janela de loading
                             if(file){
                                 setpreview(URL.createObjectURL(file))
                             }

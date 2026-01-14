@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from "react";
 import "./Register.css"
 import { toast } from "react-toastify";
+import Loading from "../../components/loading/loading";
 
 export default function Register() {
  
@@ -11,6 +12,7 @@ export default function Register() {
     const [foto, setfoto] = useState(null)
     const [Preview,setPreview] = useState('./assets/semfoto.jpeg')
     const [idade,setIdade] = useState('')
+    const [modal,setmodal] = useState(false)
 
     useEffect(() => {
         return () => Preview && URL.revokeObjectURL(Preview)
@@ -44,15 +46,6 @@ export default function Register() {
         setIdade(tempodevida)
     }
 
-    function mostraModal(){
-        const modal = document.getElementById('Rmodal')
-        modal.style.display = 'block'
-    }
-
-    function escondeModal(){
-        const modal = document.getElementById('Rmodal')
-        modal.style.display = 'none'
-    }
 
     async function EnviaBack(e) { //envia os dados para o backend
         e.preventDefault()
@@ -89,11 +82,11 @@ export default function Register() {
             
                         const data = await res.json()
                         
-                        mostraModal()
+                        setmodal(true)
 
                         if(data.msg === 'Email ja cadastrado'){
 
-                            escondeModal()
+                            setmodal(false)
                             setemail('')
                             toast.warning(data.msg)
 
@@ -127,9 +120,9 @@ export default function Register() {
 
     return (
         <main id="CadConteiner">
-            <section id="Rmodal">
-               <div id="load"></div>
-            </section>
+            {modal &&
+            <Loading />
+            }
             <section id="BemVindo">
                <h1>CRIE SUA CONTA AGORA!</h1>
             </section>

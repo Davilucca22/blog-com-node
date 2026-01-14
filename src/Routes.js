@@ -7,6 +7,7 @@ import Feed from './pages/feed/feed.js'
 import PerfilUser from './pages/userPerfil/index.js'
 import PostaFT from './pages/postarFT/index.js'
 import UserEdit from './pages/userEdit/userEdit.js'
+import EditInfo from './pages/editInfo/editInfo.js'
 
 export default function AppRouter(){
     return(
@@ -18,6 +19,7 @@ export default function AppRouter(){
             <Route path='/Perfil' element={<PerfilUser />}/>
             <Route path='/postar' element={<PostaFT />} />
             <Route path='/editperfil' element={<UserEdit />}/>
+            <Route path='/editainfo' element={<EditInfo />} />
         </Routes>
     ) 
 }

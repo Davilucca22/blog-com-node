@@ -1,0 +1,58 @@
+:root{
+    --CorSegundaria: #000000ff;
+    --CorTexto: #586f7cff;   
+    --CorPrimaria:#b8dbd9ff;
+    --CorDoBotao:#f4f4f9ff;
+}
+
+#conteinerForm{
+    margin: 150px auto;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#conteinerForm label{
+    width: 100%;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+#conteinerForm input{
+    width: 100%;
+    height: 20px;
+    padding: 5px;
+    background-color: var(--CorPrimaria);
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--CorDoBotao);
+    outline: none;
+}
+
+#conteinerForm button{
+    background-color: var(--CorSegundaria);
+    color: var(--CorDoBotao);
+    font-size: 20px;
+    height: 50px;
+    width: 250px;
+    border-radius: 10px;
+}
+
+#backFeed{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+#backFeed svg{
+    width: 20px;
+    height: 20px;
+    color: black;
+}
+
+#backFeed span{
+    font-weight: 700;
+}

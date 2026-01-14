@@ -4,28 +4,19 @@ import { IoArrowBackOutline } from "react-icons/io5";
 import "./index.css"
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loading from "../../components/loading/loading";
 
 export default function PostaFT(){
 
     const [img, setImg] = useState(null)
     const [coment,setcoment] = useState('')
     const [preview,setPreview] = useState(null)
+    const [load,setload] = useState(false)
 
         useEffect(() => {
             return () => preview && URL.revokeObjectURL(preview) //limpa a URL gerada
         }, [preview])
 
-        function mostramodal(){
-            const modal = document.getElementById("modalPost")
-
-            modal.style.display = "block"
-        }
-
-        function escondemodal(){
-            const modal = document.getElementById('modalPost')
-
-            modal.style.display = "none"
-        }
 
         async function enviaDados(e){
             e.preventDefault()
@@ -45,13 +36,13 @@ export default function PostaFT(){
                     })
 
                     const data = await env.json()
-                    
+
                     if(data){
                         setImg(null)
                         setPreview(null)
                         setcoment('')
                         toast.success(data.msg)
-                        escondemodal()
+                        setload(false)  //esconde o load
                     }
                     
                 if(!env.ok) throw new Error("erro ao enviar dados")
@@ -71,10 +62,9 @@ export default function PostaFT(){
     return(
         <div>
             <main>
-                <div id="modalPost">
-                    <div id="loading"></div>
-                    <p>ENVIANDO POST...</p>
-                </div>
+                {load &&
+                    <Loading />
+                }
                 <span><Link to={"/feed"}><IoArrowBackOutline id="seta"/></Link></span>
                 <section>
                     <div id="conteinerAddfoto">
@@ -97,7 +87,7 @@ export default function PostaFT(){
                     
                     <form onSubmit={e => {
                         enviaDados(e)
-                        mostramodal() 
+                        setload(true) // mostra o loading
                     }} id="textoPost">
                         <textarea type="text" value={coment} onChange={e => setcoment(e.target.value)} placeholder="como esta se sentindo?..."></textarea>
                         <button type="submit">POSTAR</button>

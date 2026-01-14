@@ -4,7 +4,6 @@ import { GoPlusCircle } from "react-icons/go";
 import { FaSearch } from "react-icons/fa";
 import "./menu.css"
 
-
 export default function Menu() {
 
     const [img,setImg] = useState(null)
