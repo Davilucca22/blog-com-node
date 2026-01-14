@@ -139,7 +139,7 @@ export default function Feed(){
                     </button>
                     <span><a href="/editperfil">EDITAR PERFIL</a></span>
                     <span><a href="/editainfo">INFORMAÇOES DO USUARIO</a></span>
-                    <span><a href="/editainfo">SENHA E SEGURANÇA</a></span>
+                    <span><a href="/editsenha">SENHA E SEGURANÇA</a></span>
                     <span>TEMA</span>
                     <span onClick={() => setSair(true)}>SAIR</span>
                 </div>
