@@ -8,18 +8,20 @@ import PerfilUser from './pages/userPerfil/index.js'
 import PostaFT from './pages/postarFT/index.js'
 import UserEdit from './pages/userEdit/userEdit.js'
 import EditInfo from './pages/editInfo/editInfo.js'
+import EditSenha from './pages/editsenha/editsenha.js'
 
 export default function AppRouter(){
     return(
         <Routes>
-            <Route path='/' element={<BoasVindas/>}/>
+            <Route path='/' element={<BoasVindas/>} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
             <Route path='/feed' element={<Feed />} />
-            <Route path='/Perfil' element={<PerfilUser />}/>
+            <Route path='/Perfil' element={<PerfilUser />} />
             <Route path='/postar' element={<PostaFT />} />
-            <Route path='/editperfil' element={<UserEdit />}/>
+            <Route path='/editperfil' element={<UserEdit />} />
             <Route path='/editainfo' element={<EditInfo />} />
+            <Route path='/editsenha' element={<EditSenha />} />
         </Routes>
     ) 
 }

@@ -54,8 +54,6 @@ export default function Register() {
             if(nome && email && senha && DataNasc){
                 if(senha.length < 6){
                     toast.error("senha muito curta")
-                }else if(senha.length > 8){
-                    toast.error("senha muito longa")
                 }else{
                     if(idade < 18){
                         toast.warning('voce nao tem idade suficiente para usar o app')
