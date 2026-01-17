@@ -3,6 +3,9 @@ import Menu from "../../components/menu/menu";
 import "./index.css"
 import { FiMenu } from "react-icons/fi";
 import { IoArrowBackOutline } from "react-icons/io5";
+import { IoIosHeart } from "react-icons/io";
+import { GoArrowLeft } from "react-icons/go";
+
 
 export default function PerfilUser() {
     const [nome,setNome] = useState('')
@@ -13,14 +16,15 @@ export default function PerfilUser() {
     const [Posts,setPosts] = useState([])
     const [modal,setmodal] = useState(false)
     const [sair,setSair] = useState(false)
-
+    const [zoomFT,setZoomFT] = useState(null)
+ 
     useEffect(() => {
         fetch("http://localhost:3000/session",{
             method:"GET",
             credentials:"include"
         }).then(res => res.json()
         ).then(dados => {
-            setNome(dados.name)
+            setNome(dados.name)                                             
             setFoto(dados.fotoPerfil)
             setSeguidores(dados.infos.seguidores)
             setSeguindo(dados.infos.seguindo)
@@ -32,8 +36,7 @@ export default function PerfilUser() {
 
     return (
         <div id="conteinerPerfil">
-            <main>
-                <section id="modalFT"></section>
+        <main>
         {modal && 
             <section id="modal">
                 {sair &&
@@ -51,7 +54,9 @@ export default function PerfilUser() {
                     <button onClick={() => setmodal(false)}>
                         <IoArrowBackOutline id="back"/>
                     </button>
-                    <span>EDITAR PERFIL</span>
+                    <span><a href="/editperfil">EDITAR PERFIL</a></span>
+                    <span><a href="/editainfo">INFORMAÇOES DO USUARIO</a></span>
+                    <span><a href="/editsenha">SENHA E SEGURANÇA</a></span>
                     <span>TEMA</span>
                     <span onClick={() => setSair(true)}>SAIR</span>
                 </div>
@@ -90,8 +95,38 @@ export default function PerfilUser() {
                 <div id="Posts">
                     <h1>POSTAGENS</h1>
                     <div id="imgs">
-                        {Posts.map((e,index) =>(
-                            <img src={e.imgURL} alt={index}></img>  
+                    {Posts.map((e,index) =>(
+                        <div>
+                            {zoomFT === index && 
+                                <div id="janelaFoto">
+                                    <div id="headerjanelaFoto">
+                                        <span onClick={() => setZoomFT(null)}><GoArrowLeft/> POST</span>
+                                    </div>
+                                    <img id="fotoMaior" src={e.imgURL} alt="foto maior"></img>
+                                    <div id="coraçao">
+                                        <IoIosHeart/>
+                                        {e.curtidas}
+                                    </div>
+                                    {e.textoPost &&
+                                        <span id="legendaPost">{nome}: {e.textoPost}</span>
+                                    }
+                                    <hr/>
+                                    <div id="contComent">
+                                        {e.comentarios.map((item => (
+                                        <div className="contComentario">
+                                            <img className="fotoDono" src={item.fotoDono} alt="foto do dono do comentario"></img>
+                                            <div className="infoComent">
+                                                <dt className="user">{item.donoComentario}</dt>
+                                                    <dd className="usercoment">{item.textoComentario}</dd>
+                                            </div>
+                                        </div>
+                                            ))) 
+                                        }
+                                    </div>
+                                </div>
+                            }
+                            <img src={e.imgURL} onClick={() => setZoomFT(index)} className="blocoFT" id={index} alt="foto post"></img>
+                        </div>
                         ))}
                     </div>
                 </div>
