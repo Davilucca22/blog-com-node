@@ -7,6 +7,7 @@ import { AiOutlineCheck, AiOutlineClose  } from "react-icons/ai";
 import Menu from "../../components/menu/menu";
 import "./feed.css"
 import { toast } from "react-toastify";
+import Coment from "../../components/comentarios/coments";
 
 export default function Feed(){
     const [nome, setNome] = useState('')
@@ -24,22 +25,6 @@ export default function Feed(){
         }).then(res => res.json())
         .then(data =>{  
             setDados(data)
-            setInterval(() => {
-                fetch("http://localhost:3000/attdados",{
-                    method:"PUT",
-                    credentials:"include",
-                    headers:{
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    data
-                })
-            }).then(res => res.json())
-            .then(resp => {
-                setDados(resp) //passa os posts atualizados
-            })
-            }, 5000); // 5 seg
-
         })
 
         fetch("http://localhost:3000/session",{ //dados apenas da sessao
@@ -181,17 +166,7 @@ export default function Feed(){
                         {verComent === index &&
                             <div id="conteinerComent">
                                 <button type="button" id="sairComent" onClick={() => setverComent('')}><AiOutlineClose  /></button>
-                                <dl id="comentarios">
-                                {val.post.comentarios?.map(item => (
-                                        <div className="contComentario">
-                                            <img className="fotoDono" src={item.fotoDono} alt="foto do dono do comentario"></img>
-                                            <div className="infoComent">
-                                                <dt className="user">{item.donoComentario}</dt>
-                                                    <dd className="usercoment">{item.textoComentario}</dd>
-                                            </div>
-                                        </div>
-                                    ))}
-                                    </dl>
+                                <Coment data={dados} IDpost={val.post._id}/> {/* renderiza os comentarios*/}
                                 <form id="digitaComent" onSubmit={e => Addcomentario(e,val.post._id)}>
                                     <input type="text" placeholder="digite aqui...." value={textComent} onChange={e => setTextComent(e.target.value)} ></input>
                                     <button type="submit"><AiOutlineCheck /></button>
