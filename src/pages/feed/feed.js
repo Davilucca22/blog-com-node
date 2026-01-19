@@ -182,17 +182,16 @@ export default function Feed(){
                         <div className="imgPost">
                             <img src={val.post.imgURL} alt={val.post.textoPost}></img>
                             <div className="tres">
-                                <IoIosHeart onClick={e => curtir(val.post._id)} id={val.post._id} className="curtida"/>
-                                <span className="numLikes" >{val.post.curtidas}</span>
-                                <a href={`#${index}`} onClick={() => setverComent(index)} ><FaRegComment className="comentario"/></a>
+                                <IoIosHeart onClick={e => curtir(val.post._id)} id={val.post._id} className="curtida"/> {/*icone de curtida*/}
+                                <span className="numLikes" >{val.post.curtidas}</span> {/* legenda do post*/}
+                                <a href={`#${index}`} onClick={() => setverComent(index)} ><FaRegComment className="comentario"/></a> {/*icone comentario */}
                             </div>
                             {val.post.textoPost && 
                                 <div>
                                 <span className="comentPost">{val.name}: {val.post.textoPost}</span>
                                 </div>
                             }
-
-                        </div>  
+                        </div>
                         
                         </section>
 
