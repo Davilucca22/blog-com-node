@@ -3,17 +3,12 @@ import Menu from "../../components/menu/menu";
 import "./index.css"
 import { FiMenu } from "react-icons/fi";
 import { IoArrowBackOutline } from "react-icons/io5";
-import { IoIosHeart } from "react-icons/io";
-import { GoArrowLeft } from "react-icons/go";
+import Coment from "../../components/comentarios/coments";
 
 
 export default function PerfilUser() {
-    const [nome,setNome] = useState('')
-    const [bio,setbio] = useState('')
-    const [Seguidores,setSeguidores] = useState(0)
-    const [Seguindo,setSeguindo] = useState(0)
-    const [Foto,setFoto] = useState(null)
-    const [Posts,setPosts] = useState([])
+    const [dados,setDados] = useState([])
+    const [posts, setPosts] = useState([])
     const [modal,setmodal] = useState(false)
     const [sair,setSair] = useState(false)
     const [zoomFT,setZoomFT] = useState(null)
@@ -24,15 +19,17 @@ export default function PerfilUser() {
             credentials:"include"
         }).then(res => res.json()
         ).then(dados => {
-            setNome(dados.name)                                             
-            setFoto(dados.fotoPerfil)
-            setSeguidores(dados.infos.seguidores)
-            setSeguindo(dados.infos.seguindo)
-            setPosts(dados.posts)
-            setbio(dados.biografia)
+            setDados(dados)
+        })
+
+        fetch("http://localhost:3000/feedUser", {
+            method:"GET",
+            credentials:"include"
+        }).then(res => res.json())
+        .then(infos => {
+            setPosts(infos)
         })
     },[])
-
 
     return (
         <div id="conteinerPerfil">
@@ -70,65 +67,34 @@ export default function PerfilUser() {
                     </div>
                     <div id="infoUser">
                         <div id="contadores">
-                            <img src={Foto} alt="sem foto"></img>
+                            <img src={dados.fotoPerfil} alt="sem foto"></img>
                             <div id="textos">
-                                <span id="nomeP">{nome}</span>
+                                <span id="nomeP">{dados.name}</span>
                                 <div id="legendas">
                                     <div className="info">
-                                        <span>{Posts.length}</span>
+                                        <span>{posts.length}</span>
                                         <span>Posts</span>
                                     </div>
                                     <div className="info">
-                                        <span>{Seguindo}</span>
+                                        <span>{dados.infos.seguindo}</span>
                                         <span>Seguindo</span>
                                     </div>
                                     <div className="info">
-                                        <span>{Seguidores}</span>
+                                        <span>{dados.infos.seguidores}</span>
                                         <span>Seguidores</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <p>{bio}</p>
+                        <p>{dados.bio}</p>
                     </div>
                 </section>
                 <div id="Posts">
                     <h1>POSTAGENS</h1>
-                    <div id="imgs">
-                    {Posts.map((e,index) =>(
-                        <div>
-                            {zoomFT === index && 
-                                <div id="janelaFoto">
-                                    <div id="headerjanelaFoto">
-                                        <span onClick={() => setZoomFT(null)}><GoArrowLeft/> POST</span>
-                                    </div>
-                                    <img id="fotoMaior" src={e.imgURL} alt="foto maior"></img>
-                                    <div id="coraçao">
-                                        <IoIosHeart/>
-                                        {e.curtidas}
-                                    </div>
-                                    {e.textoPost &&
-                                        <span id="legendaPost">{nome}: {e.textoPost}</span>
-                                    }
-                                    <hr/>
-                                    <div id="contComent">
-                                        {e.comentarios.map((item => (
-                                        <div className="contComentario">
-                                            <img className="fotoDono" src={item.fotoDono} alt="foto do dono do comentario"></img>
-                                            <div className="infoComent">
-                                                <dt className="user">{item.donoComentario}</dt>
-                                                    <dd className="usercoment">{item.textoComentario}</dd>
-                                            </div>
-                                        </div>
-                                            ))) 
-                                        }
-                                    </div>
-                                </div>
-                            }
-                            <img src={e.imgURL} onClick={() => setZoomFT(index)} className="blocoFT" id={index} alt="foto post"></img>
-                        </div>
-                        ))}
-                    </div>
+                    
+                    {zoomFT &&
+                        <Coment Posts={posts} name={dados.name} Foto={dados.fotoPerfil} />
+                    }
                 </div>
                 <footer id="footer"></footer>
             </main>

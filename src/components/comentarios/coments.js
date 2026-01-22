@@ -1,48 +1,179 @@
 import react, { useEffect, useState } from "react";
 import './coment.css'
+import { IoIosHeart } from "react-icons/io";
+import { FaRegComment } from "react-icons/fa";
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
+import { toast } from "react-toastify";
 
-export default function Coment({ data, IDpost }) {
+export default function Coment({ Posts , name, Foto }) {
 
-    const [dados, setdados] = useState(data || [])
-    const [ID, setid] = useState(IDpost || '')
+    const [dados, setDados] = useState(Posts || [])
+    const [verComent, setverComent] = useState('')
+    const [textComent, setTextComent] = useState('')
+    const [nome, setNome] = useState(name || '')
+    const [foto, setFoto] = useState(Foto || '')
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            fetch('http://localhost:3000/attdados', {
+        setDados(Posts || [])
+        setNome(name || '')
+        setFoto(Foto || '')
+    },[Posts, name, Foto])
+
+    useEffect(() => {
+        if(dados.length > 0){
+            const interval = setInterval(() => {
+                fetch('http://localhost:3000/attdados', {
+                    method: "PUT",
+                    credentials: "include",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        dados
+                    })
+                }).then(res => res.json())
+                    .then(resp => { 
+                        setDados(resp)
+                        console.log(resp)
+                    })
+            }, 5000);
+    
+            return () => clearInterval(interval)
+        }
+
+    }, [])
+
+    function curtir(id) {
+
+        const coracao = document.getElementById(id)
+        coracao.style.color = "red"
+
+        fetch(`http://localhost:3000/${id}/curtida`, { //envia o id do post pro back atualizar a curtida
+            method: "PUT",
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        setDados(prev => { //atualiza a curtida
+            return prev.map(item => {
+                if (item.post._id === id) {
+                    return {
+                        ...item,
+                        post: {
+                            ...item.post,
+                            curtidas: item.post.curtidas + 1
+                        }
+                    }
+                }
+                return item
+            })
+        })
+    }
+
+    function Addcomentario(e, id) {
+
+        e.preventDefault()
+
+        try {
+            fetch('http://localhost:3000/comentario', {
                 method: "PUT",
                 credentials: "include",
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    dados
+                    IDpost: id,
+                    nome: nome,
+                    foto: foto,
+                    comentario: textComent
                 })
-            }).then(res => res.json())
-                .then(resp => setdados(resp) )
-        }, 5000);
+            })
 
-        return () => clearInterval(interval)
+            setTextComent('')
 
-    }, [dados])
+            setDados(prev => {
+                return prev.map(item => {
+                    if (item.post._id === id)
+                        return {
+                            ...item,
+                            post: {
+                                ...item.post,
+                                comentarios: [...item.post.comentarios, { textoComentario: textComent, donoComentario: nome, fotoDono: foto }]
+                            }
+                        }
+                    return item
+                })
+            })
+
+        } catch (e) {
+            toast.error(e)
+        }
+    }
+
+    useEffect(() => { //trava o scroll quando os comentarios aparecerem
+
+        if (verComent !== '') {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = 'auto'
+        }
+        return () => {
+            document.body.style.overflow = 'auto'
+        }
+    }, [verComent])
 
     return (
-        <dl id="comentarios">
-            {dados.map(val => (
-                <div>
-                { ID === val.post._id && //renderiza os comentarios de um post especifico
-                val.post.comentarios?.map(item => (
-                    <div className="contComentario">
-                        <img className="fotoDono" src={item.fotoDono} alt="foto do dono do comentario"></img>
-                        <div className="infoComent">
-                            <dt className="user">{item.donoComentario}</dt>
-                            <dd className="usercoment">{item.textoComentario}</dd>
+        <div>
+            {dados.map((val, index) => (
+                <section key={val.post._id} className="conteinerPost" id={index} >
+                    <dl id="comentarios">
+                        {verComent === index &&
+                            <div id="conteinerComent">
+                                <button type="button" id="sairComent" onClick={() => setverComent('')}><AiOutlineClose /></button>
+                                <div id="feedComent">
+                                    {val.post.comentarios?.map(item => (
+                                        <div className="contComentario">
+                                            <img className="fotoDono" src={item.fotoDono} alt="foto do dono do comentario"></img>
+                                            <div className="infoComent">
+                                                <dt className="user">{item.donoComentario}</dt>
+                                                <dd className="usercoment">{item.textoComentario}</dd>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <form id="digitaComent" onSubmit={e => Addcomentario(e, val.post._id)}>
+                                    <input type="text" placeholder="digite aqui...." value={textComent} onChange={e => setTextComent(e.target.value)} ></input>
+                                    <button type="submit"><AiOutlineCheck /></button>
+                                </form>
+                            </div>
+                        }
+
+                        <div className="cabecalhoPost">
+                            <img className="fotoP" src={val.fotoPerfil} alt="foto"></img>
+                            <span>{val.name}</span>
                         </div>
-                    </div>
-                ))
-                    }
-            </div>
+
+                        <div className="imgPost">
+                            <img src={val.post.imgURL} alt={val.post.textoPost}></img>
+                            <div className="tres">
+                                <IoIosHeart onClick={e => curtir(val.post._id)} id={val.post._id} className="curtida" />
+                                <span className="numLikes" >{val.post.curtidas}</span>
+                                <a href={`#${index}`} onClick={() => setverComent(index)} ><FaRegComment className="comentario" /></a>
+                            </div>
+                            {val.post.textoPost &&
+                                <div>
+                                    <span className="comentPost">{val.name}: {val.post.textoPost}</span>
+                                </div>
+                            }
+
+                        </div>
+
+                    </dl>
+                </section>
             ))
             }
-        </dl>
+        </div>
     )
 }

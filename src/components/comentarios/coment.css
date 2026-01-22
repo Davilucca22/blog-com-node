@@ -1,3 +1,108 @@
+.cabecalhoPost{
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.cabecalhoPost span{
+    font-size: 15px;
+    font-weight: bold;
+    display: block;
+    margin-left: 10px;
+}
+
+.fotoP{
+    width: 40px;
+    height: 40px;
+}
+
+.imgPost{
+    margin-bottom: 30px;
+}
+
+.imgPost img{
+    border-radius: 0;
+    width: 100%;
+    height: 400px;
+}
+
+.comentPost{
+    display: block;
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+.imgPost svg{
+    width: 25px;
+    height: 25px;
+}
+
+.curtida{
+    color: rgb(0, 0, 0);
+    margin-left: 5px ;
+}
+
+.tres{
+    display: flex;
+    align-items: center;
+}
+
+.comentario{
+    margin-left: 10px;
+    color: var(--CorSegundaria);
+}
+
+#conteinerComent{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    z-index: 1001;
+    background-color: rgb(3, 82, 85,1);
+    width: 100vw;
+    height: 80vh;
+    margin-top: 150px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 1px 1px 3px black;
+}
+
+#feedComent{
+    margin-bottom: auto;
+}
+
+#digitaComent{
+    margin-bottom: 15px;
+    display: flex;
+    width: 100%;
+    height: 40px;
+    border: 1px solid black;
+    font-size: 22px;
+    align-content: center;
+}
+
+#digitaComent input{
+    width: 85%;
+    outline: none;
+}
+
+#digitaComent button{
+    width: 15%;
+    background-color: var(--CorTexto);
+    height: 100%;
+}
+
+#conteinerComent button svg{
+    width: 20px;
+    height: 20px;
+}
+
+#sairComent{
+    margin: 5px 10px;
+    background-color: #035255;
+}
+
 .contComentario{
     display: flex;
     flex-direction: row;
@@ -17,7 +122,6 @@
 }
 
 #comentarios{
-    height: 65vh;
     margin: 10px 0;
     overflow: scroll;
 }
