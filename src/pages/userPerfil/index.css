@@ -1,10 +1,3 @@
-:root{
-    --CorSegundaria: #000000ff;
-    --CorTexto: #586f7cff;   
-    --CorPrimaria:#b8dbd9ff;
-    --CorDoBotao:#f4f4f9ff;
-}
-
 hr{
     margin: 5px auto;
     width: 95%;
@@ -149,5 +142,54 @@ hr{
 }
 
 #legendaPost{
+    margin-left: 5px;
+}
+
+#conteinerPosts{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    background-color: var(--CorPrimaria);
+}
+
+#conteinerPosts a{
+    display: block;
+}
+
+.postUser{
+    margin: 0;
+    border-radius: 0;
+    aspect-ratio: 1/1 ;
+    width: 100%;
+    object-fit: cover;
+}
+
+#conteinerZoom{
+    position: fixed;
+    height: 100dvh;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    z-index: 1005;
+    background-color: var(--CorPrimaria);
+}
+
+#divSair{
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--CorSegundaria);
+    width: 100%;
+    height: 60px;
+    box-shadow: 1px 1px 3px black;
+    z-index: 1004;
+    color: var(--CorDoBotao);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#voltar{
+    width: 40px;
+    height: 40px;
     margin-left: 5px;
 }

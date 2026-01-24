@@ -3,7 +3,7 @@ import { FiMenu } from "react-icons/fi";
 import { IoArrowBackOutline } from "react-icons/io5";
 import Menu from "../../components/menu/menu";
 import "./feed.css"
-import Coment from "../../components/comentarios/coments";
+import FeedDePosts from "../../components/feedDePosts/feedDePosts";
 
 export default function Feed() {
     const [nome, setNome] = useState('')
@@ -75,7 +75,7 @@ export default function Feed() {
             <main id="MainFeed">
 
                 <div id="vazio" /* apenas preenche o espaço vazio atras do header no main, pro conteudo ficar pra baixo do header */></div>
-                <Coment  Posts={dados} name={nome} Foto={foto} /> {/* conteiner do post */}
+                <FeedDePosts  Posts={dados} name={nome} Foto={foto} /> {/* conteiner do post */}
 
             </main>
 

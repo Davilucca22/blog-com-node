@@ -1,11 +1,11 @@
 import react, { useEffect, useState } from "react";
-import './coment.css'
+import './feedDePosts.css'
 import { IoIosHeart } from "react-icons/io";
 import { FaRegComment } from "react-icons/fa";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
 
-export default function Coment({ Posts , name, Foto }) {
+export default function FeedDePosts({ Posts , name, Foto }) {
 
     const [dados, setDados] = useState(Posts || [])
     const [verComent, setverComent] = useState('')
@@ -156,7 +156,7 @@ export default function Coment({ Posts , name, Foto }) {
                         </div>
 
                         <div className="imgPost">
-                            <img src={val.post.imgURL} alt={val.post.textoPost}></img>
+                            <img src={val.post.imgURL} id={val.post._id} alt={val.post.textoPost}></img>
                             <div className="tres">
                                 <IoIosHeart onClick={e => curtir(val.post._id)} id={val.post._id} className="curtida" />
                                 <span className="numLikes" >{val.post.curtidas}</span>

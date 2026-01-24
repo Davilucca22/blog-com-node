@@ -3,7 +3,7 @@ import Menu from "../../components/menu/menu";
 import "./index.css"
 import { FiMenu } from "react-icons/fi";
 import { IoArrowBackOutline } from "react-icons/io5";
-import Coment from "../../components/comentarios/coments";
+import FeedDePosts from "../../components/feedDePosts/feedDePosts";
 
 
 export default function PerfilUser() {
@@ -11,7 +11,7 @@ export default function PerfilUser() {
     const [posts, setPosts] = useState([])
     const [modal,setmodal] = useState(false)
     const [sair,setSair] = useState(false)
-    const [zoomFT,setZoomFT] = useState(null)
+    const [zoomFT,setZoomFT] = useState(false)
  
     useEffect(() => {
         fetch("http://localhost:3000/session",{
@@ -19,6 +19,7 @@ export default function PerfilUser() {
             credentials:"include"
         }).then(res => res.json()
         ).then(dados => {
+            console.log(dados)
             setDados(dados)
         })
 
@@ -59,6 +60,15 @@ export default function PerfilUser() {
                 </div>
             </section>
         }
+        {zoomFT &&
+            <nav id="conteinerZoom">
+                <div id="divSair">
+                    <IoArrowBackOutline id="voltar" onClick={() => setZoomFT(false)}/> POSTS
+                </div>
+                <FeedDePosts Posts={posts} name={dados.name} Foto={dados.fotoPerfil} />
+            </nav>
+        }
+
                 <section id="bio">
                     <div id="conteinerHamburguer">
                         <button id="BThamburguer2" onClick={() => setmodal(true)}>
@@ -76,25 +86,28 @@ export default function PerfilUser() {
                                         <span>Posts</span>
                                     </div>
                                     <div className="info">
-                                        <span>{dados.infos.seguindo}</span>
+                                        <span>{dados.seguidores?.length ?? 0}</span>
                                         <span>Seguindo</span>
                                     </div>
                                     <div className="info">
-                                        <span>{dados.infos.seguidores}</span>
+                                        <span>{dados.seguindo?.length ?? 0}</span>
                                         <span>Seguidores</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <p>{dados.bio}</p>
+                        <p>{dados.biografia}</p>
                     </div>
                 </section>
                 <div id="Posts">
                     <h1>POSTAGENS</h1>
-                    
-                    {zoomFT &&
-                        <Coment Posts={posts} name={dados.name} Foto={dados.fotoPerfil} />
-                    }
+                    <div id="conteinerPosts">
+                            {dados.posts &&
+                                dados.posts?.slice().reverse().map((item,index) => (
+                                    <a key={item._id} href={"#" + item._id}><img onClick={() => setZoomFT(true)} className="postUser" di={item._id} src={item.imgURL} alt="foto"></img></a>
+                                ))
+                            }
+                    </div>
                 </div>
                 <footer id="footer"></footer>
             </main>
