@@ -1,4 +1,5 @@
 import react, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import './feedDePosts.css'
 import { IoIosHeart } from "react-icons/io";
 import { FaRegComment } from "react-icons/fa";
@@ -7,6 +8,7 @@ import { toast } from "react-toastify";
 
 export default function FeedDePosts({ Posts , name, Foto }) {
 
+    const navigate = useNavigate()
     const [dados, setDados] = useState(Posts || [])
     const [verComent, setverComent] = useState('')
     const [textComent, setTextComent] = useState('')
@@ -21,7 +23,7 @@ export default function FeedDePosts({ Posts , name, Foto }) {
 
     useEffect(() => {
         if(dados.length > 0){
-            const interval = setInterval(() => {
+            const interval = setInterval(() => {//retorna os posts do feed atualizados a cada 5 segundos
                 fetch('http://localhost:3000/attdados', {
                     method: "PUT",
                     credentials: "include",
@@ -34,7 +36,6 @@ export default function FeedDePosts({ Posts , name, Foto }) {
                 }).then(res => res.json())
                     .then(resp => { 
                         setDados(resp)
-                        console.log(resp)
                     })
             }, 5000);
     
@@ -72,12 +73,12 @@ export default function FeedDePosts({ Posts , name, Foto }) {
         })
     }
 
-    function Addcomentario(e, id) {
+    function Addcomentario(e, id) { 
 
         e.preventDefault()
 
         try {
-            fetch('http://localhost:3000/comentario', {
+            fetch('http://localhost:3000/comentario', { //atualiza comentario no back
                 method: "PUT",
                 credentials: "include",
                 headers: {
@@ -93,7 +94,7 @@ export default function FeedDePosts({ Posts , name, Foto }) {
 
             setTextComent('')
 
-            setDados(prev => {
+            setDados(prev => { //atualiza comentario no front
                 return prev.map(item => {
                     if (item.post._id === id)
                         return {
@@ -124,6 +125,10 @@ export default function FeedDePosts({ Posts , name, Foto }) {
         }
     }, [verComent])
 
+    function telaUser(id){
+        navigate(`/details/${id}`)
+    }
+
     return (
         <div>
             {dados.map((val, index) => (
@@ -152,7 +157,7 @@ export default function FeedDePosts({ Posts , name, Foto }) {
 
                         <div className="cabecalhoPost">
                             <img className="fotoP" src={val.fotoPerfil} alt="foto"></img>
-                            <span>{val.name}</span>
+                            <span onClick={() => telaUser(val.userId) }>{val.name}</span>
                         </div>
 
                         <div className="imgPost">
@@ -164,7 +169,7 @@ export default function FeedDePosts({ Posts , name, Foto }) {
                             </div>
                             {val.post.textoPost &&
                                 <div>
-                                    <span className="comentPost">{val.name}: {val.post.textoPost}</span>
+                                    <span className="comentPost">{val.name}:{val.post.textoPost}</span>
                                 </div>
                             }
 

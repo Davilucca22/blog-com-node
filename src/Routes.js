@@ -9,6 +9,7 @@ import PostaFT from './pages/postarFT/index.js'
 import UserEdit from './pages/userEdit/userEdit.js'
 import EditInfo from './pages/editInfo/editInfo.js'
 import EditSenha from './pages/editsenha/editsenha.js'
+import PerfilOutro from './pages/perfilOutro/perfilOutro.js'
 
 export default function AppRouter(){
     return(
@@ -22,6 +23,7 @@ export default function AppRouter(){
             <Route path='/editperfil' element={<UserEdit />} />
             <Route path='/editainfo' element={<EditInfo />} />
             <Route path='/editsenha' element={<EditSenha />} />
+            <Route path='/details/:id' element={<PerfilOutro />} />
         </Routes>
     ) 
 }

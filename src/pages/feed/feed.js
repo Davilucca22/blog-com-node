@@ -31,10 +31,6 @@ export default function Feed() {
             })
     }, [])
 
-    useEffect(() => {
-        console.log('feed:', dados)
-    },[dados])
-
     return (
         <div id="conteinerFeed">
             {modal &&
