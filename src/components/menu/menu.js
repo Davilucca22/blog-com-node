@@ -7,13 +7,17 @@ import "./menu.css"
 export default function Menu() {
 
     const [img,setImg] = useState(null)
+    const [id,setId] = useState('')
 
     useEffect(() =>{
         fetch("http://localhost:3000/session",{
             method:"GET",
             credentials:"include"
         }).then(res => res.json())
-        .then(dados => setImg(dados.fotoPerfil) )
+        .then(dados => {
+            setImg(dados.fotoPerfil)
+            setId(dados._id)
+        })
     })
 
     return (
@@ -22,7 +26,7 @@ export default function Menu() {
                 <a href="/feed"> <GrHomeRounded className="icon" /></a>
                 <a href="/postar"><GoPlusCircle className="icon" /></a>
                 <a href="/"><FaSearch className="icon" /></a>
-                <a href="/perfil"><img src={img} alt="foto do usuario"></img></a>
+                <a href={`/Perfil/${id}`}><img src={img} alt="foto do usuario"></img></a> {/*passa id do usuario na url*/}
             </div>
         </footer>
     )

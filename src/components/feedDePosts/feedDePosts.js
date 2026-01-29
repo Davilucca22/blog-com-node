@@ -129,7 +129,7 @@ export default function FeedDePosts({ Posts , name, Foto }) {
         navigate(`/details/${id}`)
     }
 
-    return (
+    return ( 
         <div>
             {dados.map((val, index) => (
                 <section key={val.post._id} className="conteinerPost" id={index} >
@@ -138,7 +138,7 @@ export default function FeedDePosts({ Posts , name, Foto }) {
                             <div id="conteinerComent">
                                 <button type="button" id="sairComent" onClick={() => setverComent('')}><AiOutlineClose /></button>
                                 <div id="feedComent">
-                                    {val.post.comentarios?.map(item => (
+                                    {val.post.comentarios?.slice().reverse().map(item => (
                                         <div className="contComentario">
                                             <img className="fotoDono" src={item.fotoDono} alt="foto do dono do comentario"></img>
                                             <div className="infoComent">

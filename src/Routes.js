@@ -18,7 +18,7 @@ export default function AppRouter(){
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
             <Route path='/feed' element={<Feed />} />
-            <Route path='/Perfil' element={<PerfilUser />} />
+            <Route path='/Perfil/:id' element={<PerfilUser />} />
             <Route path='/postar' element={<PostaFT />} />
             <Route path='/editperfil' element={<UserEdit />} />
             <Route path='/editainfo' element={<EditInfo />} />

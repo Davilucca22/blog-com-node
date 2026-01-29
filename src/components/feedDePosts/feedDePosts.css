@@ -70,7 +70,10 @@
 }
 
 #feedComent{
+    width: 100%;
     margin-bottom: auto;
+    height: 90%;
+    overflow: scroll;
 }
 
 #digitaComent{
@@ -124,7 +127,6 @@
 
 #comentarios{
     margin: 10px 0;
-    overflow: scroll;
 }
 
 #comentarios dt{
