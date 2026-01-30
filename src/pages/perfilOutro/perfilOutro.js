@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import InfoUser from '../../components/infoUser/infoUser'
 import FeedDePosts from '../../components/feedDePosts/feedDePosts'
+import Menu from '../../components/menu/menu'
 import { IoArrowBackOutline } from "react-icons/io5";
 import { useParams } from 'react-router-dom';
 import './perfilOutro.css'
+import { toast } from 'react-toastify';
 
 // pegar o id que foi mandado da outra tela e buscar no banco o usuario correspondente
 export default function PerfilOutro(){
@@ -11,8 +13,10 @@ export default function PerfilOutro(){
     const [dados,setDados] = useState([])
     const [nome,setnome] = useState('')
     const [foto,setfoto] = useState('')
+    const [toSeguindo,setToSeguindo] = useState([])
     const [posts,setposts] = useState([])
     const [zoomFT,setZoomFT] = useState(false)
+    const [legendaSeg,setLegendaSeg] = useState('+ Seguir')
 
     useEffect(() => {
 
@@ -26,6 +30,7 @@ export default function PerfilOutro(){
         .then(item => { 
             setnome(item.name)
             setfoto(item.fotoPerfil)
+            setToSeguindo(item.seguindo)
         })
 
         fetch(`http://localhost:3000/perfiloutro/${id}`,{
@@ -50,8 +55,59 @@ export default function PerfilOutro(){
     
     },[])
 
-    
+    function DeixarDeSeguir(){
+        setLegendaSeg("+ Seguir")
 
+        try{
+            fetch('http://localhost:3000/Seguir',{
+                method:"PUT",
+                credentials:"include",
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({
+                    IdOutro:id                   
+                })
+            }).then(res => res.json())
+            .then(resp => toast.success(resp.msg))
+        }catch(e){
+            toast.error("problemas chefe:", e)
+        }            
+    }
+
+    function Seguir(){
+        setLegendaSeg("Seguindo...")
+
+        try{
+            fetch('http://localhost:3000/DeixarDeSeguir',{
+                method:"PUT",
+                credentials:"include",
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({
+                    IdOutro:id
+                })
+            }).then(res => res.json())
+                .then(resp => toast.success(resp.msg))
+        }catch(e){
+            console.log("B.O B.O:", e)
+        }
+    }
+
+    useEffect(() => {
+        if(toSeguindo.length > 0){
+            toSeguindo.map(item => {
+                if(item.IDseguindo === id){
+                    DeixarDeSeguir()
+                }else{
+                    Seguir()
+                }
+            })
+        }
+        return
+    })
+    
     return(
         <main>
                 {zoomFT &&
@@ -65,10 +121,14 @@ export default function PerfilOutro(){
             <div id="contVoltaFeed">
                 <a href="/feed">
                     <IoArrowBackOutline />
+                    <span>{dados.name}</span>
                 </a>
             </div>
             <div id='vazio'></div>
             <InfoUser objDados={dados}/>
+            <div id='Divseguir'>
+                <button onClick={() => Seguir()} id='BtnSeguir'>{legendaSeg}</button>
+            </div>
             <div id="Posts">
                 <h1>POSTAGENS</h1>
                 <div id="conteinerPosts">
@@ -79,6 +139,7 @@ export default function PerfilOutro(){
                         }
                 </div>
             </div>
+            <Menu />
             <footer id="footer"></footer>    
         </main>
     )
