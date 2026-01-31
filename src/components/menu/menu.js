@@ -18,7 +18,7 @@ export default function Menu() {
             setImg(dados.fotoPerfil)
             setId(dados._id)
         })
-    })
+    }, [])
 
     return (
         <footer id="FooterFeed">

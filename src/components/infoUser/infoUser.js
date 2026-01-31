@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import "./infoUser.css"
 
-export default function InfoUser({objDados}){
+export default function InfoUser({objDados, Arrseguindo}){
     const [dados,setDados] = useState(objDados || [])
+    const [arraySeguidores,setSeguidores] = useState(Arrseguindo || [])
 
     useEffect(() => {
         setDados(objDados || [])
-    },[objDados])
+        setSeguidores(Arrseguindo || [])
+    },[objDados,Arrseguindo])
 
     return( 
         <div>
@@ -26,7 +28,7 @@ export default function InfoUser({objDados}){
                                     <span>Seguindo</span>
                                 </div>
                                 <div className="info">
-                                    <span>{dados.seguidores?.length ?? 0}</span>{/*se encontrar seguindo, retorna o tamanho, senao retorna 0*/}
+                                    <span>{arraySeguidores.length ?? 0}</span>{/*se encontrar seguindo, retorna o tamanho, senao retorna 0*/}
                                     <span>Seguidores</span>
                                 </div>
                             </div>

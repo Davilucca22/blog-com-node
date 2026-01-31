@@ -17,6 +17,7 @@ export default function PerfilOutro(){
     const [posts,setposts] = useState([])
     const [zoomFT,setZoomFT] = useState(false)
     const [legendaSeg,setLegendaSeg] = useState('+ Seguir')
+    const [TempArray,setTempArray] = useState([])
 
     useEffect(() => {
 
@@ -58,25 +59,9 @@ export default function PerfilOutro(){
     function DeixarDeSeguir(){
         setLegendaSeg("+ Seguir")
 
-        try{
-            fetch('http://localhost:3000/Seguir',{
-                method:"PUT",
-                credentials:"include",
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify({
-                    IdOutro:id                   
-                })
-            }).then(res => res.json())
-            .then(resp => toast.success(resp.msg))
-        }catch(e){
-            toast.error("problemas chefe:", e)
-        }            
-    }
-
-    function Seguir(){
-        setLegendaSeg("Seguindo...")
+        const rem = toSeguindo.filter(item => item.IDseguindo !== id)
+        
+        setTempArray(rem)
 
         try{
             fetch('http://localhost:3000/DeixarDeSeguir',{
@@ -86,27 +71,52 @@ export default function PerfilOutro(){
                     'Content-Type':'application/json'
                 },
                 body:JSON.stringify({
+                    IdOutro:id                   
+                })
+            })
+        }catch(e){
+            console.log(e)
+        }            
+    }
+
+    function Seguir(){
+        setLegendaSeg("Seguindo...")
+
+        TempArray.push({IDseguindo:id})
+
+        try{
+            fetch('http://localhost:3000/Seguir',{
+                method:"PUT",
+                credentials:"include",
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({
                     IdOutro:id
                 })
-            }).then(res => res.json())
-                .then(resp => toast.success(resp.msg))
+            })
         }catch(e){
-            console.log("B.O B.O:", e)
+            console.log(e)
         }
     }
 
-    useEffect(() => {
-        if(toSeguindo.length > 0){
-            toSeguindo.map(item => {
-                if(item.IDseguindo === id){
-                    DeixarDeSeguir()
-                }else{
-                    Seguir()
-                }
-            })
+    function SegueOuNao() {
+    
+        if(TempArray.length > 0){
+            const jaSegue = TempArray.some(
+                item  => item.IDseguindo === id
+            )
+
+            if(jaSegue){
+                DeixarDeSeguir()
+            }else{
+                Seguir()
+            }
+        }else{
+            Seguir()
         }
-        return
-    })
+
+    }
     
     return(
         <main>
@@ -125,9 +135,9 @@ export default function PerfilOutro(){
                 </a>
             </div>
             <div id='vazio'></div>
-            <InfoUser objDados={dados}/>
+            <InfoUser Arrseguindo={TempArray} objDados={dados}/>
             <div id='Divseguir'>
-                <button onClick={() => Seguir()} id='BtnSeguir'>{legendaSeg}</button>
+                <button onClick={SegueOuNao} id='BtnSeguir'>{legendaSeg}</button>
             </div>
             <div id="Posts">
                 <h1>POSTAGENS</h1>
