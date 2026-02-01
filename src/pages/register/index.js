@@ -70,7 +70,7 @@ export default function Register() {
                         }
         
                         //manda pro backend
-                        const res = await fetch('http://localhost:3000/register', {
+                        const res = await fetch(`http://${process.env.REACT_APP_URL_SITE}/register`, {
                             method: 'POST', //metodo para mandar dados 
                             body: formData, //manda todo o formulario pro back
                             credentials:"include"

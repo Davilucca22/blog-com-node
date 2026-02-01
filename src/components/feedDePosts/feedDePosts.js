@@ -24,7 +24,7 @@ export default function FeedDePosts({ Posts , name, Foto }) {
     useEffect(() => {
         if(dados.length > 0){
             const interval = setInterval(() => {//retorna os posts do feed atualizados a cada 5 segundos
-                fetch('http://localhost:3000/attdados', {
+                fetch(`http://${process.env.REACT_APP_URL_SITE}/attdados`, {
                     method: "PUT",
                     credentials: "include",
                     headers: {
@@ -49,7 +49,7 @@ export default function FeedDePosts({ Posts , name, Foto }) {
         const coracao = document.getElementById(id)
         coracao.style.color = "red"
 
-        fetch(`http://localhost:3000/${id}/curtida`, { //envia o id do post pro back atualizar a curtida
+        fetch(`http://${process.env.REACT_APP_URL_SITE}/${id}/curtida`, { //envia o id do post pro back atualizar a curtida
             method: "PUT",
             credentials: "include",
             headers: {
@@ -76,9 +76,9 @@ export default function FeedDePosts({ Posts , name, Foto }) {
     function Addcomentario(e, id) { 
 
         e.preventDefault()
-
+ 
         try {
-            fetch('http://localhost:3000/comentario', { //atualiza comentario no back
+            fetch(`http://${process.env.REACT_APP_URL_SITE}/comentario`, { //atualiza comentario no back
                 method: "PUT",
                 credentials: "include",
                 headers: {

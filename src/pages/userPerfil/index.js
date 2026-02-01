@@ -19,7 +19,7 @@ export default function PerfilUser() {
 
 
     useEffect(() => {
-        fetch("http://localhost:3000/session",{
+        fetch(`http://${process.env.REACT_APP_URL_SITE}/session`,{
             method:"GET",
             credentials:"include"
         }).then(res => res.json()
@@ -27,7 +27,7 @@ export default function PerfilUser() {
             setDados(dados)
         })
 
-        fetch(`http://localhost:3000/feedUser/${id}`, {
+        fetch(`http://${process.env.REACT_APP_URL_SITE}/feedUser/${id}`, {
             method:"GET",
             credentials:"include"
         }).then(res => res.json())

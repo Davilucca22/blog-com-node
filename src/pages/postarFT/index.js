@@ -29,7 +29,7 @@ export default function PostaFT(){
                 if(img instanceof File){ //se img for do tipo file 
 
                     formadata.append("img",img)
-                    const env = await fetch("http://localhost:3000/postar",{
+                    const env = await fetch(`http://${process.env.REACT_APP_URL_SITE}/postar`,{
                         method:"PUT", //PUT por que vai atualizar o array de posts
                         body: formadata,
                         credentials:"include"

@@ -11,7 +11,7 @@ export default function EditInfo() {
     const [idade,setIdade] = useState('')
 
     useEffect(() => {
-        fetch('http://localhost:3000/session',{
+        fetch(`http://${process.env.REACT_APP_URL_SITE}/session`,{
             method:"GET",
             credentials:"include",
             headers:{
@@ -56,7 +56,7 @@ export default function EditInfo() {
         e.preventDefault()
 
         if(idade > 18){
-            const env = await fetch('http://localhost:3000/editinfo',{
+            const env = await fetch(`http://${process.env.REACT_APP_URL_SITE}/editinfo`,{
                 method:"PUT",
                 credentials:"include",
                 headers:{

@@ -20,7 +20,7 @@ export default function EditSenha(){
             return
 
         }else{
-            const env = await fetch('http://localhost:3000/editsenha',{
+            const env = await fetch(`http://${process.env.REACT_APP_URL_SITE}/editsenha`,{
                 method:"PUT",
                 credentials:"include",
                 headers:{

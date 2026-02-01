@@ -10,7 +10,7 @@ export default function Menu() {
     const [id,setId] = useState('')
 
     useEffect(() =>{
-        fetch("http://localhost:3000/session",{
+        fetch(`http://${process.env.REACT_APP_URL_SITE}/session`,{
             method:"GET",
             credentials:"include"
         }).then(res => res.json())
