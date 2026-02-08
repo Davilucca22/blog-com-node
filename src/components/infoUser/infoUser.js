@@ -24,11 +24,16 @@ export default function InfoUser({objDados, Arrseguindo}){
                                     <span>Posts</span>
                                 </div>
                                 <div className="info">
-                                    <span>{dados.seguindo?.length ?? 0}</span>{/*se encontrar seguidores, retorna o tamanho, senao retorna 0*/}
+                                    <span>{dados.seguindo?.length ?? 0}</span>
                                     <span>Seguindo</span>
                                 </div>
                                 <div className="info">
-                                    <span>{arraySeguidores.length ?? 0}</span>{/*se encontrar seguindo, retorna o tamanho, senao retorna 0*/}
+                                    {arraySeguidores.length !== 0 &&
+                                        <span>{arraySeguidores.length ?? 0}</span>
+                                    }
+                                    {arraySeguidores.length === 0 &&
+                                        <span>{dados.seguidores?.length ?? 0}</span>
+                                    }
                                     <span>Seguidores</span>
                                 </div>
                             </div>

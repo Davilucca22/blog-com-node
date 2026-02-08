@@ -8,6 +8,7 @@ import FeedDePosts from "../../components/feedDePosts/feedDePosts";
 export default function Feed() {
     const [nome, setNome] = useState('')
     const [foto, setFoto] = useState(null)
+    const [id,setid] = useState('')
     const [modal, setmodal] = useState(false)
     const [sair, setSair] = useState(false)
     const [dados,setDados] = useState([])
@@ -28,6 +29,7 @@ export default function Feed() {
             .then(email => {
                 setNome(email.name)
                 setFoto(email.fotoPerfil)
+                setid(email._id)
             })
     }, [])
 
@@ -71,7 +73,7 @@ export default function Feed() {
             <main id="MainFeed">
 
                 <div id="vazio" /* apenas preenche o espaço vazio atras do header no main, pro conteudo ficar pra baixo do header */></div>
-                <FeedDePosts  Posts={dados} name={nome} Foto={foto} /> {/* conteiner do post */}
+                <FeedDePosts  Posts={dados} name={nome} Foto={foto} MeuID={id} /> {/* conteiner do post */}
 
             </main>
 

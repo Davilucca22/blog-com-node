@@ -44,7 +44,7 @@ export default function PerfilUser() {
                     <div id="divSair">
                         <IoArrowBackOutline id="voltar" onClick={() => setZoomFT(false)}/> POSTS
                     </div>
-                    <FeedDePosts Posts={posts} name={dados.name} Foto={dados.fotoPerfil} />
+                    <FeedDePosts Posts={posts} name={dados.name} Foto={dados.fotoPerfil} MeuID={dados._id} />
                 </nav>
                 }
 

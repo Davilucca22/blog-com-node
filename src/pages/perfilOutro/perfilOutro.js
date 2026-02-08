@@ -10,13 +10,13 @@ import { toast } from 'react-toastify';
 // pegar o id que foi mandado da outra tela e buscar no banco o usuario correspondente
 export default function PerfilOutro(){
     const { id } = useParams()
+    const [meuId,setMeuId] = useState('')
     const [dados,setDados] = useState([])
     const [nome,setnome] = useState('')
     const [foto,setfoto] = useState('')
-    const [toSeguindo,setToSeguindo] = useState([])
     const [posts,setposts] = useState([])
     const [zoomFT,setZoomFT] = useState(false)
-    const [legendaSeg,setLegendaSeg] = useState('+ Seguir')
+    const [legendaSeg,setLegendaSeg] = useState('')
     const [TempArray,setTempArray] = useState([])
 
     useEffect(() => {
@@ -31,7 +31,7 @@ export default function PerfilOutro(){
         .then(item => { 
             setnome(item.name)
             setfoto(item.fotoPerfil)
-            setToSeguindo(item.seguindo)
+            setMeuId(item._id)
         })
 
         fetch(`http://${process.env.REACT_APP_URL_SITE}/perfiloutro/${id}`,{
@@ -43,6 +43,7 @@ export default function PerfilOutro(){
         }).then(res => res.json())
         .then(item => {
             setDados(item)
+            setTempArray(item.seguidores)
         })
         
         fetch(`http://${process.env.REACT_APP_URL_SITE}/feedUser/${id}`,{
@@ -56,13 +57,26 @@ export default function PerfilOutro(){
     
     },[])
 
-    function DeixarDeSeguir(){
-        setLegendaSeg("+ Seguir")
-
-        const rem = toSeguindo.filter(item => item.IDseguindo !== id)
+    useEffect(() => {
         
-        setTempArray(rem)
+        if(!meuId) return
 
+    const sera = TempArray.some(
+        item => item.IDseguidor === meuId
+    )
+
+    setLegendaSeg(sera ? 'Seguindo...' : '+Seguir')
+
+    },[TempArray,meuId])
+
+    function DeixarDeSeguir(){
+        
+        setTempArray(prev => 
+            prev.filter(item => item.IDseguidor !== meuId) //se eu ja seguir a pessoa, sou removido do array e deixo de seguir
+        ) 
+
+        setLegendaSeg("+ Seguir")
+        
         try{
             fetch(`http://${process.env.REACT_APP_URL_SITE}/DeixarDeSeguir`,{
                 method:"PUT",
@@ -80,9 +94,12 @@ export default function PerfilOutro(){
     }
 
     function Seguir(){
-        setLegendaSeg("Seguindo...")
 
-        TempArray.push({IDseguindo:id})
+        setTempArray(prev => {
+            if(prev.some(item => item.IDseguidor === meuId)) return prev
+            return [...prev,{IDseguidor:meuId}] //impede de duplicar com clique duplo
+        })
+        setLegendaSeg("Seguindo...")
 
         try{
             fetch(`http://${process.env.REACT_APP_URL_SITE}/Seguir`,{
@@ -101,21 +118,15 @@ export default function PerfilOutro(){
     }
 
     function SegueOuNao() {
-    
-        if(TempArray.length > 0){
-            const jaSegue = TempArray.some(
-                item  => item.IDseguindo === id
-            )
+        const jaSegue = TempArray.some(
+            item  => item.IDseguidor === meuId
+        )
 
-            if(jaSegue){
-                DeixarDeSeguir()
-            }else{
-                Seguir()
-            }
+        if(jaSegue){
+            DeixarDeSeguir()
         }else{
             Seguir()
         }
-
     }
     
     return(
