@@ -25,7 +25,7 @@ export default function Menu() {
             <div>
                 <a href="/feed"> <GrHomeRounded className="icon" /></a>
                 <a href="/postar"><GoPlusCircle className="icon" /></a>
-                <a href="/"><FaSearch className="icon" /></a>
+                <a href="/busca"><FaSearch className="icon" /></a>
                 <a href={`/Perfil/${id}`}><img src={img} alt="foto do usuario"></img></a> {/*passa id do usuario na url*/}
             </div>
         </footer>

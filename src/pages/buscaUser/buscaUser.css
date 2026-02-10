@@ -1,0 +1,35 @@
+#conteinerInput{
+    padding-top: 10px;   
+    width: 100%;
+    justify-items: center;
+}
+
+#conteinerInput div{
+    display: flex;
+    flex-direction: row;
+    width: 300px;
+    height: 40px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 1px 3px black;
+    justify-content: space-between;
+    border-radius: 5px;
+}
+
+#conteinerInput div input{
+    height: 100%;
+    outline: none;
+    width: 90%;
+    padding-left: 5px;
+    border-radius: 5px;
+}
+
+#conteinerInput div button{
+    width: 10%;
+    background-color: white;
+    border-radius: 5px;
+}
+
+#conteinerInput div button svg{
+    width: 20px;
+    height: 20px;
+}
