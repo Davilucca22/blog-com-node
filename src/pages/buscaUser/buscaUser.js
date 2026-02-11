@@ -34,16 +34,17 @@ export default function BuscaUser() {
                 <ul id="listaUsers">
                     {nome &&
                         resultado.map(user => (
-                            <li>
-                                <a href={`/details/${user._id}`}>
-                                    <img src={user.fotoPerfil} alt="foto user"></img>
-                                    <span>{user.name}</span>
+                            <li className="blocoPerfil">
+                                <a className="LinkPerfil" href={`/details/${user._id}`}>
+                                    <img className="FTuser" src={user.fotoPerfil} alt="foto user"></img>
+                                    <span className="NameUser">{user.name}</span>
                                 </a>
                             </li>
                         ))
                     }
                 </ul>
             </div>
+            <div id="vazio" /* apenas preenche o espaço vazio atras do header no main, pro conteudo ficar pra baixo do header */></div>
             <Menu/>
         </main>
     )

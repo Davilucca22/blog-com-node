@@ -143,7 +143,7 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
                         {verComent === index &&
                             <div id="conteinerComent">
                                 <button type="button" id="sairComent" onClick={() => setverComent('')}><AiOutlineClose /></button>
-                                <div id="feedComent">
+                                <div key={val._id} id="feedComent">
                                     {val.post.comentarios?.slice().reverse().map(item => (
                                         <div className="contComentario">
                                             <img className="fotoDono" src={item.fotoDono} alt="foto do dono do comentario"></img>
