@@ -1,7 +1,6 @@
 import { Routes , Route} from 'react-router-dom'
 
 import Register from './pages/register/index'
-import BoasVindas from './pages/home/index.js'
 import Login from './pages/login/login.js'
 import Feed from './pages/feed/feed.js'
 import PerfilUser from './pages/userPerfil/index.js'
@@ -11,13 +10,13 @@ import EditInfo from './pages/editInfo/editInfo.js'
 import EditSenha from './pages/editsenha/editsenha.js'
 import PerfilOutro from './pages/perfilOutro/perfilOutro.js'
 import BuscaUser from './pages/buscaUser/buscaUser.js'
+import MostraSeguidores from './pages/mostraSeguidores/mostraSeguidores.js'
 
 export default function AppRouter(){
     return(
         <Routes>
-            <Route path='/' element={<BoasVindas/>} />
+            <Route path='/' element={<Login/>} />
             <Route path='/register' element={<Register />} />
-            <Route path='/login' element={<Login />} />
             <Route path='/feed' element={<Feed />} />
             <Route path='/Perfil/:id' element={<PerfilUser />} />
             <Route path='/postar' element={<PostaFT />} />
@@ -26,6 +25,7 @@ export default function AppRouter(){
             <Route path='/editsenha' element={<EditSenha />} />
             <Route path='/details/:id' element={<PerfilOutro />} />
             <Route path='/busca' element={<BuscaUser />} />
+            <Route path='/seguidores/:id' element={<MostraSeguidores />} />
         </Routes>
     ) 
 }

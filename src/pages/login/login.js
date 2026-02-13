@@ -39,22 +39,23 @@ export default function Login(){
         }
     }        
 
-    return(
-        <main>
-            <section id="bemVindo">
-                <h1>
-                    <span className="preto">BEM</span>
-                    <span className="branco" >VINDO</span>
-                    <span className="preto">DE</span>
-                    <span className="branco1">VOLTA</span>
-                </h1>
-            </section>
-            <form id="form" onSubmit={e => enviaBack(e)}>
-                <input type="email" placeholder="SEU EMAIL..." value={email} onChange={e => setemail(e.target.value)}></input>
-                <input type="password" placeholder="SUA SENHA..." value={senha} onChange={e => setsenha(e.target.value)}></input>
-                <button id="entrar_1" type="Submit">ENTRAR</button>
-                <span>ESQUECI MINHA SENHA</span>
-            </form>
+    return( 
+        <main id="MainLogin">
+            <div id="ConteinerForm">
+                <form id="form" onSubmit={e => enviaBack(e)}>
+                    <label>Email:
+                        <input id="inptEmail" type="email" value={email} onChange={e => setemail(e.target.value)}></input>
+                    </label>
+                    <label>Senha:
+                        <input type="password" value={senha} onChange={e => setsenha(e.target.value)}></input>
+                    </label>                    
+                    <button id="entrar_1" type="Submit">ENTRAR</button>
+                </form>
+                <section id="conteinerSpan">
+                    <span id="esqueciSnh">ESQUECI MINHA SENHA</span>
+                    <span id="NovoUSer">Novo por aqui?<a href="/register">Criar nova Conta</a></span>    
+                </section>
+            </div>
         </main>
     )
 }

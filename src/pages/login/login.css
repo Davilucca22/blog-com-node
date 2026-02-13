@@ -1,64 +1,77 @@
-:root{
-    --CorSegundaria: #000000ff;
-    --CorTexto: #586f7cff;   
-    --CorPrimaria:#b8dbd9ff;
-    --CorDoBotao:#f4f4f9ff;
+#MainLogin{
+    background-image: url('../../../public/assets/arvores.jfif');
+    background-size: cover;
 }
 
-main{
+#ConteinerForm{
+    position: fixed;
+    width: 100%;
+    height: 350px;
+    bottom: 0;
     background-color: var(--CorPrimaria);
-    height: 100vh;
-}
-
-#bemVindo h1{
-    display: flex;
-    flex-direction: column;
-    font-size: 72px;
-}
-
-#bemVindo{
-    margin-bottom: 30px;
-}
-
-.preto{
-    padding-left: 10px;
-}
-
-.branco{
-    padding-left: 10px;
-    color: white;
-    background-color: black;
-}
-
-.branco1{
-    padding-left: 10px;
-    color: white;
-    background-color: black;
-    width: 90%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 #form{
     display: flex;
     flex-direction: column;
     width: 70%;
-    margin: 0 auto;
+    margin: 20px auto;
+    align-items: center;
+}
+
+#form label{
+    color: var(--CorSegundaria);
+    font-weight: 500;
 }
 
 #form input{
-    background-color: var(--CorPrimaria);
+    margin-bottom: 10px;
+    background-color: whitesmoke;
     color: var(--CorTexto);
-    border-bottom: 1px solid white;
     font-size: 14px;
+    height: 20px;
+    width: 250px;
+    padding: 10px;
     font-weight: lighter;
-    margin: 20px 0;
     outline: none;
+    border-radius: 5px;
+    box-shadow: 0px 1px 3px gray;
 }
 
 #entrar_1{
-    font-size: 25px;
-    background-color: black;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    width: 200px;
+    background-color: var(--CorSegundaria);
     color: white;
     border-radius: 10px;
     height: 50px;
-    box-shadow: 1px 1px 3px black;
+    box-shadow: 1px 1px 3px gray;
+}
+
+#conteinerSpan{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--CorSegundaria);
+}
+
+#esqueciSnh{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#NovoUSer{
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#NovoUSer a{
+    text-decoration: none;
+    font-weight: 800;
+    color: var(--CorSegundaria);
 }

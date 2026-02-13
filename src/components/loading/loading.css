@@ -1,10 +1,3 @@
-:root{
-    --CorSegundaria: #000000ff;
-    --CorTexto: #586f7cff;   
-    --CorPrimaria:#b8dbd9ff;
-    --CorDoBotao:#f4f4f9ff;
-}
-
 #modalPost{
     width: 100vw;
     height: 100vh;

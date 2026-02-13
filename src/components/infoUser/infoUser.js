@@ -32,7 +32,7 @@ export default function InfoUser({objDados, Arrseguindo}){
                                         <span>{arraySeguidores.length ?? 0}</span>
                                     }
                                     {arraySeguidores.length === 0 &&
-                                        <span>{dados.seguidores?.length ?? 0}</span>
+                                        <span><a href={`/seguidores/${dados._id}`}>{dados.seguidores?.length ?? 0}</a></span>
                                     }
                                     <span>Seguidores</span>
                                 </div>
