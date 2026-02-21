@@ -11,21 +11,21 @@ export default function Feed() {
     const [id,setid] = useState('')
     const [modal, setmodal] = useState(false)
     const [sair, setSair] = useState(false)
-    const [dados,setDados] = useState([])
+    const [dados,setDados] = useState([]) 
 
     useEffect(() => { //dados dos posts
-        fetch("http://localhost:3000/feed?page=1", {
-            method: "GET",
-            credentials: "include"
-        }).then(res => res.json())
+            fetch("http://localhost:3000/feed?page=1", {
+                method: "GET",
+                credentials: "include"
+            }).then(res => res.json())
             .then(data => {
                 setDados(data)
             })
 
-        fetch("http://localhost:3000/session", { //dados apenas da sessao
-            method: "GET",
-            credentials: "include"
-        }).then(res => res.json())
+            fetch("http://localhost:3000/session", { //dados apenas da sessao
+                method: "GET",
+                credentials: "include"
+            }).then(res => res.json())
             .then(email => {
                 setNome(email.name)
                 setFoto(email.fotoPerfil)
@@ -48,7 +48,7 @@ export default function Feed() {
                             </div>
                         </div>
                     }
-                    <div id="botoes">
+                    <div id="botoes"> 
                         <button onClick={() => setmodal(false)}>
                             <IoArrowBackOutline id="back" />
                         </button>

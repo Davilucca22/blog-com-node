@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     margin: 10px;
+    cursor: pointer;
 }
 
 .cabecalhoPost span{
@@ -14,6 +15,7 @@
 .fotoP{
     width: 40px;
     height: 40px;
+    box-shadow: 2px 2px 2px black;
 }
 
 .imgPost{
@@ -22,9 +24,11 @@
 
 .imgPost img{
     border-radius: 0;
-    width: 100%;    
-    height: 400px;
-    object-fit: cover;
+    background-color: #001316;
+    width: 375px;    
+    height: 581px;
+    object-fit: contain;
+    box-shadow: 2px 2px 3px black;
 }
 
 .comentPost{
@@ -42,6 +46,7 @@
 .like{
     color: black;
     transition: color 0.2s ease, transform 0.1s ease;
+    cursor: pointer;
 }
 
 .like.ativo{
@@ -69,7 +74,7 @@
     flex-direction: column;
     align-items: start;
     z-index: 1001;
-    background-color: rgb(3, 82, 85,1);
+    background-color: #035255;
     width: 100vw;
     height: 80vh;
     margin-top: 150px;
@@ -81,12 +86,17 @@
 #feedComent{
     width: 100%;
     margin-bottom: auto;
-    height: 90%;
+    height: 400px;
     overflow: scroll;
 }
 
+#textos{
+    width: 100%;
+}
+
 #digitaComent{
-    margin-bottom: 15px;
+    position: fixed;
+    bottom: 0;
     display: flex;
     width: 100%;
     height: 40px;
@@ -145,4 +155,16 @@
 #comentarios dd{
     margin-left: 15px;
     margin-bottom: 10px;
+}
+
+#fotoNoComent{
+    display: none;
+}
+
+@media (min-width:640px){
+
+    .imgPost img{
+        width: 100%;
+        height: 100vh;
+    }
 }

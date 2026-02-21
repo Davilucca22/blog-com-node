@@ -51,14 +51,16 @@ export default function EditSenha(){
             <div id="voltar"><a href="/feed"><IoArrowBackOutline /></a></div>
             <div id="cadeado"><FaLock/></div>
             <form onSubmit={e => EnviaBack(e)} id="formSenha">
-                <div><input id="senhaAtual" placeholder="digite sua senha atual" value={senhaAtual} onChange={e => setAtual(e.target.value)}  type={showA ? "text" : "password"}></input><button type="button" onClick={() => {
+                <div><input id="senhaAtual" placeholder="digite sua senha atual" value={senhaAtual} onChange={e => setAtual(e.target.value)}  type={showA ? "text" : "password"}></input>
+                <button type="button" onClick={() => {
                     if(showA){
                         setshowA(false)
                     }else{
                         setshowA(true)
                     }
                 }}><IoEyeSharp className="olho"/></button></div>
-                <div><input id="novaSenha" placeholder="digite sua nova senha" value={senhaNova} onChange={e => setNova(e.target.value)} type={showB ? "text" : "password"}></input><button type="button" onClick={() => {
+                <div><input id="novaSenha" placeholder="digite sua nova senha" value={senhaNova} onChange={e => setNova(e.target.value)} type={showB ? "text" : "password"}></input>
+                <button type="button" onClick={() => {
                     if(showB){
                         setshowB(false)
                     }else{

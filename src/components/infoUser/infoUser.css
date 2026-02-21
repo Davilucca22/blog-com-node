@@ -1,57 +1,238 @@
-#infoUser{
+#infoUser {
+    display: flex;
+    flex-direction: row;
+}
+
+#contadores {
     display: flex;
     flex-direction: column;
-}
-
-#infoUser img{
-    width: 100px;
-    height: 100px;
-}
-
-#contadores{
-    display: flex;
+    height: 100%;
     margin-left: 10px;
 }
 
-#textos{
+#contImg {
+    margin-left: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 1px 1px 3px gray;
+}
+
+#contImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+#textos {
     margin: 10px;
 }
 
-#legendas{
+#legendas {
     display: flex;
     flex-direction: row;
     margin: 5px;
     gap: 10px;
 }
 
-.info{
+.info {
     display: flex;
     flex-direction: column;
     margin: 0 5px;
 }
 
-#conteinerHamburguer{
+#conteinerHamburguer {
     justify-self: end;
 }
 
-#hamburguer2{
+#hamburguer2 {
     width: 40px;
     height: 40px;
     margin-right: 10px;
     color: var(--CorSegundaria);
 }
-#BThamburguer2{
+
+#BThamburguer2 {
     background-color: var(--CorPrimaria);
 }
 
-#nomeP{
+#nomeP {
     margin-left: 10px;
     font-size: 18px;
     font-weight: 600;
 }
 
-#infoUser p {
+#bioMobile {
     margin-top: 15px;
     margin-left: 15px;
     margin-bottom: 50px;
+}
+
+#bioDesktop {
+    display: none;
+}
+
+#configVdesktop {
+    display: none;
+    background-color: var(--CorPrimaria);
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+#configVdesktop svg {
+    width: 15px;
+    height: 15px;
+}
+
+#modal{
+    position: fixed;
+    width: 100vw;
+    height: 100%;
+    background-color: var(--CorPrimaria);
+    z-index: 999;
+    transition: all ease 2000ms;
+}
+
+#botoes{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 10px; 
+    justify-content: center;
+}
+
+#botoes a{
+    color: var(--CorDoBotao);
+    text-decoration: none;
+}
+
+#back{
+    display: block;
+    width: 35px;
+    height: 35px;
+    margin-bottom: 20px;
+}
+
+#modal div span{
+    background-color: var(--CorSegundaria);
+    color: var(--CorDoBotao);
+    font-size: 15px;
+    font-weight: 700;
+    margin: 10px 20px;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+#botoes button{
+    background-color: var(--CorPrimaria);
+}
+
+#ModalSair{
+    position: fixed;
+    justify-items: center;
+    align-content: center;
+    background-color:rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+}
+
+#confirmaSair{
+    width: 300px;
+    height: 300px;
+    background-color: var(--CorPrimaria);
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px black;
+    justify-items: center;
+    align-content: center;
+}
+
+#confirmaSair p{
+    font-size: 25px;
+    font-weight: 800;
+}
+
+#BTNs{
+    margin: 30px;
+}
+
+#BTNs button{
+    width: 100px;
+    height: 30px;
+    margin: 0 10px;
+    box-shadow: 1px 1px 3px black;
+    border-radius: 5px;
+}
+
+#BTNcancel{
+    background-color: red;
+    font-weight: 700;
+}
+
+#BTNconfirm{
+    background-color: green;
+    font-weight: 700;
+}
+
+#BTNconfirm a{
+    text-decoration: none;
+    color: black;
+}
+
+@media (min-width:640px) {
+
+    #configVdesktop {
+        display: inline;
+    }
+
+    #bio {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 40px 0;
+    }
+
+    #bioMobile {
+        display: none;
+    }
+
+    #bioDesktop {
+        display: block;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    #contImg {
+        width: 200px;
+        height: 200px;
+    }
+
+    #textos {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    #nomeP {
+        font-size: 22px;
+    }
+
+    .info {
+        margin-top: 10px;
+    }
+
+    .info span {
+        font-size: 18px;
+    }
+
+    #conteinerHamburguer {
+        display: none;
+    }
+
+    #modal{
+        width: 300px;
+        right: 0;
+    }
 }

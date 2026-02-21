@@ -36,7 +36,7 @@
 
 #listaUsers{
     position: fixed;
-    margin-top: 5px;
+    margin-top: 10px;
     list-style-type: none;
     height: 550px;  
     width: 100%;
@@ -68,4 +68,29 @@
     align-items: center;
     gap: 10px;
     text-decoration: none;
+}
+
+#ContLista{
+    width: 100%;
+}
+
+@media(min-width:640px){
+
+    #ContLista{
+        display: flex;
+        justify-content: center;
+    }
+    
+    #listaUsers{
+        width: 800px;
+        margin: 20px auto;
+    }
+
+    ::-webkit-scrollbar{
+        display: none;
+    }
+
+    #blocoPerfil{
+        border: 2px solid black;
+    }
 }

@@ -82,38 +82,41 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
     function Addcomentario(e, id) {
 
         e.preventDefault()
-
+        
         try {
-            fetch(`http://${process.env.REACT_APP_URL_SITE}/comentario`, { //atualiza comentario no back
-                method: "PUT",
-                credentials: "include",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    IDpost: id,
-                    nome: nome,
-                    foto: foto,
-                    comentario: textComent
+            if(textComent !== ''){
+
+                fetch(`http://${process.env.REACT_APP_URL_SITE}/comentario`, { //atualiza comentario no back
+                    method: "PUT",
+                    credentials: "include",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        IDpost: id,
+                        nome: nome,
+                        foto: foto,
+                        comentario: textComent
+                    })
                 })
-            })
-
-            setTextComent('')
-
-            setDados(prev => { //atualiza comentario no front
-                return prev.map(item => {
-                    if (item.post._id === id)
-                        return {
-                            ...item,
-                            post: {
-                                ...item.post,
-                                comentarios: [...item.post.comentarios, { textoComentario: textComent, donoComentario: nome, fotoDono: foto }]
-                            }
+                
+                setTextComent('')
+                
+                setDados(prev => { //atualiza comentario no front
+                    return prev.map(item => {
+                        if (item.post._id === id)
+                            return {
+                        ...item,
+                        post: {
+                            ...item.post,
+                            comentarios: [...item.post.comentarios, { textoComentario: textComent, donoComentario: nome, fotoDono: foto }]
                         }
+                    }
                     return item
                 })
-            })
-
+                })
+            
+            }
         } catch (e) {
             toast.error(e)
         }
@@ -142,22 +145,25 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
                     <dl id="comentarios">
                         {verComent === index &&
                             <div id="conteinerComent">
-                                <button type="button" id="sairComent" onClick={() => setverComent('')}><AiOutlineClose /></button>
-                                <div key={val._id} id="feedComent">
-                                    {val.post.comentarios?.slice().reverse().map(item => (
-                                        <div className="contComentario">
-                                            <img className="fotoDono" src={item.fotoDono} alt="foto do dono do comentario"></img>
-                                            <div className="infoComent">
-                                                <dt className="user">{item.donoComentario}</dt>
-                                                <dd className="usercoment">{item.textoComentario}</dd>
+                                <img src={val.post.imgURL} alt="nada" id="fotoNoComent" ></img>
+                                <div id="textos">
+                                    <button type="button" id="sairComent" onClick={() => setverComent('')}><AiOutlineClose /></button>
+                                    <div key={val._id} id="feedComent">
+                                        {val.post.comentarios?.slice().reverse().map(item => (
+                                            <div className="contComentario">
+                                                <img className="fotoDono" src={item.fotoDono} alt="foto do dono do comentario"></img>
+                                                <div className="infoComent">
+                                                    <dt className="user">{item.donoComentario}</dt>
+                                                    <dd className="usercoment">{item.textoComentario}</dd>
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        ))}
+                                    </div>
+                                    <form id="digitaComent" onSubmit={e => Addcomentario(e, val.post._id)}>
+                                        <input type="text" placeholder="digite aqui...." value={textComent} onChange={e => setTextComent(e.target.value)} ></input>
+                                        <button type="submit"><AiOutlineCheck /></button>
+                                    </form>
                                 </div>
-                                <form id="digitaComent" onSubmit={e => Addcomentario(e, val.post._id)}>
-                                    <input type="text" placeholder="digite aqui...." value={textComent} onChange={e => setTextComent(e.target.value)} ></input>
-                                    <button type="submit"><AiOutlineCheck /></button>
-                                </form>
                             </div>
                         }
 

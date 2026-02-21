@@ -1,4 +1,4 @@
-import {react, useState, useEffect} from "react"
+import {react, useState, useEffect} from "react" 
 import { FaCamera } from "react-icons/fa";
 import { IoArrowBackOutline } from "react-icons/io5";
 import "./index.css"
@@ -66,7 +66,7 @@ export default function PostaFT(){
                     <Loading />
                 }
                 <span><Link to={"/feed"}><IoArrowBackOutline id="seta"/></Link></span>
-                <section>
+                <section id="ContFTeForm">
                     <div id="conteinerAddfoto">
                         <div>
                             {img &&
@@ -84,7 +84,7 @@ export default function PostaFT(){
                             }} ></input>
                         </div>
                     </div>
-                    
+
                     <form onSubmit={e => {
                         enviaDados(e)
                         setload(true) // mostra o loading

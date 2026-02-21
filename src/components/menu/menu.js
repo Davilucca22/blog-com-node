@@ -2,22 +2,23 @@ import react, { useEffect, useState } from "react";
 import { GrHomeRounded } from "react-icons/gr";
 import { GoPlusCircle } from "react-icons/go";
 import { FaSearch } from "react-icons/fa";
+
 import "./menu.css"
 
 export default function Menu() {
 
-    const [img,setImg] = useState(null)
-    const [id,setId] = useState('')
+    const [img, setImg] = useState(null)
+    const [id, setId] = useState('')
 
-    useEffect(() =>{
-        fetch(`http://${process.env.REACT_APP_URL_SITE}/session`,{
-            method:"GET",
-            credentials:"include"
+    useEffect(() => {
+        fetch(`http://${process.env.REACT_APP_URL_SITE}/session`, {
+            method: "GET",
+            credentials: "include"
         }).then(res => res.json())
-        .then(dados => {
-            setImg(dados.fotoPerfil)
-            setId(dados._id)
-        })
+            .then(dados => {
+                setImg(dados.fotoPerfil)
+                setId(dados._id)
+            })
     }, [])
 
     return (

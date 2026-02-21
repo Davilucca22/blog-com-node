@@ -1,9 +1,11 @@
 import React, { useState,useEffect } from "react";
 import "./Register.css"
 import { toast } from "react-toastify";
+import { IoEyeSharp  } from "react-icons/io5";
 import Loading from "../../components/loading/loading";
 
-export default function Register() {
+
+export default function Register() { 
  
     const [nome, setnome] = useState('')
     const [email, setemail] = useState('')
@@ -13,6 +15,7 @@ export default function Register() {
     const [Preview,setPreview] = useState('./assets/semfoto.jpeg')
     const [idade,setIdade] = useState('')
     const [modal,setmodal] = useState(false)
+    const [showBTN,setShowBTN] = useState(false)
 
     useEffect(() => {
         return () => Preview && URL.revokeObjectURL(Preview)
@@ -117,31 +120,59 @@ export default function Register() {
     }
 
     return (
-        <main id="CadConteiner">
+        <main id="MainRegister">
+            <div id="telaPreta">
             {modal &&
             <Loading />
             }
-            <section id="BemVindo">
-               <h1>CRIE SUA CONTA AGORA!</h1>
-            </section>
-            <form id="formularioCad" onSubmit={e => EnviaBack(e)}>
-                <img src={Preview}  alt="foto de perfil"></img>
-                <input id="anexaFt" type="file" 
-                onChange={e =>
-                    {
-                        const file = e.target.files[0]
-                        setfoto(file);
-                        if(file){
-                            setPreview(URL.createObjectURL(file))
-                        }   
-                    }
-                }/>
-                <input className="inputForm" type="text" placeholder="NOME COMPLETO..." value={nome} onChange={e => setnome(e.target.value)}></input>
-                <input className="inputForm" type="email" placeholder="SEU MELHOR EMAIL..." value={email} onChange={e => setemail(e.target.value)}></input>
-                <input className="inputForm" type="password" placeholder="SENHA(6 A 8 CARACTERES)" value={senha} onChange={e => setsenha(e.target.value)}></input>
-                <input className="inputForm" type="text" placeholder="SUA DATA DE NASCIMENTO..." value={DataNasc} onChange={e => formataData(e) }></input>
-                <button id="botaoEnviar" type="submit">CRIAR CONTA</button>
-            </form>
+            <div id="ConteinerForm1">
+                <form id="form1" onSubmit={e => EnviaBack(e)}>
+                    <div id="divFT">
+                        <img id="FTuser" src={Preview}  alt="foto de perfil"></img>
+                        <input id="anexaFt" type="file"
+                        onChange={e =>
+                            {
+                                const file = e.target.files[0]
+                                setfoto(file);
+                                if(file){
+                                    setPreview(URL.createObjectURL(file))
+                                }
+                            }
+                        }/>
+                    </div>
+                    <div id="divInputs">
+                        <label>
+                            Nome de Usuario:
+                        </label>
+                            <input className="inputForm" type="text" value={nome} onChange={e => setnome(e.target.value)}></input>
+                        <label>
+                            E-mail:
+                        </label>
+                            <input className="inputForm" type="email" value={email} onChange={e => setemail(e.target.value)}></input>
+                        <label>
+                            Senha:
+                        </label>
+                            <div id="divSenha">
+                                <input id="inputSenha" type={ showBTN ? 'text' : 'password'} value={senha} onChange={e => setsenha(e.target.value)}></input>
+                                <button id="olhoBTN" type="button" onClick={() => {
+                                    if(showBTN){
+                                        setShowBTN(false)
+                                    }else{
+                                        setShowBTN(true)
+                                    }
+                                }}><IoEyeSharp /></button>
+                            </div>
+                        <label>
+                            Data de Nascimento:
+                        </label>
+                            <input className="inputForm" type="text" value={DataNasc} onChange={e => formataData(e) }></input>
+                        <button id="botaoEnviar" type="submit">CRIAR CONTA</button>
+                        <span id="login">Ja tem uma Conta?<a href="/">Faça Login</a></span>
+                    </div>
+                </form>
+                <img id="imgDesktopVersion" src="./assets/foto1.jfif" alt="foto de paisagem"></img>
+            </div>
+            </div>
         </main>
     )
 }

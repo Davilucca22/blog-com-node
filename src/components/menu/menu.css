@@ -8,12 +8,16 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+    box-shadow: 2px 2px 3px black;
 }
 
 #FooterFeed img{
     width: 40px;
     height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
 }
+
 
 .icon{
     color: var(--CorDoBotao);
@@ -21,4 +25,23 @@
     margin-right: 25px;
     width: 40px;
     height: 40px;
+}
+
+@media(min-width:730px){
+    #FooterFeed{
+        flex-direction: column;
+        height: 100vh;
+        width: 100px;
+        justify-content: center;
+    }
+
+    .icon{
+        display: block;
+        margin: 50px auto;
+    }
+
+    #FooterFeed img{
+        width: 50px;
+        height: 50px;
+    }
 }

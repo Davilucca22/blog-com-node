@@ -5,7 +5,7 @@ import './buscaUser.css'
 
 export default function BuscaUser() {
     const [nome,setName] = useState('')
-    const [resultado,setResultado] = useState(null)
+    const [resultado,setResultado] = useState(null) 
 
     useEffect(() => {
         fetch(`http://${process.env.REACT_APP_URL_SITE}/buscar?nome=${nome}`,{
@@ -30,7 +30,7 @@ export default function BuscaUser() {
                     </button>
                 </div>
             </section>
-            <div>
+            <div id="ContLista">
                 <ul id="listaUsers">
                     {nome &&
                         resultado.map(user => (
