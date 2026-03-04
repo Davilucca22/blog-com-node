@@ -1,0 +1,241 @@
+.cabecalhoPost2{
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.cabecalhoPost2 span{
+    font-size: 15px;
+    font-weight: bold;
+    display: block;
+    margin-left: 10px;
+}
+
+.fotoP2{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px black;
+    object-fit: cover;
+}
+
+.imgPost2{
+    margin-bottom: 30px;
+}
+
+.imgPost2 img{
+    border-radius: 0;
+    background-color: #001316;
+    width: 375px;    
+    max-height: 581px;
+    object-fit: contain;
+    box-shadow: 2px 2px 3px black;
+}
+
+.comentPost2{
+    display: block;
+    margin-left: 10px; 
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+.imgPost2 svg{
+    width: 25px;
+    height: 25px;
+}
+
+.like2{
+    color: black;
+    transition: color 0.2s ease, transform 0.1s ease;
+    cursor: pointer;
+}
+
+.like.ativo2{
+    color: #8a1e1e;
+    animation: pop 0.2s ease;
+}
+
+@keyframes pop{
+    50%{ transform: scale(1.3);}
+}
+
+.tres2{
+    display: flex;
+    align-items: center;
+}
+
+.comentario2{
+    margin-left: 10px;
+    color: var(--CorSegundaria);
+}
+
+
+.fotoDono2{
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.user2{
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--CorDoBotao);
+}
+
+.usercoment2{
+    display: block;
+    width: 90%;
+    line-break: anywhere;
+}
+
+.infoComent2{
+    width: 100%;
+}
+
+
+#comentarios2{
+    margin: 10px 0;
+}
+
+#comentarios2 dt{
+    margin-left: 10px;
+}
+
+#comentarios2 dd{
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+#fotoNoComent2{
+    display: none;
+}
+
+#conteinerComent2{
+    position: absolute;
+    z-index: 1001;
+    background-color: #043036;
+    width: 100%;
+    height: 80vh;   
+}
+
+.contComentario2{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#feedComent2{
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.sairDesktop{
+    display: none;
+}
+
+@media (min-width:640px){
+
+    #comentarios2{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+    }
+    
+    .conteinerPublicacao2{
+        width: 900px;
+        height: 700px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        background-color: #043036;
+        color: whitesmoke;
+    }
+    
+    #layoutPost{
+        width: 400px;
+        display: flex;
+        height: auto;
+        flex-direction: column;
+    }
+
+    .imgPost2{
+        height: 100%;
+        width: 400px;
+    }
+
+    .imgPost2 img{
+        height: 100%;
+        width: 100%;
+    }
+
+    #conteinerComent2{
+        position: relative;
+        width: 500px;
+    }
+    
+    #feedComent2{
+        height:590px;
+        overflow-y: scroll;
+        margin-left: 20px;
+    }
+
+    .contComentario2{
+        margin: 10px 0;
+        align-items: start;
+    }
+
+    .contComentario2 img{
+        object-fit: cover;
+    }
+
+    #digitaComent2 {
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        background-color: var(--CorDoBotao);
+
+    }
+
+    #digitaComent2 input {
+        width: 90%;
+        outline: none;
+        margin-left: 5px;
+    }
+
+    #digitaComent2 button{
+        width: 10%;
+        background-color: #001316;
+        color: whitesmoke;
+        font-weight: bold;
+    }
+
+    #sairComent2{
+        margin-left: 100%;
+        width: 20px;
+        height: 100%    ;
+    }
+
+    #corpoPub{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .cabecalhoPost2{
+        z-index: 100;
+        box-shadow: 1px 1px 3px black;
+        width: 880px;   
+        margin: 0;
+        padding: 10px;
+    }
+
+    .comentPost2{
+        margin-bottom: 10px;
+    }
+
+    #sairComent2{
+        display: none;
+    }
+}

@@ -93,6 +93,17 @@
     background-color: var(--CorPrimaria);
     z-index: 999;
     transition: all ease 2000ms;
+    animation: slideInRight 0.4s ease forwards;
+}
+
+#SairModal{
+    position: fixed;
+    width: 100vw;
+    height: 100%;
+    background-color: var(--CorPrimaria);
+    z-index: 999;
+    transition: all ease 2000ms;
+    animation: slideInLeft 0.5s ease forwards;
 }
 
 #botoes{
@@ -106,6 +117,7 @@
 #botoes a{
     color: var(--CorDoBotao);
     text-decoration: none;
+    
 }
 
 #back{
@@ -123,10 +135,13 @@
     margin: 10px 20px;
     border-radius: 10px;
     padding: 15px;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px black;
 }
 
 #botoes button{
     background-color: var(--CorPrimaria);
+    cursor: pointer;
 }
 
 #ModalSair{
@@ -137,6 +152,18 @@
     z-index: 1000;
     width: 100%;
     height: 100%;
+    animation: LowOpacity 0.4s ease forwards;
+}
+
+#SairAtivo{   
+    position: fixed;
+    justify-items: center;
+    align-content: center;
+    background-color:rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    animation: HighOpacity 0.4s ease forwards;
 }
 
 #confirmaSair{
@@ -164,6 +191,7 @@
     margin: 0 10px;
     box-shadow: 1px 1px 3px black;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 #BTNcancel{
@@ -181,6 +209,56 @@
     color: black;
 }
 
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(200%);
+    opacity: 1;
+  }
+}
+
+@keyframes LowOpacity{
+    0%{
+        opacity: 0%;
+    }
+
+    50%{
+        opacity: 50%;
+    }
+
+    100%{
+        opacity: 100%;
+    }
+}
+
+@keyframes HighOpacity{
+    0%{
+        opacity: 100%;
+    }
+
+    50%{
+        opacity: 50%;
+    }
+
+    100%{
+        opacity: 0%;
+    }
+}
+
 @media (min-width:640px) {
 
     #configVdesktop {
@@ -191,7 +269,7 @@
         width: 100%;
         display: flex;
         justify-content: center;
-        margin: 40px 0;
+        margin-bottom: 40px;
     }
 
     #bioMobile {
@@ -232,7 +310,19 @@
     }
 
     #modal{
-        width: 300px;
+        width: 800px;
+        height: 100vh;
         right: 0;
+        box-shadow: 1px 1px 3px black;
+        border-top-left-radius: 20px;
+    }
+
+    #ModalSair{
+        width: 800px;
+        border-top-left-radius: 20px;
+    }
+
+    #Margem{
+        height: 40px;
     }
 }

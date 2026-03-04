@@ -2,7 +2,8 @@ import {react, useEffect, useState} from "react";
 import Menu from "../../components/menu/menu";
 import "./index.css"
 import { IoArrowBackOutline } from "react-icons/io5";
-import FeedDePosts from "../../components/feedDePosts/feedDePosts";
+import { CgClose } from "react-icons/cg";
+import FeedPerfil from "../../components/feedNoPerfil/feedNoPerfil";
 import InfoUser from "../../components/infoUser/infoUser";
 import { useParams } from "react-router-dom";
 
@@ -36,12 +37,15 @@ export default function PerfilUser() {
     return (
         <div id="conteinerPerfil">
             <main>
+
                 {zoomFT &&
                 <nav id="conteinerZoom">
                     <div id="divSair">
-                        <IoArrowBackOutline id="voltar" onClick={() => setZoomFT(false)}/> POSTS
+                        <CgClose id="voltar" onClick={() => setZoomFT(false)}/> 
+                        <label for="voltar">POSTS</label>
                     </div>
-                    <FeedDePosts Posts={posts} name={dados.name} Foto={dados.fotoPerfil} MeuID={dados._id} />
+
+                    <FeedPerfil Posts={posts} name={dados.name} Foto={dados.fotoPerfil} MeuID={dados._id} />
                 </nav>
                 }
 
@@ -49,7 +53,7 @@ export default function PerfilUser() {
 
                 <div id="Posts">
                     <h1>POSTAGENS</h1>
-                    <hr></hr>
+                    <hr></hr> 
                     <div id="conteinerPosts">
                             {dados.posts &&
                                 dados.posts?.slice().reverse().map((item,index) => (

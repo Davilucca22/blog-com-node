@@ -1,12 +1,12 @@
 import react, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './feedDePosts.css'
+import './feedNoPerfil.css'
 import { IoIosHeart } from "react-icons/io";
 import { FaRegComment } from "react-icons/fa";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
 
-export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
+export default function FeedPerfil({ Posts, name, Foto, MeuID }) {
 
     const navigate = useNavigate()
     const [dados, setDados] = useState(Posts || [])
@@ -15,6 +15,8 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
     const [nome, setNome] = useState(name || '')
     const [foto, setFoto] = useState(Foto || '')
     const [ID, setID] = useState(MeuID || '')
+    const [Desktop,SetDesktop] = useState(window.innerWidth >= 640)
+    const [verComent2,setverComent2] = useState('')
 
     useEffect(() => {
         setDados(Posts || [])
@@ -23,6 +25,15 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
         setFoto(Foto || '')
     }, [Posts, name, Foto, MeuID])
 
+    useEffect(() => { //verifica a largura da tela para mudar o layout  
+        const media = window.matchMedia("(min-width:640px)")
+
+        const handler = () => SetDesktop(media.matches)
+        handler()
+
+        media.addEventListener("change", handler)
+        return () => media.removeEventListener("change",handler)
+    },[])
 
     useEffect(() => {
         if (dados.length > 0) {
@@ -135,62 +146,64 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
         }
     }, [verComent])
 
-    function telaUser(id) {
-        navigate(`/details/${id}`)
-    }
-
-    return (
+    return ( 
         <div>
             {dados.map((val, index) => (
-                <section key={val.post._id} className="conteinerPost" id={index} >
-                    <dl id="comentarios">
-
-                        <div className="cabecalhoPost">
-                            <img className="fotoP" src={val.fotoPerfil} alt="foto"></img>
-                            <span onClick={() => telaUser(val.userId)}>{val.name}</span>
+                <section key={val.post._id} className="conteinerPost2" id={index} >
+                    <dl id="comentarios2">
+                        <div className="conteinerPublicacao2" id={val.post._id}>
+                        <div className="cabecalhoPost2">
+                            <img className="fotoP2" src={val.fotoPerfil} alt="foto"></img>
+                            <span onClick={() => navigate(`/details/${val.userId}`)}>{val.name}</span>
                         </div>
-
-                        <div id="conteinerPublicacao">
-                            <div className="imgPost">
-                                <img src={val.post.imgURL} id={val.post._id} alt={val.post.textoPost}></img>
-                                <div className="tres">
-                                    <IoIosHeart onClick={e => curtir(val.post._id)} className={
-                                        val.post.curtidas.includes(ID)
-                                            ? 'like ativo'
-                                            : 'like'
-                                    } />
-                                    <span className="numLikes" >{val.post.curtidas.length}</span>
-                                    <a href={`#${index}`} onClick={() => setverComent(index)} ><FaRegComment className="comentario" /></a>
+                            <div id="corpoPub" >
+                                <div id="layoutPost">
+                                    <div className="imgPost2">
+                                        <img src={val.post.imgURL} onClick={() => setverComent2(index)} alt={val.post.textoPost}></img>
+                                        <div className="tres2">
+                                            <IoIosHeart onClick={e => curtir(val.post._id)} className={
+                                                val.post.curtidas.includes(ID)
+                                                    ? 'like ativo2'
+                                                    : 'like2'
+                                            } />
+                                            <span className="numLikes2" >{val.post.curtidas.length}</span>
+                                            {!Desktop &&
+                                                <a href={`#${index}`} onClick={() => setverComent(index)} ><FaRegComment className="comentario" /></a>
+                                            }
+                                        </div>
+                                        {val.post.textoPost &&
+                                            <div>
+                                                <span className="comentPost2">{val.name}:{val.post.textoPost}</span>
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
-                                {val.post.textoPost &&
-                                    <div>
-                                        <span className="comentPost">{val.name}:{val.post.textoPost}</span>
+                                {verComent === index || (verComent2 === index && Desktop) &&
+                                    <div id="conteinerComent2">
+                                        <div id="textos2">                                                
+                                        <button type="button" id="sairComent2" onClick={() => {
+                                            setverComent('')
+                                            setverComent2('')
+                                            }}><AiOutlineClose /></button>
+                                            <div key={val._id} id="feedComent2">
+                                                {val.post.comentarios?.slice().reverse().map(item => (
+                                                    <div className="contComentario2">
+                                                        <img className="fotoDono2" src={item.fotoDono ? item.fotoDono : foto} alt="foto do dono do comentario"></img>
+                                                        <div className="infoComent2">
+                                                            <dt className="user2">{item.donoComentario}</dt>
+                                                            <dd className="usercoment2">{item.textoComentario}</dd>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <form id="digitaComent2" onSubmit={e => Addcomentario(e, val.post._id)}>
+                                                <input type="text" placeholder="digite aqui...." value={textComent} onChange={e => setTextComent(e.target.value)} ></input>
+                                                <button type="submit"><AiOutlineCheck /></button>
+                                            </form>
+                                        </div>
                                     </div>
                                 }
                             </div>
-                            {verComent === index &&
-                                <div id="conteinerComent">
-                                    <img src={val.post.imgURL} alt="nada" id="fotoNoComent" ></img>
-                                    <div id="textos">
-                                        <button type="button" id="sairComent" onClick={() => setverComent('')}><AiOutlineClose /></button>
-                                        <div key={val._id} id="feedComent">
-                                            {val.post.comentarios?.slice().reverse().map(item => (
-                                                <div className="contComentario">
-                                                    <img className="fotoDono" src={item.fotoDono} alt="foto do dono do comentario"></img>
-                                                    <div className="infoComent">
-                                                        <dt className="user">{item.donoComentario}</dt>
-                                                        <dd className="usercoment">{item.textoComentario}</dd>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                        <form id="digitaComent" onSubmit={e => Addcomentario(e, val.post._id)}>
-                                            <input type="text" placeholder="digite aqui...." value={textComent} onChange={e => setTextComent(e.target.value)} ></input>
-                                            <button type="submit"><AiOutlineCheck /></button>
-                                        </form>
-                                    </div>
-                                </div>
-                            }
                         </div>
 
                     </dl>

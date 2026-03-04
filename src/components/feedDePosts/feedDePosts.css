@@ -15,7 +15,9 @@
 .fotoP{
     width: 40px;
     height: 40px;
+    border-radius: 50%;
     box-shadow: 2px 2px 2px black;
+    object-fit: cover;
 }
 
 .imgPost{
@@ -26,14 +28,14 @@
     border-radius: 0;
     background-color: #001316;
     width: 375px;    
-    height: 581px;
+    max-height: 581px;
     object-fit: contain;
     box-shadow: 2px 2px 3px black;
 }
 
 .comentPost{
     display: block;
-    margin-left: 10px;
+    margin-left: 10px; 
     margin-top: 5px;
     font-size: 18px;
 }
@@ -68,72 +70,9 @@
     color: var(--CorSegundaria);
 }
 
-#conteinerComent{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    z-index: 1001;
-    background-color: #035255;
-    width: 100vw;
-    height: 80vh;
-    margin-top: 150px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    box-shadow: 1px 1px 3px black;
-}
-
-#feedComent{
-    width: 100%;
-    margin-bottom: auto;
-    height: 400px;
-    overflow: scroll;
-}
-
-#textos{
-    width: 100%;
-}
-
-#digitaComent{
-    position: fixed;
-    bottom: 0;
-    display: flex;
-    width: 100%;
-    height: 40px;
-    border: 1px solid black;
-    font-size: 22px;
-    align-content: center;
-}
-
-#digitaComent input{
-    width: 85%;
-    outline: none;
-}
-
-#digitaComent button{
-    width: 15%;
-    background-color: var(--CorTexto);
-    height: 100%;
-}
-
-#conteinerComent button svg{
-    width: 20px;
-    height: 20px;
-}
-
-#sairComent{
-    margin: 5px 10px;
-    background-color: #035255;
-}
-
-.contComentario{
-    display: flex;
-    flex-direction: row;
-    margin-left: 15px;
-    margin-bottom: 10px;
-}
 
 .fotoDono{
+    border-radius: 50%;
     width: 40px;
     height: 40px;
 }
@@ -161,10 +100,31 @@
     display: none;
 }
 
+#conteinerComent{
+    position: absolute;
+    z-index: 2;
+    background-color: #043036;
+    width: 100%;
+    height: 80vh;   
+}
+
+.contComentario{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#feedComent{
+    height: 100%;
+    overflow-y: scroll;
+}
+
 @media (min-width:640px){
 
     .imgPost img{
-        width: 100%;
-        height: 100vh;
+        max-width: 400px;
+        max-height: 600px;
+        object-fit: cover;
     }
+
 }

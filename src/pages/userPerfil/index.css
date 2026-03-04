@@ -1,6 +1,14 @@
 #Posts h1{
     margin: 5px;
     color: var(--CorSegundaria);
+    margin: 0 auto;
+}
+
+#Posts{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #footer{
@@ -60,26 +68,40 @@
 }
 
 hr{
-    width: 80%;
+    width: 90%;
     border: 1px solid var(--CorSegundaria);
     margin-bottom: 5px;
 }
 
 @media (min-width:640px){
-    #Posts{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+
+    hr{
+        width: 80%;
     }
 
     #conteinerPosts{
-        width: 800px;
+        width: 800px; 
     }
 
     #conteinerPosts img{
         object-fit: cover;
         height: 350px;
-        
+    }
+
+    #conteinerZoom{
+        background-color: rgba(0,0,0,0.7);
+        width: 100vw;
+        scroll-behavior: auto;
+        overflow-y: hidden;
+    }
+
+    #divSair{
+        background-color: transparent;
+        box-shadow: none;
+        justify-content: end;
+    }
+
+    #divSair label{
+        visibility: hidden;
     }
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import InfoUser from '../../components/infoUser/infoUser'
-import FeedDePosts from '../../components/feedDePosts/feedDePosts'
+import FeedPerfil from '../../components/feedNoPerfil/feedNoPerfil'
 import Menu from '../../components/menu/menu'
 import { IoArrowBackOutline } from "react-icons/io5";
 import { useParams } from 'react-router-dom';
@@ -136,7 +136,7 @@ export default function PerfilOutro(){
                     <div id="divSair">
                         <IoArrowBackOutline id="voltar" onClick={() => setZoomFT(false)}/> POSTS
                     </div>
-                    <FeedDePosts Posts={posts} name={nome} Foto={foto} />
+                    <FeedPerfil Posts={posts} name={nome} Foto={foto} />
                 </nav>
                 }    
             <div id="contVoltaFeed">

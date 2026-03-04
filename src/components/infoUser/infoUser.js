@@ -9,6 +9,8 @@ export default function InfoUser({ objDados, Arrseguindo }) {
     const [arraySeguidores, setSeguidores] = useState(Arrseguindo || [])
     const [modal, setmodal] = useState(false)
     const [sair, setSair] = useState(false)
+    const [SairAtivo,setSairAtivo] = useState(false)
+    const [fechaModal,setFechaModal] = useState(false)
 
 
     useEffect(() => {
@@ -17,22 +19,34 @@ export default function InfoUser({ objDados, Arrseguindo }) {
     }, [objDados, Arrseguindo])
 
     return (
-        <div>
+        <div> 
             {modal &&
-                <section id="modal">
+                <section id={fechaModal ? "SairModal" : "modal"}>
                     {sair &&
-                        <div id="ModalSair">
+                        <div id={SairAtivo ? "SairAtivo" :"ModalSair"}>
                             <div id="confirmaSair">
                                 <p>SAIR?</p>
                                 <div id="BTNs">
-                                    <button id="BTNcancel" onClick={() => setSair(false)}>Cancelar</button>
+                                    <button id="BTNcancel" onClick={() => {
+                                        setSairAtivo(true)
+                                        setTimeout(() => {
+                                            setSair(false)
+                                            setSairAtivo(false)
+                                        },400);
+                                    }}>Cancelar</button>
                                     <button id="BTNconfirm"><a href="/" >Confirma</a></button>
                                 </div>
                             </div>
                         </div>
                     }
                     <div id="botoes">
-                        <button onClick={() => setmodal(false)}>
+                        <button onClick={() => {
+                            setFechaModal(true)
+                            setTimeout(() => {
+                                setFechaModal(false)
+                                setmodal(false)
+                            },300);
+                        }}>
                             <GoX id="back" />
                         </button>
                         <span><a href="/editperfil">EDITAR PERFIL</a></span>
@@ -49,7 +63,7 @@ export default function InfoUser({ objDados, Arrseguindo }) {
                     <FiMenu id="hamburguer2" />
                 </button>
             </div>
-
+            <div id="Margem"></div>
             <section id="bio">
                 <div id="infoUser">
                     <div id="contImg"><img src={dados.fotoPerfil} alt="sem foto"></img></div>
