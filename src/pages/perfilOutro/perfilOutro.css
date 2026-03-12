@@ -43,3 +43,9 @@
     cursor: pointer;
     margin-bottom: 5px;
 }
+
+@media(min-width:640px){
+    #contVoltaFeed{
+        display: none;
+    }
+}

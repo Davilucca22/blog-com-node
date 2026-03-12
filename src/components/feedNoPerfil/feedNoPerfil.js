@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './feedNoPerfil.css'
 import { IoIosHeart } from "react-icons/io";
@@ -15,20 +15,19 @@ export default function FeedPerfil({ Posts, name, Foto, MeuID }) {
     const [nome, setNome] = useState(name || '')
     const [foto, setFoto] = useState(Foto || '')
     const [ID, setID] = useState(MeuID || '')
-    const [Desktop,SetDesktop] = useState(window.innerWidth >= 640)
-    const [verComent2,setverComent2] = useState('')
+    const [Desktop, setDesktop] = useState(window.innerWidth >= 640)
 
     useEffect(() => {
         setDados(Posts || [])
         setID(MeuID || '')
-        setNome(name || '')
+        setNome(name || '') 
         setFoto(Foto || '')
     }, [Posts, name, Foto, MeuID])
 
     useEffect(() => { //verifica a largura da tela para mudar o layout  
         const media = window.matchMedia("(min-width:640px)")
 
-        const handler = () => SetDesktop(media.matches)
+        const handler = () => setDesktop(media.matches)
         handler()
 
         media.addEventListener("change", handler)
@@ -51,12 +50,15 @@ export default function FeedPerfil({ Posts, name, Foto, MeuID }) {
                     .then(resp => {
                         setDados(resp)
                     })
+                    .catch(err => {
+                        console.error('Erro ao atualizar dados:', err)
+                    })
             }, 5000);
 
             return () => clearInterval(interval)
         }
 
-    }, [])
+    }, [dados])
 
     function curtir(id) {
 
@@ -70,7 +72,14 @@ export default function FeedPerfil({ Posts, name, Foto, MeuID }) {
                 PostID: id,
                 UserID: ID
             })
-        }).then(res => console.log(res.json().msg))
+        }).then(res => res.json())
+            .then(data => {
+                // Curtida atualizada com sucesso
+            })
+            .catch(err => {
+                console.error('Erro ao curtir:', err)
+                toast.error('Erro ao curtir post')
+            })
 
         setDados(prev => { //atualiza a curtida
             return prev.map(item => {
@@ -110,7 +119,14 @@ export default function FeedPerfil({ Posts, name, Foto, MeuID }) {
                         foto: foto,
                         comentario: textComent
                     })
-                })
+                }).then(res => res.json())
+                    .then(data => {
+                        // Comentário adicionado com sucesso
+                    })
+                    .catch(err => {
+                        console.error('Erro ao adicionar comentário:', err)
+                        toast.error('Erro ao adicionar comentário')
+                    })
                 
                 setTextComent('')
                 
@@ -153,17 +169,17 @@ export default function FeedPerfil({ Posts, name, Foto, MeuID }) {
                     <dl id="comentarios2">
                         <div className="conteinerPublicacao2" id={val.post._id}>
                         <div className="cabecalhoPost2">
-                            <img className="fotoP2" src={val.fotoPerfil} alt="foto"></img>
+                            <img className="fotoP2" src={val.fotoPerfil} alt={`Foto de perfil de ${val.name}`}></img>
                             <span onClick={() => navigate(`/details/${val.userId}`)}>{val.name}</span>
                         </div>
                             <div id="corpoPub" >
                                 <div id="layoutPost">
                                     <div className="imgPost2">
-                                        <img src={val.post.imgURL} onClick={() => setverComent2(index)} alt={val.post.textoPost}></img>
+                                        <img src={val.post.imgURL} alt={val.post.textoPost}></img>
                                         <div className="tres2">
                                             <IoIosHeart onClick={e => curtir(val.post._id)} className={
                                                 val.post.curtidas.includes(ID)
-                                                    ? 'like ativo2'
+                                                    ? 'like2 ativo2'
                                                     : 'like2'
                                             } />
                                             <span className="numLikes2" >{val.post.curtidas.length}</span>
@@ -178,17 +194,26 @@ export default function FeedPerfil({ Posts, name, Foto, MeuID }) {
                                         }
                                     </div>
                                 </div>
-                                {verComent === index || (verComent2 === index && Desktop) &&
+                                {(verComent === index ||  Desktop) &&
                                     <div id="conteinerComent2">
                                         <div id="textos2">                                                
                                         <button type="button" id="sairComent2" onClick={() => {
                                             setverComent('')
-                                            setverComent2('')
                                             }}><AiOutlineClose /></button>
                                             <div key={val._id} id="feedComent2">
-                                                {val.post.comentarios?.slice().reverse().map(item => (
-                                                    <div className="contComentario2">
-                                                        <img className="fotoDono2" src={item.fotoDono ? item.fotoDono : foto} alt="foto do dono do comentario"></img>
+                                            {val.post.textoPost && 
+                                                    <div key={`coment`} className="contComentario2">
+                                                        <img className="fotoDono2" src={foto} alt={`Foto de ${val.name}`}></img>
+                                                        <div className="infoComent2">
+                                                            <dt className="user2">{val.name}</dt>
+                                                            <dd className="usercoment2">{val.post.textoPost}</dd>
+                                                        </div>
+                                                    </div>
+                                            }
+
+                                                {val.post.comentarios?.slice().reverse().map((item, idx) => (
+                                                    <div key={`comentario-${val.post._id}-${idx}`} className="contComentario2">
+                                                        <img className="fotoDono2" src={item.fotoDono ? item.fotoDono : foto} alt={`Foto de ${item.donoComentario}`}></img>
                                                         <div className="infoComent2">
                                                             <dt className="user2">{item.donoComentario}</dt>
                                                             <dd className="usercoment2">{item.textoComentario}</dd>

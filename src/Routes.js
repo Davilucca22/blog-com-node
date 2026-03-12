@@ -1,4 +1,5 @@
 import { Routes , Route} from 'react-router-dom'
+import { FeedProvider } from './context/FeedContext.js'
 
 import Register from './pages/register/index'
 import Login from './pages/login/login.js'
@@ -14,6 +15,7 @@ import MostraSeguidores from './pages/mostraSeguidores/mostraSeguidores.js'
 
 export default function AppRouter(){
     return(
+        <FeedProvider>
         <Routes>
             <Route path='/' element={<Login/>} />
             <Route path='/register' element={<Register />} />
@@ -27,5 +29,6 @@ export default function AppRouter(){
             <Route path='/busca' element={<BuscaUser />} />
             <Route path='/seguidores/:id' element={<MostraSeguidores />} />
         </Routes>
+        </FeedProvider>
     ) 
 }

@@ -58,7 +58,7 @@ export default function UserEdit(){
             })
 
             setload(false) //esconde a janela de loading
-            toast.success('dados enviados')
+            toast.success('dados enviados') 
             
             const data = await env.json()
             console.log(data.erro)
@@ -81,7 +81,7 @@ export default function UserEdit(){
                 setload(true)
                 }}>
                 <div id="conteinerFTuser">
-                        <img src={previw} alt="foto do usuario"></img>
+                        <img id="imgUser" src={previw} alt="foto do usuario"></img>
                         <input type="file" onChange={e => {
                             const file = e.target.files[0]
                             setnovafoto(file) //mostra a janela de loading

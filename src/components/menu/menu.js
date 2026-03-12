@@ -19,15 +19,15 @@ export default function Menu() {
                 setImg(dados.fotoPerfil)
                 setId(dados._id)
             })
-    }, [])
+    }, []) 
 
     return (
         <footer id="FooterFeed">
             <div>
-                <a href="/feed"> <GrHomeRounded className="icon" /></a>
-                <a href="/postar"><GoPlusCircle className="icon" /></a>
-                <a href="/busca"><FaSearch className="icon" /></a>
-                <a href={`/Perfil/${id}`}><img src={img} alt="foto do usuario"></img></a> {/*passa id do usuario na url*/}
+                <a className="contIcon" href="/feed"> <GrHomeRounded className="icon" /> <label className="link" >HOME  </label></a>
+                <a className="contIcon" href="/postar"><GoPlusCircle className="icon" /> <label className="link">POST  </label></a>
+                <a className="contIcon" href="/busca"><FaSearch className="icon" /> <label className="link">BUSCA </label></a>
+                <a className="contIcon" href={`/Perfil/${id}`}><img src={img} alt="foto do usuario"></img><label className="link">PERFIL</label></a> {/*passa id do usuario na url*/}
             </div>
         </footer>
     )

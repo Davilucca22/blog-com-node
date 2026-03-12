@@ -5,11 +5,11 @@ import Menu from '../../components/menu/menu'
 import { IoArrowBackOutline } from "react-icons/io5";
 import { useParams } from 'react-router-dom';
 import './perfilOutro.css'
-import { toast } from 'react-toastify';
+import { CgClose } from "react-icons/cg";
 
 // pegar o id que foi mandado da outra tela e buscar no banco o usuario correspondente
 export default function PerfilOutro(){
-    const { id } = useParams()
+    const { id } = useParams() 
     const [meuId,setMeuId] = useState('')
     const [dados,setDados] = useState([])
     const [nome,setnome] = useState('')
@@ -134,14 +134,14 @@ export default function PerfilOutro(){
                 {zoomFT &&
                 <nav id="conteinerZoom">
                     <div id="divSair">
-                        <IoArrowBackOutline id="voltar" onClick={() => setZoomFT(false)}/> POSTS
+                        <CgClose id="voltar" onClick={() => setZoomFT(false)}/>
                     </div>
                     <FeedPerfil Posts={posts} name={nome} Foto={foto} />
                 </nav>
                 }    
             <div id="contVoltaFeed">
-                <a href="/feed">
-                    <IoArrowBackOutline />
+                <a href='/feed'>
+                    <IoArrowBackOutline/>
                     <span>{dados.name}</span>
                 </a>
             </div>

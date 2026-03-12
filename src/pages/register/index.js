@@ -19,7 +19,7 @@ export default function Register() {
 
     useEffect(() => {
         return () => Preview && URL.revokeObjectURL(Preview)
-    }, [Preview]) 
+    }, [Preview])  
 
     function formataData(e){
        let v = e.target.value.replace(/\D/g, "") //só numeros

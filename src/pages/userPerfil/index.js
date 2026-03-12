@@ -1,7 +1,6 @@
-import {react, useEffect, useState} from "react";
+import {React, useEffect, useState} from "react";
 import Menu from "../../components/menu/menu";
 import "./index.css"
-import { IoArrowBackOutline } from "react-icons/io5";
 import { CgClose } from "react-icons/cg";
 import FeedPerfil from "../../components/feedNoPerfil/feedNoPerfil";
 import InfoUser from "../../components/infoUser/infoUser";

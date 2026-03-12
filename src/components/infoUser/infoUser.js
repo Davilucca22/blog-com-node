@@ -5,12 +5,24 @@ import { FiMenu } from "react-icons/fi";
 import "./infoUser.css"
 
 export default function InfoUser({ objDados, Arrseguindo }) {
-    const [dados, setDados] = useState(objDados || [])
-    const [arraySeguidores, setSeguidores] = useState(Arrseguindo || [])
-    const [modal, setmodal] = useState(false)
+    const [dados, setDados] = useState(objDados || []) //dados do usuario no perfil
+    const [meuId,setMeuId] = useState('') //id do dono da sessao
+    const [arraySeguidores, setSeguidores] = useState(Arrseguindo || []) // seguidores do usuario
+    const [modal, setmodal] = useState(false) // controla a janela modal das opçoes
     const [sair, setSair] = useState(false)
     const [SairAtivo,setSairAtivo] = useState(false)
     const [fechaModal,setFechaModal] = useState(false)
+
+    useEffect(() => { // pega o id do usuario para fazer a comparaçao com o id dos dados, se for diferente, esconde o botao de opçoes.
+        fetch(`http://${process.env.REACT_APP_URL_SITE}/session`,{
+            method:"GET",
+            credentials:"include",
+            headers:{
+                "Content-Type":"application/json"
+            }
+        }).then(res => res.json())
+        .then(res => setMeuId(res._id))
+    },[])
 
 
     useEffect(() => {
@@ -69,9 +81,12 @@ export default function InfoUser({ objDados, Arrseguindo }) {
                     <div id="contImg"><img src={dados.fotoPerfil} alt="sem foto"></img></div>
                     <div id="contadores">
                         <div id="textos">
-                            <div><span id="nomeP">{dados.name}</span>
-                                <button id="configVdesktop" onClick={() => setmodal(true)}><DiAptana /></button>
-                            </div>
+                                <div>
+                                <span id="nomeP">{dados.name}</span>
+                                    {dados._id === meuId && //se nao for o perfil do usuario da sessao, as opçoes sao escondidas
+                                        <button id="configVdesktop" onClick={() => setmodal(true)}><DiAptana /></button>
+                                    }
+                                </div>
                             <div id="legendas">
                                 <div className="info">
                                     <span>{dados.posts?.length ?? 0}</span>{/*se encontrar o array post, retorna o tamanho, senao retorna 0*/}

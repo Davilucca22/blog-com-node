@@ -1,4 +1,5 @@
-import react, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { FeedContext } from "../../context/FeedContext";
 import { FiMenu } from "react-icons/fi";
 import { IoArrowBackOutline } from "react-icons/io5";
 import Menu from "../../components/menu/menu";
@@ -6,31 +7,37 @@ import "./feed.css"
 import FeedDePosts from "../../components/feedDePosts/feedDePosts";
 
 export default function Feed() {
+
     const [nome, setNome] = useState('')
     const [foto, setFoto] = useState(null)
     const [id,setid] = useState('')
     const [modal, setmodal] = useState(false)
     const [sair, setSair] = useState(false)
-    const [dados,setDados] = useState([]) 
+    const {dados,setDados} = useContext(FeedContext)
+    
 
     useEffect(() => { //dados dos posts
+        if(dados.length === 0){
             fetch("http://localhost:3000/feed?page=1", {
                 method: "GET",
                 credentials: "include"
-            }).then(res => res.json())
+            })
+            .then(res => res.json())
             .then(data => {
                 setDados(data)
             })
+        }
 
-            fetch("http://localhost:3000/session", { //dados apenas da sessao
-                method: "GET",
-                credentials: "include"
-            }).then(res => res.json())
-            .then(email => {
-                setNome(email.name)
-                setFoto(email.fotoPerfil)
-                setid(email._id)
-            })
+        fetch("http://localhost:3000/session", { //dados apenas da sessao
+            method: "GET",
+            credentials: "include"
+        }).then(res => res.json())
+        .then(email => {
+            setNome(email.name)
+            setFoto(email.fotoPerfil)
+            setid(email._id)
+        })
+
     }, [])
 
     return (

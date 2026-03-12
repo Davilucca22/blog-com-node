@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './feedDePosts.css'
 import { IoIosHeart } from "react-icons/io";
