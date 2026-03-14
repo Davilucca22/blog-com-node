@@ -15,7 +15,8 @@ export default function FeedPerfil({ Posts, name, Foto, MeuID }) {
     const [nome, setNome] = useState(name || '')
     const [foto, setFoto] = useState(Foto || '')
     const [ID, setID] = useState(MeuID || '')
-    const [Desktop, setDesktop] = useState(window.innerWidth >= 640)
+    // Evita crash no mobile: não acessar window no estado inicial (pode ser undefined em alguns contextos/WebViews)
+    const [Desktop, setDesktop] = useState(false)
 
     useEffect(() => {
         setDados(Posts || [])
@@ -25,14 +26,14 @@ export default function FeedPerfil({ Posts, name, Foto, MeuID }) {
     }, [Posts, name, Foto, MeuID])
 
     useEffect(() => { //verifica a largura da tela para mudar o layout  
+        if (typeof window === 'undefined' || !window.matchMedia) return
         const media = window.matchMedia("(min-width:640px)")
-
         const handler = () => setDesktop(media.matches)
-        handler()
+        setDesktop(media.matches)
 
         media.addEventListener("change", handler)
-        return () => media.removeEventListener("change",handler)
-    },[])
+        return () => media.removeEventListener("change", handler)
+    }, [])
 
     useEffect(() => {
         if (dados.length > 0) {
@@ -151,14 +152,14 @@ export default function FeedPerfil({ Posts, name, Foto, MeuID }) {
     }
 
     useEffect(() => { //trava o scroll quando os comentarios aparecerem
-
+        if (typeof document === 'undefined' || !document.body) return
         if (verComent !== '') {
             document.body.style.overflow = 'hidden'
         } else {
             document.body.style.overflow = 'auto'
         }
         return () => {
-            document.body.style.overflow = 'auto'
+            if (document.body) document.body.style.overflow = 'auto'
         }
     }, [verComent])
 
@@ -203,7 +204,7 @@ export default function FeedPerfil({ Posts, name, Foto, MeuID }) {
                                             <div key={val._id} id="feedComent2">
                                             {val.post.textoPost && 
                                                     <div key={`coment`} className="contComentario2">
-                                                        <img className="fotoDono2" src={foto} alt={`Foto de ${val.name}`}></img>
+                                                        <img className="fotoDono2" src={val.fotoPerfil} alt={`Foto de ${val.name}`}></img>
                                                         <div className="infoComent2">
                                                             <dt className="user2">{val.name}</dt>
                                                             <dd className="usercoment2">{val.post.textoPost}</dd>

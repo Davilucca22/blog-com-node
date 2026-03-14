@@ -15,9 +15,10 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
     const [nome, setNome] = useState(name || '')
     const [foto, setFoto] = useState(Foto || '')
     const [ID, setID] = useState(MeuID || '')
+    const [Vdesktop, setVdesktop] = useState(false)
 
     useEffect(() => {
-        setDados(Posts || [])
+        setDados(Posts || []) 
         setID(MeuID || '')
         setNome(name || '')
         setFoto(Foto || '')
@@ -32,19 +33,15 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
                     credentials: "include",
                     headers: {
                         'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        dados
-                    })
+                    }
                 }).then(res => res.json())
                     .then(resp => {
                         setDados(resp)
                     })
-            }, 5000);
+            }, 5000)
 
             return () => clearInterval(interval)
         }
-
     }, [])
 
     function curtir(id) {
@@ -124,14 +121,14 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
     }
 
     useEffect(() => { //trava o scroll quando os comentarios aparecerem
-
+        if (typeof document === 'undefined' || !document.body) return
         if (verComent !== '') {
             document.body.style.overflow = 'hidden'
         } else {
             document.body.style.overflow = 'auto'
         }
         return () => {
-            document.body.style.overflow = 'auto'
+            if (document.body) document.body.style.overflow = 'auto'
         }
     }, [verComent])
 
@@ -140,18 +137,18 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
     }
 
     return (
-        <div>
+        <div id="conteinerFeed">
             {dados.map((val, index) => (
-                <section key={val.post._id} className="conteinerPost" id={index} >
+                <section key={val.post._id} className={Vdesktop ? "conteinerPost desk" :"conteinerPost"} id={index} >
                     <dl id="comentarios">
 
-                        <div className="cabecalhoPost">
+                        <div className={Vdesktop ? "cabecalhoPost desk" :"cabecalhoPost"}>
                             <img className="fotoP" src={val.fotoPerfil} alt="foto"></img>
                             <span onClick={() => telaUser(val.userId)}>{val.name}</span>
                         </div>
 
-                        <div id="conteinerPublicacao">
-                            <div className="imgPost">
+                        <div className={Vdesktop ? "conteinerPublicacao desk" : "conteinerPublicacao"}>
+                            <div className={Vdesktop ? "imgPost desk" :"imgPost"}>
                                 <img src={val.post.imgURL} id={val.post._id} alt={val.post.textoPost}></img>
                                 <div className="tres">
                                     <IoIosHeart onClick={e => curtir(val.post._id)} className={
@@ -160,20 +157,32 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
                                             : 'like'
                                     } />
                                     <span className="numLikes" >{val.post.curtidas.length}</span>
-                                    <a href={`#${index}`} onClick={() => setverComent(index)} ><FaRegComment className="comentario" /></a>
+                                    <a href={`#${index}`} onClick={() => { setverComent(index)}} ><FaRegComment onClick={() => setVdesktop(true)} className="comentario" /></a>
                                 </div>
                                 {val.post.textoPost &&
                                     <div>
-                                        <span className="comentPost">{val.name}:{val.post.textoPost}</span>
+                                        <span className={Vdesktop ? "comentPost desk" : "comentPost"}>{val.name}:{val.post.textoPost}</span>
                                     </div>
                                 }
                             </div>
                             {verComent === index &&
-                                <div id="conteinerComent">
+                                <div className={Vdesktop ? "conteinerComent desk" : "conteinerComent"}>
                                     <img src={val.post.imgURL} alt="nada" id="fotoNoComent" ></img>
                                     <div id="textos">
-                                        <button type="button" id="sairComent" onClick={() => setverComent('')}><AiOutlineClose /></button>
+                                        <button type="button" id="sairComent" onClick={() => {
+                                            setverComent('')
+                                            setVdesktop(false)
+                                            }}><AiOutlineClose /></button>
                                         <div key={val._id} id="feedComent">
+                                            {val.post.textoPost &&  //se ouver texto no post do dono, ele aparece nos comentarios
+                                                <div className="contComentario">
+                                                    <img className="fotoDono" src={val.fotoPerfil} alt="foto do dono do comentario"></img>
+                                                    <div className="infoComent">
+                                                        <dt className="user">{val.name}</dt>
+                                                        <dd className="usercoment">{val.post.textoPost}</dd>
+                                                    </div>
+                                                </div>                                            
+                                            }
                                             {val.post.comentarios?.slice().reverse().map(item => (
                                                 <div className="contComentario">
                                                     <img className="fotoDono" src={item.fotoDono} alt="foto do dono do comentario"></img>
@@ -182,7 +191,8 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
                                                         <dd className="usercoment">{item.textoComentario}</dd>
                                                     </div>
                                                 </div>
-                                            ))}
+                                                ))
+                                            }
                                         </div>
                                         <form id="digitaComent" onSubmit={e => Addcomentario(e, val.post._id)}>
                                             <input type="text" placeholder="digite aqui...." value={textComent} onChange={e => setTextComent(e.target.value)} ></input>
@@ -192,7 +202,6 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
                                 </div>
                             }
                         </div>
-
                     </dl>
                 </section>
             ))

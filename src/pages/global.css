@@ -8,6 +8,7 @@ html{
 
 :root{
     --CorSegundaria: #3A5553;
+    --CorTerciaria: #043036;
     --CorTexto: #586f7cff;   
     --CorPrimaria:#b8dbd9ff;
     --CorDoBotao:#f4f4f9ff;
@@ -24,4 +25,10 @@ main{
     background-color: var(--CorPrimaria);
     height: 100%;
     width: 100vw;
+}
+
+@media(min-width: 640px){
+    html{
+        scroll-behavior: initial;
+    }
 }

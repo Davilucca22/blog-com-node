@@ -14,7 +14,6 @@ export default function Feed() {
     const [modal, setmodal] = useState(false)
     const [sair, setSair] = useState(false)
     const {dados,setDados} = useContext(FeedContext)
-    
 
     useEffect(() => { //dados dos posts
         if(dados.length === 0){
