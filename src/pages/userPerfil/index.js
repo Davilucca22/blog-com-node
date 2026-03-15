@@ -31,7 +31,7 @@ export default function PerfilUser() {
         .then(infos => {
             setPosts(infos)
         })
-    },[])
+    },[id])
 
     return (
         <div id="conteinerPerfil">
