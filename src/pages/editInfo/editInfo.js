@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./editInfo.css"
 import { IoArrowBackOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
@@ -11,7 +11,7 @@ export default function EditInfo() {
     const [idade,setIdade] = useState('')
 
     useEffect(() => {
-        fetch(`http://${process.env.REACT_APP_URL_SITE}/session`,{
+        fetch(`${process.env.REACT_APP_URL_SITE}/session`,{
             method:"GET",
             credentials:"include",
             headers:{
@@ -56,7 +56,7 @@ export default function EditInfo() {
         e.preventDefault()
 
         if(idade > 18){
-            const env = await fetch(`http://${process.env.REACT_APP_URL_SITE}/editinfo`,{
+            const env = await fetch(`${process.env.REACT_APP_URL_SITE}/editinfo`,{
                 method:"PUT",
                 credentials:"include",
                 headers:{

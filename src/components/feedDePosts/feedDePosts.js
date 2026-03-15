@@ -28,7 +28,7 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
     useEffect(() => {
         if (dados.length > 0) {
             const interval = setInterval(() => {//retorna os posts do feed atualizados a cada 5 segundos
-                fetch(`http://${process.env.REACT_APP_URL_SITE}/attdados`, {
+                fetch(`${process.env.REACT_APP_URL_SITE}/attdados`, {
                     method: "PUT",
                     credentials: "include",
                     headers: {
@@ -46,7 +46,7 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
 
     function curtir(id) {
 
-        fetch(`http://${process.env.REACT_APP_URL_SITE}/curtida`, {
+        fetch(`${process.env.REACT_APP_URL_SITE}/curtida`, {
             method: "PUT",
             credentials: "include",
             headers: {
@@ -84,7 +84,7 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
         try {
             if(textComent !== ''){
 
-                fetch(`http://${process.env.REACT_APP_URL_SITE}/comentario`, { //atualiza comentario no back
+                fetch(`${process.env.REACT_APP_URL_SITE}/comentario`, { //atualiza comentario no back
                     method: "PUT",
                     credentials: "include",
                     headers: {

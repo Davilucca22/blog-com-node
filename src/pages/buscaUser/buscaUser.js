@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Menu from '../../components/menu/menu.js'
 import { FaSearch } from "react-icons/fa";
 import './buscaUser.css'
@@ -8,7 +8,7 @@ export default function BuscaUser() {
     const [resultado,setResultado] = useState(null) 
 
     useEffect(() => {
-        fetch(`http://${process.env.REACT_APP_URL_SITE}/buscar?nome=${nome}`,{
+        fetch(`${process.env.REACT_APP_URL_SITE}/buscar?nome=${nome}`,{
             method:"GET",
             credentials:"include",
             headers:{

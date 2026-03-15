@@ -14,7 +14,7 @@ export default function InfoUser({ objDados, Arrseguindo }) {
     const [fechaModal,setFechaModal] = useState(false)
 
     useEffect(() => { // pega o id do usuario para fazer a comparaçao com o id dos dados, se for diferente, esconde o botao de opçoes.
-        fetch(`http://${process.env.REACT_APP_URL_SITE}/session`,{
+        fetch(`${process.env.REACT_APP_URL_SITE}/session`,{
             method:"GET",
             credentials:"include",
             headers:{

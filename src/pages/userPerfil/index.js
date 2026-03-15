@@ -3,7 +3,6 @@ import Menu from "../../components/menu/menu";
 import "./index.css"
 import { CgClose } from "react-icons/cg";
 import FeedPerfil from "../../components/feedNoPerfil/feedNoPerfil";
-import FeedDePosts from "../../components/feedDePosts/feedDePosts";
 import InfoUser from "../../components/infoUser/infoUser";
 import { useParams } from "react-router-dom";
 
@@ -17,7 +16,7 @@ export default function PerfilUser() {
 
 
     useEffect(() => {
-        fetch(`http://${process.env.REACT_APP_URL_SITE}/session`,{
+        fetch(`${process.env.REACT_APP_URL_SITE}/session`,{
             method:"GET",
             credentials:"include"
         }).then(res => res.json()
@@ -25,7 +24,7 @@ export default function PerfilUser() {
             setDados(dados)
         })
 
-        fetch(`http://${process.env.REACT_APP_URL_SITE}/feedUser/${id}`, {
+        fetch(`${process.env.REACT_APP_URL_SITE}/feedUser/${id}`, {
             method:"GET",
             credentials:"include"
         }).then(res => res.json())

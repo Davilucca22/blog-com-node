@@ -17,7 +17,7 @@ export default function Feed() {
 
     useEffect(() => { //dados dos posts
         if(dados.length === 0){
-            fetch("http://localhost:3000/feed?page=1", {
+            fetch(`${process.env.REACT_APP_URL_SITE}/feed?page=1`, {
                 method: "GET",
                 credentials: "include"
             })
@@ -27,7 +27,7 @@ export default function Feed() {
             })
         }
 
-        fetch("http://localhost:3000/session", { //dados apenas da sessao
+        fetch(`${process.env.REACT_APP_URL_SITE}/session`, { //dados apenas da sessao
             method: "GET",
             credentials: "include"
         }).then(res => res.json())

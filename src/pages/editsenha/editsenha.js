@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import React, { useState } from "react";
 import { IoArrowBackOutline, IoEyeSharp  } from "react-icons/io5";
 import { FaLock } from "react-icons/fa";
 import "./editsenha.css"
@@ -20,7 +20,7 @@ export default function EditSenha(){
             return
 
         }else{
-            const env = await fetch(`http://${process.env.REACT_APP_URL_SITE}/editsenha`,{
+            const env = await fetch(`${process.env.REACT_APP_URL_SITE}/editsenha`,{
                 method:"PUT",
                 credentials:"include",
                 headers:{

@@ -20,7 +20,7 @@ export default function UserEdit(){
     },[previw])
 
     useEffect(() => {
-        fetch(`http://${process.env.REACT_APP_URL_SITE}/session`,{
+        fetch(`${process.env.REACT_APP_URL_SITE}/session`,{
             method:"GET",
             credentials:"include"
         }).then(res => res.json())
@@ -51,7 +51,7 @@ export default function UserEdit(){
         }
 
         try{
-            const env = await fetch(`http://${process.env.REACT_APP_URL_SITE}/editperfil`,{
+            const env = await fetch(`${process.env.REACT_APP_URL_SITE}/editperfil`,{
             method:"PUT",
                 body:formadata,
                 credentials:"include"

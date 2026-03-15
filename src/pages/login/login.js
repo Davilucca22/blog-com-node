@@ -15,7 +15,7 @@ export default function Login(){
 
         if(email && senha){
 
-            const res = await fetch("http://localhost:3000/login",{
+            const res = await fetch(`${process.env.REACT_APP_URL_SITE}/login`,{
                 method:"POST",
                 headers:{ "Content-Type":"application/json" },
                 body:JSON.stringify({

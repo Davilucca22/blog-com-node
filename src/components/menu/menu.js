@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GrHomeRounded } from "react-icons/gr";
 import { GoPlusCircle } from "react-icons/go";
 import { FaSearch } from "react-icons/fa";
@@ -11,7 +11,7 @@ export default function Menu() {
     const [id, setId] = useState('')
 
     useEffect(() => {
-        fetch(`http://${process.env.REACT_APP_URL_SITE}/session`, {
+        fetch(`${process.env.REACT_APP_URL_SITE}/session`, {
             method: "GET",
             credentials: "include"
         }).then(res => res.json())

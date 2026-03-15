@@ -21,7 +21,7 @@ export default function PerfilOutro(){
 
     useEffect(() => {
 
-        fetch(`http://${process.env.REACT_APP_URL_SITE}/session`,{
+        fetch(`${process.env.REACT_APP_URL_SITE}/session`,{
             method:"GET",
             credentials:"include",
             headers:{
@@ -34,7 +34,7 @@ export default function PerfilOutro(){
             setMeuId(item._id)
         })
 
-        fetch(`http://${process.env.REACT_APP_URL_SITE}/perfiloutro/${id}`,{
+        fetch(`${process.env.REACT_APP_URL_SITE}/perfiloutro/${id}`,{
             method:"GET",
             credentials:"include",
             headers:{
@@ -46,7 +46,7 @@ export default function PerfilOutro(){
             setTempArray(item.seguidores)
         })
         
-        fetch(`http://${process.env.REACT_APP_URL_SITE}/feedUser/${id}`,{
+        fetch(`${process.env.REACT_APP_URL_SITE}/feedUser/${id}`,{
             method:"GET",
             credentials:"include",
             headers:{
@@ -78,7 +78,7 @@ export default function PerfilOutro(){
         setLegendaSeg("+ Seguir")
         
         try{
-            fetch(`http://${process.env.REACT_APP_URL_SITE}/DeixarDeSeguir`,{
+            fetch(`${process.env.REACT_APP_URL_SITE}/DeixarDeSeguir`,{
                 method:"PUT",
                 credentials:"include",
                 headers:{
@@ -102,7 +102,7 @@ export default function PerfilOutro(){
         setLegendaSeg("Seguindo...")
 
         try{
-            fetch(`http://${process.env.REACT_APP_URL_SITE}/Seguir`,{
+            fetch(`${process.env.REACT_APP_URL_SITE}/Seguir`,{
                 method:"PUT",
                 credentials:"include",
                 headers:{
