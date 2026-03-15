@@ -18,7 +18,7 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
     const [Vdesktop, setVdesktop] = useState(false)
 
     useEffect(() => {
-        setDados(Posts || []) 
+        setDados(Posts || [])
         setID(MeuID || '')
         setNome(name || '')
         setFoto(Foto || '')
@@ -140,7 +140,7 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
         <div id="conteinerFeed">
             {dados.map((val, index) => (
                 <section key={val.post._id} className={Vdesktop ? "conteinerPost desk" :"conteinerPost"} id={index} >
-                    <dl id="comentarios">
+                    <dl className={Vdesktop ? "comentarios desk" : "comentarios"}>
 
                         <div className={Vdesktop ? "cabecalhoPost desk" :"cabecalhoPost"}>
                             <img className="fotoP" src={val.fotoPerfil} alt="foto"></img>
@@ -157,7 +157,11 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
                                             : 'like'
                                     } />
                                     <span className="numLikes" >{val.post.curtidas.length}</span>
-                                    <a href={`#${index}`} onClick={() => { setverComent(index)}} ><FaRegComment onClick={() => setVdesktop(true)} className="comentario" /></a>
+                                    <a href={`#${index}`} onClick={ () => {
+                                        setverComent(index)
+                                        setVdesktop(true)
+                                        }} ><FaRegComment className="comentario" />
+                                    </a>
                                 </div>
                                 {val.post.textoPost &&
                                     <div>

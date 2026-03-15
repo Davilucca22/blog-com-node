@@ -89,15 +89,15 @@
     line-break: anywhere;
 }
 
-#comentarios{
+.comentarios{
     margin: 10px 0;
 }
 
-#comentarios dt{
+.comentarios dt{
     margin-left: 10px;
 }
 
-#comentarios dd{
+.comentarios dd{
     margin-left: 15px;
     margin-bottom: 10px;
 }
@@ -106,31 +106,75 @@
     display: none;
 }
 
-.conteinerComent{
-    position: absolute;
-    z-index: 2;
+.conteinerComent.desk{
+    position: fixed;
+    z-index: 1005;
     background-color: #043036;
-    width: 100%;
-    height: 80vh;   
+    width: 100vw;
+    max-width: 100%;
+    height: 90vh;
+    max-height: 90vh;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
 }
 
 .contComentario{
     display: flex;
     flex-direction: row;
     align-items: start;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 5px 0;
 }
 
 #feedComent{
-    height: 100%;
-    overflow-y: scroll;
+    height: 80vh;
+    overflow: scroll;
+}
+
+#digitaComent{
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+    background-color: var(--CorDoBotao);
+}
+
+#digitaComent input{
+    width: 80%;
+    padding: 10px;
+    outline: none;
+}
+
+#digitaComent button{
+    width: 15%;
+    background-color:#001316;
+    color: var(--CorDoBotao);
+    font:bold 20px;
+}
+
+#sairComent{
+    width: 30px;
+    height: 20px;
+    margin-left: calc(100% - 30px);
+    background-color: transparent;
+    color: var(--CorDoBotao);
+    cursor: pointer;
 }
 
 @media (min-width:640px){
+
+    .comentarios.desk{
+        box-shadow: 1px 1px 3px black;
+        border-radius: 10px;
+    }
 
     .imgPost img{
         max-width: 400px;
         max-height: 600px;
         object-fit: cover;
+        border-radius: 5px;
     }
 
     .conteinerPost.desk{
@@ -141,12 +185,14 @@
         justify-content: center;
         background-color: rgba(0,0,0,0.5);
     }
-
+    
     .cabecalhoPost.desk{
         background-color: var(--CorTerciaria);
         margin: 0;
-        padding: 10px ;
-        box-shadow: 1px 1px 3px black;
+        padding: 10px 20px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        color: var(--CorDoBotao);
     }
 
     .conteinerPublicacao.desk{
@@ -160,6 +206,7 @@
         position: relative;
         width: 400px;
         height: 100%;
+        border-bottom-right-radius: 10px;
     }
 
     .imgPost.desk{
@@ -170,6 +217,8 @@
         width: 50%;
         background-color:var(--CorTerciaria);
         margin: 0;
+        padding-left: 10px;
+        border-bottom-left-radius: 10px;
     }
 
     .imgPost.desk img{
@@ -185,23 +234,7 @@
     }
 
     #digitaComent{
-        display: flex;
-        justify-content: space-between;
         height: 50px;
-        background-color: var(--CorDoBotao);
-    }
-
-    #digitaComent input{
-        width: 80%;
-        padding: 10px;
-        outline: none;
-    }
-
-    #digitaComent button{
-        width: 15%;
-        background-color:#001316;
-        color: var(--CorDoBotao);
-        font:bold 20px;
     }
 
     #sairComent{
