@@ -43,6 +43,10 @@
     margin: 0 5px;
 }
 
+.info span{
+    cursor: pointer;
+}
+
 #conteinerHamburguer {
     justify-self: end;
 }
@@ -92,7 +96,7 @@
     height: 100%;
     background-color: var(--CorPrimaria);
     z-index: 999;
-    transition: all ease 2000ms;
+    transition: all ease 1000ms;
     animation: slideInRight 0.4s ease forwards;
 }
 
@@ -102,7 +106,7 @@
     height: 100%;
     background-color: var(--CorPrimaria);
     z-index: 999;
-    transition: all ease 2000ms;
+    transition: all ease 1000ms;
     animation: slideInLeft 0.5s ease forwards;
 }
 

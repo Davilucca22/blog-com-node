@@ -1,37 +1,57 @@
 import React, { useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
+import { GoX } from "react-icons/go";
 import './modal.css'
 
-export default function Modal({publico}){
+export default function Modal({publico, verModal, DevolveProPai}){
 
     const [Pub,setPub] = useState(publico || [])
+    const [Ver,setVer] = useState(verModal || false)
+    const [mudaClasse,setMudaclasse] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
         setPub(publico || [])
-    },[publico])
+        setVer(verModal || false)
+    },[publico,verModal])
 
     function telaUser(id) {
         navigate(`/details/${id}`)
     }
 
+    function TrataDevolverProPai(){
+        if(Ver){
+            DevolveProPai(false)
+            setVer(false)
+        }
+    }
+
     return(
-        <aside id="conteinerModal">
-            <nav>
+        <aside >
+        {Ver &&
+            <nav className={mudaClasse ? "conteinerModalAtivo" :"conteinerModal"}>
                 <div id="divaleatoria">
-                    <h3 id="tituloSeg">Seguidores</h3>
-                    <span>X</span>
+                    <span onClick={() => {
+                        setMudaclasse(true)
+                        setTimeout(() => {
+                            setMudaclasse(false)
+                            TrataDevolverProPai()
+                        },300)
+                    }}><GoX id="sair" /></span>
                 </div>
                 <ul id="listaPublico">
                     {Pub.map(pessoa => (
                         <li className="pessoa">
                             <img className="imgSeg" src={pessoa.urlFoto} alt="foto de perfil do usuario"></img>
-                            <span onClick={() => telaUser(pessoa.IDseguindo)}>{pessoa.nameSeguindo}</span>
+                            <span onClick={() => {
+                                telaUser(pessoa.IDseguindo || pessoa.IDseguidor)
+                                TrataDevolverProPai()
+                        }}>{pessoa.nameSeguindo || pessoa.nameSeguidor}</span>
                         </li>
-                    ))
-                    }
+                    ))}
                 </ul>
             </nav>
-        </aside>
+        }
+       </aside> 
     )
 }

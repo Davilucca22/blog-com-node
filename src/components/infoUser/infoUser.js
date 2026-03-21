@@ -6,13 +6,25 @@ import Modal from "../../components/modalPublico/modal"
 import "./infoUser.css"
 
 export default function InfoUser({ objDados, Arrseguindo }) {
+
     const [dados, setDados] = useState(objDados || []) //dados do usuario no perfil
     const [meuId,setMeuId] = useState('') //id do dono da sessao
     const [arraySeguidores, setSeguidores] = useState(Arrseguindo || []) // seguidores do usuario
     const [modal, setmodal] = useState(false) // controla a janela modal das opçoes
-    const [sair, setSair] = useState(false)
-    const [SairAtivo,setSairAtivo] = useState(false)
-    const [fechaModal,setFechaModal] = useState(false)
+    const [fechaModal,setFechaModal] = useState(false) // fecha o menu de opçoes
+    const [sair, setSair] = useState(false) //cancela o logoff
+    const [SairAtivo,setSairAtivo] = useState(false) //controla a classe do modal confirma sair
+    const [modalseg,setModalSeg] = useState(false) //controla a janela modal do conteiner de seguidores/seguindo
+    const [publico,setPublico] = useState([])
+
+    function RespostaDoMenu(resp){ // define modalseg como false
+        return setModalSeg(resp)
+    }
+
+    useEffect(() => {
+        setDados(objDados || [])
+        setSeguidores(Arrseguindo || [])
+    }, [objDados, Arrseguindo])
 
     useEffect(() => { // pega o id do usuario para fazer a comparaçao com o id dos dados, se for diferente, esconde o botao de opçoes.
         fetch(`${process.env.REACT_APP_URL_SITE}/session`,{
@@ -24,12 +36,6 @@ export default function InfoUser({ objDados, Arrseguindo }) {
         }).then(res => res.json())
         .then(res => setMeuId(res._id))
     },[])
-
-
-    useEffect(() => {
-        setDados(objDados || [])
-        setSeguidores(Arrseguindo || [])
-    }, [objDados, Arrseguindo])
 
     return (
         <div> 
@@ -94,15 +100,24 @@ export default function InfoUser({ objDados, Arrseguindo }) {
                                     <span>Posts</span>
                                 </div>
                                 <div className="info">
-                                    <span>{dados.seguindo?.length ?? 0}</span>
+                                    <span onClick={() => {
+                                        setModalSeg(true)
+                                        setPublico(dados.seguindo)
+                                    }}>{dados.seguindo?.length ?? 0}</span>
                                     <span>Seguindo</span>
                                 </div>
                                 <div className="info">
                                     {arraySeguidores.length !== 0 &&
-                                        <span>{arraySeguidores.length ?? 0}</span>
+                                        <span onClick={() => {
+                                            setModalSeg(true)
+                                            setPublico(arraySeguidores)
+                                        }}>{arraySeguidores.length ?? 0}</span>
                                     }
                                     {arraySeguidores.length === 0 &&
-                                        <span>{dados.seguidores?.length ?? 0}</span>
+                                        <span onClick={() => {
+                                            setModalSeg(true)
+                                            setPublico(dados.seguidores)
+                                        }}>{dados.seguidores?.length ?? 0}</span>
                                     }
                                     <span>Seguidores</span>
                                 </div>
@@ -110,11 +125,10 @@ export default function InfoUser({ objDados, Arrseguindo }) {
                             <p id="bioDesktop">{dados.biografia}</p>
                         </div>
                     </div>
-                <Modal publico={dados.seguindo}/>
+                <Modal publico={publico} verModal={modalseg} DevolveProPai={RespostaDoMenu} />
                 </div>
                 <p id="bioMobile">{dados.biografia}</p>
             </section>
-
         </div>
     )
 }

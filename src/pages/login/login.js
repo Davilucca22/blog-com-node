@@ -1,4 +1,5 @@
 import { React, useState} from "react"
+import { replace, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify"
 import { IoEyeSharp  } from "react-icons/io5";
 
@@ -6,6 +7,7 @@ import "./login.css"
 
 export default function Login(){
 
+    const navigate = useNavigate()
     const [email,setemail] = useState('')
     const [senha,setsenha] = useState('')
     const [showBTN,setShowBTN] = useState('')
@@ -31,7 +33,7 @@ export default function Login(){
 
             if(data.msg){
                 toast.success(data.msg)
-                window.open('/feed')
+                navigate('/feed',{replace:true}) //carrega o feed na mesma guia do login
             }else{
                 toast.error(data.msgerr)
             }

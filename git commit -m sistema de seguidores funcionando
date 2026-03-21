@@ -1,0 +1,260 @@
+[33mcommit c69a333550fee6d09549f1cfb0639506069b7210[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Fri Mar 20 22:21:22 2026 -0300
+
+    ta indo
+
+[33mcommit ba6c1efb12c9e23342580df917f9d7240a277767[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Sun Mar 15 16:57:19 2026 -0300
+
+    Update index.js
+
+[33mcommit bf08e5c18007d997a64c80084456c37606d9c7d2[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Sun Mar 15 16:52:02 2026 -0300
+
+    ok
+
+[33mcommit e25777b35a09e392d6fab2065d1249604df6cc15[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Sun Mar 15 15:40:33 2026 -0300
+
+    ok
+
+[33mcommit 28103ef7bd7f6ff4d29c48007937ff58a7438e31[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Sat Mar 14 12:50:20 2026 -0300
+
+    conteiner comentarios responsivo
+
+[33mcommit 914363692db0c82aff515eabfe2f9e53f0af1398[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Wed Mar 11 22:39:03 2026 -0300
+
+    quase la
+
+[33mcommit 82a2cf5743c042818cf2833db2ce8a476ae81571[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Tue Mar 3 21:19:22 2026 -0300
+
+    Versao Desktop
+
+[33mcommit 75c35bacbbeb73e0cf1cfbc9537b958bdf8915d3[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Sat Feb 21 14:54:12 2026 -0300
+
+    ta indo
+
+[33mcommit ea40e2936fca6f49cd43589f2f2da5427164a7ae[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Thu Feb 12 21:29:21 2026 -0300
+
+    novo estilo
+
+[33mcommit f74d97cc6e51bbab1146e1ec93851866340342be[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Tue Feb 10 22:08:31 2026 -0300
+
+    quase terminando
+
+[33mcommit ddb0919e986f85afbe74775d6e6ab37dff35e591[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Mon Feb 9 22:34:26 2026 -0300
+
+    sistema de busca funcionando
+
+[33mcommit ec8b76e920a441623bd5d220a9d58ada89e7e431[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Sun Feb 8 11:42:52 2026 -0300
+
+    curtida arrumada
+
+[33mcommit d16594b003894f4f8546a329cb49adc5835d5ef2[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Sun Feb 1 13:15:58 2026 -0300
+
+    ajuste de URL
+    
+    colocar a url do site em um arquivo env
+
+[33mcommit 6a1c2911115ff955df2b51a7793806168a465abc[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Sat Jan 31 16:48:10 2026 -0300
+
+    mecanica de seguir funcionando
+
+[33mcommit e7aba60bed2da03953b3c8638464da72b4e02d11[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Thu Jan 29 22:52:00 2026 -0300
+
+    sistema de serguir e deixar de seguir funcionando
+
+[33mcommit b08fa133cbd709c9ec3c1649969720051895f6f5[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Wed Jan 28 22:06:46 2026 -0300
+
+    stalkear funcionando
+
+[33mcommit 321234f0980da0aaa4cd88a4dcab948ce141faee[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Tue Jan 27 22:35:16 2026 -0300
+
+    é um passo pra frente e dois pra tras
+
+[33mcommit 4c806027a83c47c4efe4d1d5b9b95fac75e43fbb[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Sat Jan 24 14:50:32 2026 -0300
+
+    perfil 99%
+
+[33mcommit 93d5c9a9363fe48f265f176741c46a894c83bc0b[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Wed Jan 21 22:40:30 2026 -0300
+
+    feed transformado em componente
+
+[33mcommit ccdc553b169b59606407fcc4aeb195696f834081[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Wed Jan 14 19:20:42 2026 -0300
+
+    alterar senha funcionando
+
+[33mcommit 31b9299ec9fad8c7f2ec17bed9682752acbada91[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Mon Jan 19 20:43:26 2026 -0300
+
+    Revert "Update feed.js"
+    
+    This reverts commit 778a4cf9ff4d1fe6f575a7b4d29c8a017bbd35df.
+
+[33mcommit 1aa15e006341abcf093e70943310972bc827ee45[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Mon Jan 19 20:42:33 2026 -0300
+
+    Update feed.js
+
+[33mcommit c00d5488d11424eb1af1ebb463fc1a90f558ec6c[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Sat Jan 17 19:59:04 2026 -0300
+
+    ok
+
+[33mcommit e6c66d63fed53fecf9e3edaedaee5f4ee05a3e1e[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Tue Jan 13 21:51:06 2026 -0300
+
+    editando informaçoes do usuario
+
+[33mcommit c9854f5b8415fd0e68a533c9e84e8c669ba45992[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Mon Jan 12 10:39:01 2026 -0300
+
+    editar perfil funcionando
+
+[33mcommit a74fbd7b01902cd4e36e449b11dd642078cf56be[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Fri Jan 9 11:48:18 2026 -0300
+
+    tela editar perfil
+
+[33mcommit 07cb5c85dcebb5edcc4675b2b8e1c6561bfb7227[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Thu Jan 8 17:32:56 2026 -0300
+
+    comentarios funcionando
+
+[33mcommit 12a1999714d9b870d85e8614746d9d55eb0e63f5[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Wed Jan 7 09:56:05 2026 -0300
+
+    antes da possivel merda
+
+[33mcommit 2ca67c8b55b45a99f3dfe1cc3bb6b0e6567314ec[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Mon Jan 5 12:00:08 2026 -0300
+
+    ok
+
+[33mcommit a028339e962951f1414b22fe2b2094640a85ffe4[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Fri Jan 2 11:05:54 2026 -0300
+
+    curtidas atualizadas
+
+[33mcommit 8d55d09a4c2a133ec456dcb92ba3bb1cb324824b[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Thu Jan 1 12:32:32 2026 -0300
+
+    1 do ano
+
+[33mcommit b761db3d09f84eb0ee40c666e1389b7f4d3d6fa7[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Wed Dec 31 16:36:45 2025 -0300
+
+    sistema de curtidas funcionando
+
+[33mcommit d3f4794f60a21e46334543b5c4c926b216f1c599[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Tue Dec 30 11:55:48 2025 -0300
+
+    30/12
+
+[33mcommit 1564d14c90366095f8fa50db5797f5b9d21ab00a[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Mon Dec 29 11:56:15 2025 -0300
+
+    feito 29/12
+
+[33mcommit a1271279f31861f2589bcbcd8f7b8ecc314731cc[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Sat Dec 27 15:48:06 2025 -0300
+
+    ok
+
+[33mcommit a4bdee463dd26d0e356ad9bf1aafc31a096e9eb5[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Fri Dec 26 11:16:33 2025 -0300
+
+    tela de postar feita
+
+[33mcommit f204154312fb161cad744444e7aac37841d1f861[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Thu Nov 20 19:48:47 2025 -0300
+
+    tela feita
+    
+    validando email no banco dados, senha com limite e calculando idade
+
+[33mcommit 4388fa3cfd3dba7b6284aaf325a9fb1742bf74be[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Wed Nov 19 21:54:11 2025 -0300
+
+    register
+    
+    problemas com a falta do envio da foto de perfil resolvidos, mensagens de confirmaçao do backend adicionadas.
+     falta validar senha e data de nascimento
+
+[33mcommit b63b1e0b7cc9fdecfca5a90a1e835e562e4dc386[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Sun Nov 9 14:33:13 2025 -0300
+
+    tela de boas vindas feita
+
+[33mcommit cc02646ff4da7562f34a16bdf67991ea68081157[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Fri Oct 31 21:47:00 2025 -0300
+
+    adicionado foto de perfil
+
+[33mcommit adbbffa15244b19948f27ccc929434af749c7538[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Wed Oct 8 22:41:09 2025 -0300
+
+    enviando dados para o back
+
+[33mcommit 0d4999671bf0d828d2e521fb502f4234429085cd[m
+Author: lucca <davilucarios47@gmail.com>
+Date:   Tue Oct 7 21:38:32 2025 -0300
+
+    Initial commit

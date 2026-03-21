@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Register.css"
 import { toast } from "react-toastify";
 import { IoEyeSharp  } from "react-icons/io5";
@@ -7,6 +8,7 @@ import Loading from "../../components/loading/loading";
 
 export default function Register() { 
  
+    const navigate = useNavigate()
     const [nome, setnome] = useState('')
     const [email, setemail] = useState('')
     const [senha, setsenha] = useState('')
@@ -98,7 +100,7 @@ export default function Register() {
                             setsenha('')
                             setfoto(null)
                             setNasc('')
-                            window.open('/feed')
+                            navigate('/feed',{replace:true})
 
                         }
                     }
