@@ -9,19 +9,22 @@ import { CgClose } from "react-icons/cg";
 
 // pegar o id que foi mandado da outra tela e buscar no banco o usuario correspondente
 export default function PerfilOutro(){
-    const { id } = useParams() 
-    const [meuId,setMeuId] = useState('')
-    const [dados,setDados] = useState([])
-    const [nome,setnome] = useState('')
-    const [foto,setfoto] = useState('')
-    const [posts,setposts] = useState([])
-    const [zoomFT,setZoomFT] = useState(false)
-    const [legendaSeg,setLegendaSeg] = useState('')
-    const [TempArray,setTempArray] = useState([])
+
+    const { id } = useParams() //id do usuario clicado
+    const [dados,setDados] = useState([]) //dados do usuario clicado
+    const [posts,setposts] = useState([]) //posts do usuario clicado
+    const [TempArray,setTempArray] = useState([]) //seguidores do usuario clicado
+
+    const [meuId,setMeuId] = useState('') //id do usuario da sessao
+    const [nome,setnome] = useState('') //nome do usuario da sessao
+    const [foto,setfoto] = useState('') //foto do usuario da sessao
+
+    const [zoomFT,setZoomFT] = useState(false) // define a montagem do componente de janela modal
+    const [legendaSeg,setLegendaSeg] = useState('') //legenda que mostra se o usuario ja segue o outro
 
     useEffect(() => {
 
-        fetch(`${process.env.REACT_APP_URL_SITE}/session`,{
+        fetch(`${process.env.REACT_APP_URL_SITE}/session`,{ //dados da sessao
             method:"GET",
             credentials:"include",
             headers:{
@@ -34,7 +37,7 @@ export default function PerfilOutro(){
             setMeuId(item._id)
         })
 
-        fetch(`${process.env.REACT_APP_URL_SITE}/perfiloutro/${id}`,{
+        fetch(`${process.env.REACT_APP_URL_SITE}/perfiloutro/${id}`,{ //busca dados do usuario clicado
             method:"GET",
             credentials:"include",
             headers:{
@@ -42,11 +45,11 @@ export default function PerfilOutro(){
             }
         }).then(res => res.json())
         .then(item => {
-            setDados(item)
-            setTempArray(item.seguidores)
+            setDados(item) // todos os dados exceto login
+            setTempArray(item.seguidores) //seguidores do usuario clicado
         })
         
-        fetch(`${process.env.REACT_APP_URL_SITE}/feedUser/${id}`,{
+        fetch(`${process.env.REACT_APP_URL_SITE}/feedUser/${id}`,{ //trata os posts do usuario clicado, retorna num formato mais dinamico
             method:"GET",
             credentials:"include",
             headers:{
@@ -55,13 +58,13 @@ export default function PerfilOutro(){
         }).then(res => res.json())
         .then(lista => setposts(lista))
     
-    },[])
+    },[id]) // se der merda pode ser aqui
 
     useEffect(() => {
         
-        if(!meuId) return
+    if(!meuId) return
 
-    const sera = TempArray.some(
+    const sera = TempArray.some( //checa se o id do usuario da sessao esta no array de seguidores do usuario clicado
         item => item.IDseguidor === meuId
     )
 
@@ -72,13 +75,13 @@ export default function PerfilOutro(){
     function DeixarDeSeguir(){
         
         setTempArray(prev => 
-            prev.filter(item => item.IDseguidor !== meuId) //se eu ja seguir a pessoa, sou removido do array e deixo de seguir
+            prev.filter(item => item.IDseguidor !== meuId) //se eu ja seguir a pessoa, sou removido do array temporario
         ) 
 
         setLegendaSeg("+ Seguir")
         
         try{
-            fetch(`${process.env.REACT_APP_URL_SITE}/DeixarDeSeguir`,{
+            fetch(`${process.env.REACT_APP_URL_SITE}/DeixarDeSeguir`,{ //deixa de seguir no banco
                 method:"PUT",
                 credentials:"include",
                 headers:{
@@ -97,7 +100,7 @@ export default function PerfilOutro(){
 
         setTempArray(prev => {
             if(prev.some(item => item.IDseguidor === meuId)) return prev
-            return [...prev,{IDseguidor:meuId}] //impede de duplicar com clique duplo
+            return [...prev,{IDseguidor:meuId,nameSeguindo:nome,urlFoto:foto}] //impede de duplicar com clique duplo
         })
         setLegendaSeg("Seguindo...")
 
@@ -109,7 +112,9 @@ export default function PerfilOutro(){
                     'Content-Type':'application/json'
                 },
                 body:JSON.stringify({
-                    IdOutro:id
+                    IdOutro:id,
+                    nameSeguindo:dados.name,
+                    urlFoto:dados.fotoPerfil
                 })
             })
         }catch(e){

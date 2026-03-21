@@ -42,7 +42,7 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
 
             return () => clearInterval(interval)
         }
-    }, [])
+    }, [dados])
 
     function curtir(id) {
 
@@ -144,7 +144,7 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
 
                         <div className={Vdesktop ? "cabecalhoPost desk" :"cabecalhoPost"}>
                             <img className="fotoP" src={val.fotoPerfil} alt="foto"></img>
-                            <span onClick={() => telaUser(val.userId)}>{val.name}</span>
+                            <span onClick={() => telaUser(val.userId)}>{val.name}</span>                            
                         </div>
 
                         <div className={Vdesktop ? "conteinerPublicacao desk" : "conteinerPublicacao"}>

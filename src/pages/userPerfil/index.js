@@ -3,6 +3,7 @@ import Menu from "../../components/menu/menu";
 import "./index.css"
 import { CgClose } from "react-icons/cg";
 import FeedPerfil from "../../components/feedNoPerfil/feedNoPerfil";
+import  FeedDePosts from "../../components/feedDePosts/feedDePosts"
 import InfoUser from "../../components/infoUser/infoUser";
 import { useParams } from "react-router-dom";
 
@@ -42,9 +43,9 @@ export default function PerfilUser() {
                     <div id="divSair">
                         <CgClose id="voltar" onClick={() => setZoomFT(false)}/> 
                         <label for="voltar">POSTS</label>
-                    </div>
+                    </div> 
 
-                    <FeedPerfil Posts={posts} name={dados.name} Foto={dados.fotoPerfil} MeuID={dados._id} />
+                    <FeedDePosts Posts={posts} name={dados.name} Foto={dados.fotoPerfil} MeuID={dados._id} />
                 </nav>
                 }
 

@@ -80,13 +80,17 @@
 }
 
 .user{
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
-    color: var(--CorDoBotao);
+    color: var(--CorPrimaria);
+    cursor: pointer;
 }
 
 .usercoment{
     line-break: anywhere;
+    font-weight: 400;
+    font-size: 14px;
+    color: rgb(252, 252, 252);
 }
 
 .comentarios{
@@ -167,7 +171,7 @@
 
     .comentarios.desk{
         box-shadow: 1px 1px 3px black;
-        border-radius: 10px;
+        border-radius: 15px;
     }
 
     .imgPost img{
@@ -189,9 +193,9 @@
     .cabecalhoPost.desk{
         background-color: var(--CorTerciaria);
         margin: 0;
-        padding: 10px 20px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
+        padding: 15px ;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
         color: var(--CorDoBotao);
     }
 
@@ -206,7 +210,7 @@
         position: relative;
         width: 400px;
         height: 100%;
-        border-bottom-right-radius: 10px;
+        border-bottom-right-radius: 15px;
     }
 
     .imgPost.desk{
@@ -218,7 +222,7 @@
         background-color:var(--CorTerciaria);
         margin: 0;
         padding-left: 10px;
-        border-bottom-left-radius: 10px;
+        border-bottom-left-radius: 15px;
     }
 
     .imgPost.desk img{

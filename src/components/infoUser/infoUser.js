@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { DiAptana } from "react-icons/di";
 import { GoX } from "react-icons/go";
 import { FiMenu } from "react-icons/fi";
+import Modal from "../../components/modalPublico/modal"
 import "./infoUser.css"
 
 export default function InfoUser({ objDados, Arrseguindo }) {
@@ -101,7 +102,7 @@ export default function InfoUser({ objDados, Arrseguindo }) {
                                         <span>{arraySeguidores.length ?? 0}</span>
                                     }
                                     {arraySeguidores.length === 0 &&
-                                        <span><a href={`/seguidores/${dados._id}`}>{dados.seguidores?.length ?? 0}</a></span>
+                                        <span>{dados.seguidores?.length ?? 0}</span>
                                     }
                                     <span>Seguidores</span>
                                 </div>
@@ -109,9 +110,11 @@ export default function InfoUser({ objDados, Arrseguindo }) {
                             <p id="bioDesktop">{dados.biografia}</p>
                         </div>
                     </div>
+                <Modal publico={dados.seguindo}/>
                 </div>
                 <p id="bioMobile">{dados.biografia}</p>
             </section>
+
         </div>
     )
 }

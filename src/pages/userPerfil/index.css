@@ -89,10 +89,8 @@ hr{
     }
 
     #conteinerZoom{
-        background-color: rgba(0,0,0,0.7);
-        width: 100vw;
-        scroll-behavior: auto;
-        overflow-y: hidden;
+        align-content: center;
+        background-color: var(--CorTerciaria);
     }
 
     #divSair{
