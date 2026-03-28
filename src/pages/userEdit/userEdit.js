@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoArrowBackOutline } from "react-icons/io5";
 import './userEdit.css'
 import { toast } from "react-toastify";

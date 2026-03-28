@@ -65,6 +65,7 @@
     width: 40px;
     height: 40px;
     margin-left: 5px;
+    cursor: pointer;
 }
 
 hr{
@@ -74,6 +75,11 @@ hr{
 }
 
 @media (min-width:640px){
+
+    #conteinerZoom{
+        background-color: rgba(0, 0, 0, 0.6);
+        width: 100vw;
+    }
 
     hr{
         width: 80%;
@@ -86,11 +92,6 @@ hr{
     #conteinerPosts img{
         object-fit: cover;
         height: 350px;
-    }
-
-    #conteinerZoom{
-        align-content: center;
-        background-color: var(--CorTerciaria);
     }
 
     #divSair{

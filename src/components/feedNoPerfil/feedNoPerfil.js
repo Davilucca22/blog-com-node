@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import './feedNoPerfil.css'
 import { IoIosHeart } from "react-icons/io";
 import { FaRegComment } from "react-icons/fa";
+import { CgMoreVerticalAlt } from "react-icons/cg";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
+import DeletaPost from "../DeletaPost/deleta";
 
 export default function FeedPerfil({ Posts, name, Foto, MeuID }) {
 
@@ -15,14 +17,14 @@ export default function FeedPerfil({ Posts, name, Foto, MeuID }) {
     const [nome, setNome] = useState(name || '')
     const [foto, setFoto] = useState(Foto || '')
     const [ID, setID] = useState(MeuID || '')
-    // Evita crash no mobile: não acessar window no estado inicial (pode ser undefined em alguns contextos/WebViews)
     const [Desktop, setDesktop] = useState(false)
+    const [Del,setDel] = useState('')
 
     useEffect(() => {
         setDados(Posts || [])
         setID(MeuID || '')
         setNome(name || '') 
-        setFoto(Foto || '')
+        setFoto(Foto || '') 
     }, [Posts, name, Foto, MeuID])
 
     useEffect(() => { //verifica a largura da tela para mudar o layout  
@@ -44,7 +46,7 @@ export default function FeedPerfil({ Posts, name, Foto, MeuID }) {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
+                    body: JSON.stringify({ 
                         dados
                     })
                 }).then(res => res.json())
@@ -163,15 +165,27 @@ export default function FeedPerfil({ Posts, name, Foto, MeuID }) {
         }
     }, [verComent])
 
+    function zeraDel(num){
+        setDel('')
+    }
+
     return ( 
         <div>
             {dados.map((val, index) => (
                 <section key={val.post._id} className="conteinerPost2" id={index} >
                     <dl id="comentarios2">
+                        {Del.length > 0 &&
+                            <DeletaPost postID={Del} retorna={zeraDel} />
+                        }
                         <div className="conteinerPublicacao2" id={val.post._id}>
                         <div className="cabecalhoPost2">
-                            <img className="fotoP2" src={val.fotoPerfil} alt={`Foto de perfil de ${val.name}`}></img>
-                            <span onClick={() => navigate(`/details/${val.userId}`)}>{val.name}</span>
+                            <div className="nomeEfoto2">
+                                <img className="fotoP2" src={val.fotoPerfil} alt={`Foto de perfil de ${val.name}`}></img>
+                                <span onClick={() => navigate(`/details/${val.userId}`)}>{val.name}</span>
+                            </div>
+                            {val.userId === ID && //edita o proprio post
+                                <span className="treePoints2" onClick={() => setDel(val.post._id)}><CgMoreVerticalAlt/></span>
+                            }
                         </div>
                             <div id="corpoPub" >
                                 <div id="layoutPost">

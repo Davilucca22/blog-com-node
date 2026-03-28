@@ -58,7 +58,7 @@ export default function InfoUser({ objDados, Arrseguindo }) {
                             </div>
                         </div>
                     }
-                    <div id="botoes">
+                    <div id="botoes"> 
                         <button onClick={() => {
                             setFechaModal(true)
                             setTimeout(() => {

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import './feedDePosts.css'
 import { IoIosHeart } from "react-icons/io";
 import { FaRegComment } from "react-icons/fa";
+import { CgMoreVerticalAlt } from "react-icons/cg";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
 
@@ -33,7 +34,10 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
                     credentials: "include",
                     headers: {
                         'Content-Type': 'application/json'
-                    }
+                    },
+                    body:JSON.stringify({
+                        dados
+                    })
                 }).then(res => res.json())
                     .then(resp => {
                         setDados(resp)
@@ -142,9 +146,14 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
                 <section key={val.post._id} className={Vdesktop ? "conteinerPost desk" :"conteinerPost"} id={index} >
                     <dl className={Vdesktop ? "comentarios desk" : "comentarios"}>
 
-                        <div className={Vdesktop ? "cabecalhoPost desk" :"cabecalhoPost"}>
-                            <img className="fotoP" src={val.fotoPerfil} alt="foto"></img>
-                            <span onClick={() => telaUser(val.userId)}>{val.name}</span>                            
+                        <div key={val.post._id} className={Vdesktop ? "cabecalhoPost desk" :"cabecalhoPost"}>
+                            <div className="nomeEfoto" >
+                                <img className="fotoP" src={val.fotoPerfil} alt="foto"></img>
+                                <span onClick={() => telaUser(val.userId)}>{val.name}</span>
+                            </div>
+                            {val.userId === ID && //editar apenas o proprio post
+                                <span className="treePoints"><CgMoreVerticalAlt/></span>                          
+                            }
                         </div>
 
                         <div className={Vdesktop ? "conteinerPublicacao desk" : "conteinerPublicacao"}>
@@ -187,9 +196,9 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
                                                     </div>
                                                 </div>                                            
                                             }
-                                            {val.post.comentarios?.slice().reverse().map(item => (
-                                                <div className="contComentario">
-                                                    <img className="fotoDono" src={item.fotoDono} alt="foto do dono do comentario"></img>
+                                            {val.post.comentarios?.slice().reverse().map((item, idx) => (
+                                                <div key={`comentario-${val.post._id}-${idx}`} className="contComentario">
+                                                    <img className="fotoDono" src={item.fotoDono || "/assets/semfoto.jpeg"} alt="foto do dono do comentario"></img>
                                                     <div className="infoComent">
                                                         <dt className="user">{item.donoComentario}</dt>
                                                         <dd className="usercoment">{item.textoComentario}</dd>

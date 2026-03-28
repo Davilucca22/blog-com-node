@@ -1,4 +1,4 @@
-import {react, useState, useEffect} from "react" 
+import {React, useState, useEffect} from "react" 
 import { FaCamera } from "react-icons/fa";
 import { IoArrowBackOutline } from "react-icons/io5";
 import "./index.css"

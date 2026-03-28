@@ -34,7 +34,7 @@ export default function BuscaUser() {
                 <ul id="listaUsers">
                     {nome &&
                         resultado.map(user => (
-                            <li className="blocoPerfil">
+                            <li key={user._id} className="blocoPerfil">
                                 <a className="LinkPerfil" href={`/details/${user._id}`}>
                                     <img className="FTuser" src={user.fotoPerfil} alt="foto user"></img>
                                     <span className="NameUser">{user.name}</span>

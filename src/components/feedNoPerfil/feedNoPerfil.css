@@ -20,6 +20,18 @@
     object-fit: cover;
 }
 
+.nomeEfoto2{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.treePoints2 svg{
+    width: 20px;
+    height: 20px;
+}
+
 .imgPost2{
     margin-bottom: 30px;
     width: 375px;    
@@ -291,10 +303,6 @@
         height: 50px;
     }
 
-    #sairComent2{
-        display: none;
-    }
-
     #corpoPub{
         display: flex;
         flex-direction: row;
@@ -311,6 +319,10 @@
     }
 
     .comentPost2{
+        display: none;
+    }
+
+    #sairComent2{
         display: none;
     }
 }

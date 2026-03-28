@@ -38,10 +38,16 @@ export default function Modal({publico, verModal, DevolveProPai}){
                             TrataDevolverProPai()
                         },300)
                     }}><GoX id="sair" /></span>
+                    {Pub[0].nameSeguidor  &&
+                        <h3 className="tituloSeg">Seguidores</h3>
+                    }
+                    {Pub[0].nameSeguindo  &&
+                        <h3 className="tituloSeg">Seguindo</h3>
+                    }
                 </div>
                 <ul id="listaPublico">
                     {Pub.map(pessoa => (
-                        <li className="pessoa">
+                        <li key={pessoa.IDseguindo || pessoa.IDseguidor} className="pessoa">
                             <img className="imgSeg" src={pessoa.urlFoto} alt="foto de perfil do usuario"></img>
                             <span onClick={() => {
                                 telaUser(pessoa.IDseguindo || pessoa.IDseguidor)

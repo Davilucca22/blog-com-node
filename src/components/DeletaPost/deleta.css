@@ -1,0 +1,48 @@
+#conteinerDel{
+    position: fixed;
+    z-index: 1001;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#modalDel{
+    width: 300px;
+    height: 200px;
+    padding: 50px;
+    box-shadow: 1px 1px 3px black;
+    background-color: var(--CorSegundaria);
+    text-align: center;
+    border-radius: 15px;
+}
+
+#modalDel button{
+    width: 100px;
+    height: 30px;
+    margin: 5px;
+    box-shadow: 1px 1px 3px black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#confirmDel{
+    background-color: green;
+    font-weight: 700;
+    color: whitesmoke;
+}
+
+#NegaDel{
+    background-color: red;
+    font-weight: 700;
+    color: whitesmoke;
+}
+
+#h3Del{
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 50px;
+    color: var(--CorDoBotao);
+}
