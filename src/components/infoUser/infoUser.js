@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { DiAptana } from "react-icons/di";
 import { GoX } from "react-icons/go";
 import { FiMenu } from "react-icons/fi";
 import Modal from "../../components/modalPublico/modal"
+import { FeedContext } from "../../context/FeedContext";
+import { Link } from "react-router-dom";
 import "./infoUser.css"
 
 export default function InfoUser({ objDados, Arrseguindo }) {
@@ -16,6 +18,7 @@ export default function InfoUser({ objDados, Arrseguindo }) {
     const [SairAtivo,setSairAtivo] = useState(false) //controla a classe do modal confirma sair
     const [modalseg,setModalSeg] = useState(false) //controla a janela modal do conteiner de seguidores/seguindo
     const [publico,setPublico] = useState([])
+    const { darkTheme, setDarkTheme } = useContext(FeedContext)
 
     function RespostaDoMenu(resp){ // define modalseg como false
         return setModalSeg(resp)
@@ -68,20 +71,21 @@ export default function InfoUser({ objDados, Arrseguindo }) {
                         }}>
                             <GoX id="back" />
                         </button>
-                        <span><a href="/editperfil">EDITAR PERFIL</a></span>
-                        <span><a href="/editainfo">INFORMAÇOES DO USUARIO</a></span>
-                        <span><a href="/editsenha">SENHA E SEGURANÇA</a></span>
-                        <span>TEMA</span>
+                        <span><Link to="/editperfil">EDITAR PERFIL</Link></span>
+                        <span><Link to="/editainfo">INFORMAÇOES DO USUARIO</Link></span>
+                        <span><Link to="/editsenha">SENHA E SEGURANÇA</Link></span>
+                        <span onClick={() => setDarkTheme(!darkTheme)}>TEMA ESCURO  <input className={darkTheme ? "checkbox" : "check"} type="checkbox" checked={darkTheme} readOnly></input></span>
                         <span onClick={() => setSair(true)}>SAIR</span>
                     </div>
                 </section>
             }
-
+            {dados._id === meuId &&
             <div id="conteinerHamburguer">
                 <button id="BThamburguer2" onClick={() => setmodal(true)}>
                     <FiMenu id="hamburguer2" />
                 </button>
             </div>
+            }
             <div id="Margem"></div>
             <section id="bio">
                 <div id="infoUser">

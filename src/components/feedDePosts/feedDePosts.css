@@ -94,7 +94,7 @@
 .user{
     font-size: 15px;
     font-weight: 600;
-    color: var(--CorPrimaria);
+    color: var(--CorTexto);
     cursor: pointer;
 }
 
@@ -102,7 +102,7 @@
     line-break: anywhere;
     font-weight: 400;
     font-size: 14px;
-    color: rgb(252, 252, 252);
+    color: var(--CorTexto);
 }
 
 .comentarios{

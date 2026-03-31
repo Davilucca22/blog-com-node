@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './feedDePosts.css'
 import { IoIosHeart } from "react-icons/io";
 import { FaRegComment } from "react-icons/fa";
-import { CgMoreVerticalAlt } from "react-icons/cg";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
 
@@ -151,9 +150,6 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
                                 <img className="fotoP" src={val.fotoPerfil} alt="foto"></img>
                                 <span onClick={() => telaUser(val.userId)}>{val.name}</span>
                             </div>
-                            {val.userId === ID && //editar apenas o proprio post
-                                <span className="treePoints"><CgMoreVerticalAlt/></span>                          
-                            }
                         </div>
 
                         <div className={Vdesktop ? "conteinerPublicacao desk" : "conteinerPublicacao"}>
@@ -166,11 +162,11 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
                                             : 'like'
                                     } />
                                     <span className="numLikes" >{val.post.curtidas.length}</span>
-                                    <a href={`#${index}`} onClick={ () => {
+                                    <Link to={`#${index}`} onClick={ () => {
                                         setverComent(index)
                                         setVdesktop(true)
                                         }} ><FaRegComment className="comentario" />
-                                    </a>
+                                    </Link>
                                 </div>
                                 {val.post.textoPost &&
                                     <div>

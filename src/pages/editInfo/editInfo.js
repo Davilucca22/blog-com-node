@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./editInfo.css"
 import { IoArrowBackOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 export default function EditInfo() {
 
@@ -85,9 +86,9 @@ export default function EditInfo() {
     return(
         <main id="conteinerInfo">
             <div id="backFeed">
-                <a href="/feed">
+                <Link to="/feed">
                     <IoArrowBackOutline/>
-                </a>
+                </Link>
                 <span onClick={() => {
                     if(active){
                         setactive(false)

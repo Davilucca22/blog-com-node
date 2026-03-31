@@ -3,6 +3,7 @@ import { IoArrowBackOutline } from "react-icons/io5";
 import './userEdit.css'
 import { toast } from "react-toastify";
 import Loading from "../../components/loading/loading";
+import { Link } from "react-router-dom";
 
 export default function UserEdit(){
 
@@ -75,7 +76,7 @@ export default function UserEdit(){
                <Loading /> //tela de load
             }
 
-            <div id="backtoFeed"><a href="/feed"><IoArrowBackOutline /></a></div>
+            <div id="backtoFeed"><Link to="/feed"><IoArrowBackOutline /></Link></div>
             <form id="formularioUser" onSubmit={e => {
                 EnviaBack(e)
                 setload(true)

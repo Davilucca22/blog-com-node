@@ -1,17 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-html{
-    scroll-behavior: smooth;
-    height: max-content;
-    background-color: var(--CorPrimaria);
+:root{
+    color-scheme:light;
 }
 
 :root{
     --CorTerciaria: #3A5553;
     --CorSegundaria: #043036;
-    --CorTexto: #586f7cff;   
-    --CorPrimaria:#b8dbd9ff;
+    --CorTexto: #ffffff;   
+    --CorPrimaria:light-dark(#b8dbd9ff, #0e3533);
     --CorDoBotao:#f4f4f9ff;
+}
+
+:root:has(.checkbox){
+    color-scheme: dark;
+}
+
+/* Tema Escuro */
+body.dark-theme {
+    --CorTerciaria: #5A7D7A;
+    --CorSegundaria: #074e4e;
+    --CorPrimaria: #0e3533;
+    --CorDoBotao: #011e22;
+    background-color: var(--CorPrimaria);
+    color: var(--CorTexto);
+}
+
+body.dark-theme main {
+    background-color: var(--CorPrimaria);
+}
+
+html{
+    scroll-behavior: smooth;
+    height: max-content;
+    background-color: var(--CorPrimaria);
 }
 
 *{

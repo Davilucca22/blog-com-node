@@ -81,6 +81,7 @@
 #configVdesktop {
     display: none;
     background-color: var(--CorPrimaria);
+    color: var(--CorSegundaria);
     margin-left: 5px;
     cursor: pointer;
 }

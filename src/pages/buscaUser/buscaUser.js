@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Menu from '../../components/menu/menu.js'
 import { FaSearch } from "react-icons/fa";
 import './buscaUser.css'
+import { Link } from "react-router-dom";
 
 export default function BuscaUser() {
     const [nome,setName] = useState('')
@@ -21,7 +22,7 @@ export default function BuscaUser() {
     },[nome])
 
     return(
-        <main>
+        <main id="contBusca">
             <section id="conteinerInput">
                 <div>
                     <input type="text" placeholder="Busca por nome..." value={nome} onChange={e => setName(e.target.value)}></input>
@@ -35,10 +36,10 @@ export default function BuscaUser() {
                     {nome &&
                         resultado.map(user => (
                             <li key={user._id} className="blocoPerfil">
-                                <a className="LinkPerfil" href={`/details/${user._id}`}>
+                                <Link className="LinkPerfil" to={`/details/${user._id}`}>
                                     <img className="FTuser" src={user.fotoPerfil} alt="foto user"></img>
                                     <span className="NameUser">{user.name}</span>
-                                </a>
+                                </Link>
                             </li>
                         ))
                     }

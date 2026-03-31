@@ -3,6 +3,7 @@ import { IoArrowBackOutline, IoEyeSharp  } from "react-icons/io5";
 import { FaLock } from "react-icons/fa";
 import "./editsenha.css"
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 export default function EditSenha(){
 
@@ -48,7 +49,7 @@ export default function EditSenha(){
 
     return(
         <main id="conteinerSenha">
-            <div id="voltar"><a href="/feed"><IoArrowBackOutline /></a></div>
+            <div id="voltar"><Link to="/feed"><IoArrowBackOutline /></Link></div>
             <div id="cadeado"><FaLock/></div>
             <form onSubmit={e => EnviaBack(e)} id="formSenha">
                 <div><input id="senhaAtual" placeholder="digite sua senha atual" value={senhaAtual} onChange={e => setAtual(e.target.value)}  type={showA ? "text" : "password"}></input>
