@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function EditInfo() {
 
+    const [id,setid] = useState('')
     const [email,setemail] = useState('')
     const [dataNasc,setdataNasc] = useState('')
     const [active,setactive] = useState(true)
@@ -20,6 +21,7 @@ export default function EditInfo() {
             }
         }).then(res => res.json())
         .then(dados => {
+            setid(dados._id)
             setemail(dados.email)
             setdataNasc(dados.dataNasc)
         })
@@ -86,7 +88,7 @@ export default function EditInfo() {
     return(
         <main id="conteinerInfo">
             <div id="backFeed">
-                <Link to="/feed">
+                <Link to={`/Perfil/${id}`}>
                     <IoArrowBackOutline/>
                 </Link>
                 <span onClick={() => {

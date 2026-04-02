@@ -181,6 +181,10 @@
 
 @media (min-width:640px){
 
+    #conteinerFeed{
+        width: 100%;
+    }
+
     .comentarios.desk{
         box-shadow: 1px 1px 3px black;
         border-radius: 15px;

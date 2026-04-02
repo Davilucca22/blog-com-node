@@ -7,7 +7,7 @@
 :root{
     --CorTerciaria: #3A5553;
     --CorSegundaria: #043036;
-    --CorTexto: #ffffff;   
+    --CorTexto: #312f2f;   
     --CorPrimaria:light-dark(#b8dbd9ff, #0e3533);
     --CorDoBotao:#f4f4f9ff;
 }
@@ -22,6 +22,7 @@ body.dark-theme {
     --CorSegundaria: #074e4e;
     --CorPrimaria: #0e3533;
     --CorDoBotao: #011e22;
+    --CorTexto: #fff;
     background-color: var(--CorPrimaria);
     color: var(--CorTexto);
 }
@@ -41,6 +42,7 @@ html{
     margin: 0;
     padding: 0;
     border: 0;
+    border: 1px solid red;
 }
 
 main{

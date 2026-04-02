@@ -6,7 +6,7 @@ import Loading from "../../components/loading/loading";
 import { Link } from "react-router-dom";
 
 export default function UserEdit(){
-
+    const [Id,SetId] = useState('')
     const [nome,setnome] = useState('')
     const [foto,setfoto] = useState('')
     const [novafoto,setnovafoto] = useState(null)
@@ -26,6 +26,7 @@ export default function UserEdit(){
             credentials:"include"
         }).then(res => res.json())
         .then(dados => {
+            SetId(dados._id)
             setnome(dados.name)
             setpreview(dados.fotoPerfil)
             setfoto(dados.fotoPerfil)
@@ -76,7 +77,7 @@ export default function UserEdit(){
                <Loading /> //tela de load
             }
 
-            <div id="backtoFeed"><Link to="/feed"><IoArrowBackOutline /></Link></div>
+            <div id="backtoFeed"><Link to={`/Perfil/${Id}`}><IoArrowBackOutline /></Link></div>
             <form id="formularioUser" onSubmit={e => {
                 EnviaBack(e)
                 setload(true)

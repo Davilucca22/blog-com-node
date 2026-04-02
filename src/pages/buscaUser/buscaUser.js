@@ -5,6 +5,7 @@ import './buscaUser.css'
 import { Link } from "react-router-dom";
 
 export default function BuscaUser() {
+    const [meuId,setMeuId] = useState('')
     const [nome,setName] = useState('')
     const [resultado,setResultado] = useState(null) 
 
@@ -19,6 +20,14 @@ export default function BuscaUser() {
         .then(dados => {
             setResultado(dados)
         })
+
+        fetch(`${process.env.REACT_APP_URL_SITE}/session`, {
+            method:'GET',
+            credentials:'include',
+            headers:{
+                'Content-Type':'application/json'
+            }
+        }).then(res => res.json()).then(lista => setMeuId(lista._id))
     },[nome])
 
     return(
@@ -34,13 +43,13 @@ export default function BuscaUser() {
             <div id="ContLista">
                 <ul id="listaUsers">
                     {nome &&
-                        resultado.map(user => (
+                        resultado.filter(item => item._id !== meuId).map(user => (
                             <li key={user._id} className="blocoPerfil">
                                 <Link className="LinkPerfil" to={`/details/${user._id}`}>
                                     <img className="FTuser" src={user.fotoPerfil} alt="foto user"></img>
                                     <span className="NameUser">{user.name}</span>
                                 </Link>
-                            </li>
+                            </li> 
                         ))
                     }
                 </ul>

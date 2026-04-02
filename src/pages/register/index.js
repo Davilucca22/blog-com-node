@@ -63,10 +63,9 @@ export default function Register() {
                     if(idade < 18){
                         toast.warning('voce nao tem idade suficiente para usar o app')
                     }else{
-
                         const formData = new FormData()
-                        formData.append('nome',nome)
-                        formData.append('email',email)
+                        formData.append('nome',nome.toUpperCase())
+                        formData.append('email',email.toUpperCase())
                         formData.append('senha',senha)
                         formData.append('dataNasc',DataNasc)
         
