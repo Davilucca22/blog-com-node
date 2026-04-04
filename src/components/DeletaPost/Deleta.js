@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import "./deleta.css"
+import "./Deleta.css"
 
 export default function DeletaPost({postID, retorna}){
     const [IdPost,setPost] = useState(postID || '')

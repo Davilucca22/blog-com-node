@@ -1,5 +1,5 @@
 import { React, useState} from "react"
-import { useNavigate } from "react-router-dom";
+import { replace, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify"
 import { IoEyeSharp  } from "react-icons/io5";
 
@@ -41,7 +41,7 @@ export default function Login(){
             setemail('')
             setsenha('')
         }
-    }        
+    }         
 
     return( 
         <main id="MainLogin"> 

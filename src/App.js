@@ -1,4 +1,6 @@
 import React, { useContext, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 import AppRouter from "./Routes.js";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -24,9 +26,26 @@ function AppContent() {
   );
 }
 
+function Scroll(){
+  const location = useLocation()
+
+  useEffect(() => {
+    if(location.hash){
+      const el = document.querySelector(location.hash)
+      if(el){
+        el.scrollIntoView({behavior:"smooth"})
+      }
+    }
+  },[location])
+
+  return null
+
+}
+
 export default function App() {
   return (
     <FeedProvider>
+      <Scroll/>
       <AppContent />
     </FeedProvider>
   );

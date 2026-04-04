@@ -9,7 +9,6 @@
     display: flex;
     flex-direction: column;
     box-shadow: 2px 2px 3px black;
-    transition: all ease 300ms;
 }
 
 #FooterFeed img{
@@ -21,7 +20,7 @@
 
 
 .icon{
-    color: var(--CorDoBotao);
+    color: var(--CorBranca);
     margin-top: 10px;
     margin-right: 25px;
     width: 40px;
@@ -41,7 +40,7 @@
 
     .link{
         height: 100%;
-        color: var(--CorDoBotao);
+        color: var(--CorBranca);
         font-weight: 700;
         margin: auto 0;
         padding: 5px;
@@ -49,6 +48,7 @@
     }
 
     #FooterFeed:hover{
+        transition: all ease 100ms;
         width: 115px;
         padding: 0 10px;
         .link{

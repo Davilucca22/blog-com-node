@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import InfoUser from '../../components/infoUser/infoUser'
-import FeedPerfil from '../../components/feedNoPerfil/feedNoPerfil'
+import FeedDePosts from '../../components/feedDePosts/feedDePosts'
 import Menu from '../../components/menu/menu'
 import { IoArrowBackOutline } from "react-icons/io5";
 import { useParams } from 'react-router-dom';
@@ -141,7 +142,7 @@ export default function PerfilOutro(){
                     <div id="divSair">
                         <CgClose id="voltar" onClick={() => setZoomFT(false)}/>
                     </div>
-                    <FeedPerfil Posts={posts} name={nome} Foto={foto} />
+                    <FeedDePosts Posts={posts} name={nome} Foto={foto} />
                 </nav>
                 }    
             <div id="contVoltaFeed">
@@ -157,10 +158,11 @@ export default function PerfilOutro(){
             </div>
             <div id="Posts">
                 <h1>POSTAGENS</h1>
+                <hr></hr>
                 <div id="conteinerPosts">
                         {dados.posts &&
                             dados.posts?.slice().reverse().map((item,index) => (
-                                <a key={item._id} href={"#" + item._id}><img onClick={() => setZoomFT(true)} className="postUser" di={item._id} src={item.imgURL} alt="foto"></img></a>
+                                <Link key={item._id} to={"#post-" + item._id}><img onClick={() => setZoomFT(true)} className="postUser" id={"post-" + item._id} src={item.imgURL} alt="foto"></img></Link>
                             ))
                         }
                 </div>

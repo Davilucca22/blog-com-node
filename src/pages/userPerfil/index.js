@@ -2,9 +2,9 @@ import {React, useEffect, useState} from "react";
 import Menu from "../../components/menu/menu";
 import "./index.css"
 import { CgClose } from "react-icons/cg";
-import FeedPerfil from "../../components/feedNoPerfil/feedNoPerfil";
+import  FeedDePosts from "../../components/feedDePosts/feedDePosts"
 import InfoUser from "../../components/infoUser/infoUser";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 
 export default function PerfilUser() {
@@ -41,10 +41,9 @@ export default function PerfilUser() {
                 <nav id="conteinerZoom">
                     <div id="divSair">
                         <CgClose id="voltar" onClick={() => setZoomFT(false)}/> 
-                        <label for="voltar">POSTS</label>
                     </div> 
 
-                    <FeedPerfil Posts={posts} name={dados.name} Foto={dados.fotoPerfil} MeuID={dados._id} />
+                    <FeedDePosts Posts={posts} name={dados.name} Foto={dados.fotoPerfil} MeuID={dados._id} />
                 </nav>
                 }
 
@@ -56,7 +55,7 @@ export default function PerfilUser() {
                     <div id="conteinerPosts">
                             {dados.posts &&
                                 dados.posts?.slice().reverse().map((item,index) => (
-                                    <a key={item._id} href={"#" + item._id}><img onClick={() => setZoomFT(true)} className="postUser" di={item._id} src={item.imgURL} alt="foto"></img></a>
+                                    <Link key={item._id} to={"#post-" + item._id}><img onClick={() => setZoomFT(true)} className="postUser" di={item._id} src={item.imgURL} alt="foto"></img></Link>
                                 ))
                             }
                     </div>

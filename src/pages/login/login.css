@@ -24,7 +24,7 @@
 }
 
 #form label{
-    color: var(--CorSegundaria);
+    color: var(--CorTexto);
     font-weight: 500;
     display: block;
     width: 70%;
@@ -43,14 +43,13 @@
     border-radius: 10px;
     height: 50px;
     box-shadow: 1px 1px 3px gray;
-    cursor: pointer;
 }
 
 #conteinerSpan{
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: var(--CorSegundaria);
+    color: var(--CorTexto);
 }
 
 #esqueciSnh{
@@ -67,7 +66,7 @@
 #NovoUSer a{
     text-decoration: none;
     font-weight: 800;
-    color: var(--CorSegundaria);
+    color: var(--CorTexto);
 }
 
 #imgDesktopVersion{
@@ -92,7 +91,7 @@
     background-color: whitesmoke;
     width: 100%;
     padding-left: 10px;
-    color: var(--CorSegundaria);
+    color: var(--CorPreta);
     font-size: 14px;
     font-weight: lighter;
 }

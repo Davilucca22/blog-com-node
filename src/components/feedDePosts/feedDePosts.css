@@ -1,282 +1,210 @@
 .cabecalhoPost{
+    height: 60px;
     display: flex;
+    flex-direction: row;
     align-items: center;
-    margin: 10px;
-    cursor: pointer;
+    justify-content: space-between;
+    margin-top: 5px;
 }
 
-.cabecalhoPost span{
-    font-size: 15px;
-    font-weight: bold;
-    display: block;
-    margin-left: 10px;
-}
-
-.fotoP{
-    width: 40px;
-    height: 40px;
+.nomeEfoto img{
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    box-shadow: 2px 2px 2px black;
     object-fit: cover;
+    margin: 5px;
 }
 
 .nomeEfoto{
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
-    width: 330px;
+    cursor: pointer;
 }
 
-.treePoints svg{
+.tresPontos{
+    cursor: pointer;
     width: 20px;
     height: 20px;
 }
 
-.imgPost{
-    margin-bottom: 30px;
+.conteinerPost{
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    margin-bottom: 10px;
+}
+
+.comentarios{
+    display: flex;
+    flex-direction: column;
+    width: 375px;
 }
 
 .imgPost img{
-    border-radius: 0;
-    background-color: #001316;
-    width: 375px;    
-    max-height: 581px;
+    width: 100%;
+    height: 500px;
     object-fit: contain;
-    box-shadow: 2px 2px 3px black;
+    margin: 5px auto;
+    background-color: var(--FundoFoto);
+    box-shadow: 1px 1px 3px solid black;
 }
 
-.comentPost{
-    display: block;
-    margin-left: 10px; 
-    margin-top: 5px;
-    font-size: 18px;
+.tres{
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
-.imgPost svg{
-    width: 25px;
-    height: 25px;
+@keyframes pular{
+    0% {scale: 1.1;}
+    50% {scale: 1.2;}
+    100%{scale: 1;}
 }
 
 .like{
-    color: black;
-    transition: color 0.2s ease, transform 0.1s ease;
+    width: 25px;
+    height: 25px;
+    margin: 0 2px;
     cursor: pointer;
 }
 
 .like.ativo{
-    color: #8a1e1e;
-    animation: pop 0.2s ease;
+    color: red;
+    animation: pular forwards 500ms;
 }
 
-@keyframes pop{
-    50%{ transform: scale(1.3);}
+.numLikes{
+    margin: 0 2px;
 }
 
-.tres{
-    display: flex;
-    align-items: center;
-}
-
-.comentario{
-    margin-left: 10px;
-    color: var(--CorSegundaria);
-}
-
-
-.fotoDono{
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    margin-bottom: 20px ;
-}
-
-.user{
-    font-size: 15px;
-    font-weight: 600;
+.iconeComentario{
+    width: 25px;
+    height: 25px;
     color: var(--CorTexto);
+    margin-left: 5px;
     cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
-.usercoment{
-    line-break: anywhere;
-    font-weight: 400;
-    font-size: 14px;
-    color: var(--CorTexto);
+.iconeComentario:hover{
+    transform: scale(1.1);
 }
 
-.comentarios{
-    margin: 10px 0;
+.comentPost{
+    margin-left: 5px;
+    width: 100%;
 }
 
-.comentarios dt{
-    margin-left: 10px;
+.conteinerPublicacao{
+    position: relative;
 }
 
-.comentarios dd{
-    margin-left: 15px;
-    margin-bottom: 10px;
-}
-
-#fotoNoComent{
-    display: none;
-}
-
-.conteinerComent.desk{
-    position: fixed;
-    z-index: 1005;
+.conteinerComent{
+    position: absolute;
     background-color: var(--CorSegundaria);
-    width: 100vw;
-    max-width: 100%;
-    height: 90vh;
-    max-height: 90vh;
+    width: 100%;
+    height: 90%;
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 1010;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
+}
+
+#sairComent{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: var(--CorSegundaria);
+    width: 100%;
+    height: 40px;
+    padding: 5px 10px;
+    cursor: pointer;
+    flex-shrink: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#sairComent svg{
+    width: 24px;
+    height: 24px;
+}
+
+#feedComent{
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .contComentario{
     display: flex;
-    flex-direction: row;
-    align-items: start;
     gap: 10px;
-    margin-bottom: 10px;
-    padding: 5px 0;
 }
 
-#feedComent{
-    height: 80vh;
-    overflow: scroll;
+.fotoDonoComentario{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 1px 1px 3px black;
+    flex-shrink: 0;
+}
+
+.TextoComentario{
+    line-break: anywhere;
+    font-weight: 500;
+}
+
+.nomeDonoComentario{
+    color: var(--CorTitulos);
+    font-weight: 600;
 }
 
 #digitaComent{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 50px;
+    background-color: whitesmoke;
     display: flex;
-    justify-content: space-between;
-    height: 30px;
-    background-color: var(--CorDoBotao);
+    align-items: center;
+    flex-shrink: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 #digitaComent input{
-    width: 80%;
-    padding: 10px;
+    flex: 1;
+    height: 100%;
+    font-size: 12px;
     outline: none;
+    padding-left: 10px;
+    border: none;
+    background-color: white;
 }
 
 #digitaComent button{
-    width: 15%;
-    background-color:#001316;
-    color: var(--CorDoBotao);
-    font:bold 20px;
-}
-
-#sairComent{
-    width: 30px;
-    height: 20px;
-    margin-left: calc(100% - 30px);
-    background-color: transparent;
-    color: var(--CorDoBotao);
+    width: 50px;
+    height: 100%;
+    background-color: var(--CorPrimaria);
+    color: var(--CorTexto);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
 }
 
-@media (min-width:640px){
-
-    #conteinerFeed{
-        width: 100%;
-    }
-
-    .comentarios.desk{
-        box-shadow: 1px 1px 3px black;
-        border-radius: 15px;
-    }
-
-    .imgPost img{
-        max-width: 400px;
-        max-height: 600px;
-        object-fit: cover;
-        border-radius: 5px;
-    }
-
-    .conteinerPost.desk{
-        width: 100vw;
-        height: 100vh;
-        display: flex ;
-        align-items: center;
-        justify-content: center;
-        background-color: rgba(0,0,0,0.5);
-    }
-    
-    .cabecalhoPost.desk{
-        background-color: var(--CorSegundaria);
-        margin: 0;
-        padding: 15px ;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-        color: var(--CorDoBotao);
-    }
-
-    .conteinerPublicacao.desk{
-        width: 100%;
-        height: 600px;
-        display: flex;
-        flex-direction: row;
-    }
-
-    .conteinerComent.desk{
-        position: relative;
-        width: 400px;
-        height: 100%;
-        border-bottom-right-radius: 15px;
-    }
-
-    .imgPost.desk{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        height: 100%;
-        width: 50%;
-        background-color:var(--CorSegundaria);   
-        margin: 0;
-        padding-left: 10px;
-        border-bottom-left-radius: 15px;
-    }
-
-    .imgPost.desk img{
-        top: 0;
-        height: 93%;
-        width: 100%;
-        object-fit: scale-down;
-        margin: 0;
-    }
-
-    #feedComent{
-        height: 470px;
-    }
-
+@media (min-width:790px){
     #digitaComent{
-        height: 50px;
-    }
-
-    #sairComent{
-        width: 30px;
-        height: 30px;
-        margin-left: calc(100% - 30px);
-        background-color: transparent;
-        color: var(--CorDoBotao);
-        cursor: pointer;
-    }
-
-    #sairComent svg{
-        width: 20px;
-        height: 20px;
-    }
-
-    .comentPost.desk{
-        display: none;
-    }
-
-    .tres{
-        margin: 5px;
-        width: max-content;
+        position: relative;
     }
 }

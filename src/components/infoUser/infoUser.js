@@ -61,7 +61,7 @@ export default function InfoUser({ objDados, Arrseguindo }) {
                             </div>
                         </div>
                     }
-                    <div id="botoes"> 
+                    <div id="botoes">
                         <button onClick={() => {
                             setFechaModal(true)
                             setTimeout(() => {
@@ -71,11 +71,11 @@ export default function InfoUser({ objDados, Arrseguindo }) {
                         }}>
                             <GoX id="back" />
                         </button>
-                        <span><Link to="/editperfil">EDITAR PERFIL</Link></span>
-                        <span><Link to="/editainfo">INFORMAÇOES DO USUARIO</Link></span>
-                        <span><Link to="/editsenha">SENHA E SEGURANÇA</Link></span>
-                        <span onClick={() => setDarkTheme(!darkTheme)}>TEMA ESCURO  <input className={darkTheme ? "checkbox" : "check"} type="checkbox" checked={darkTheme} readOnly></input></span>
-                        <span onClick={() => setSair(true)}>SAIR</span>
+                        <span><Link className="rota" to="/editperfil">EDITAR PERFIL</Link></span>
+                        <span><Link className="rota" to="/editainfo">INFORMAÇOES DO USUARIO</Link></span>
+                        <span><Link className="rota" to="/editsenha">SENHA E SEGURANÇA</Link></span>
+                        <span className="rota" onClick={() => setDarkTheme(!darkTheme)}>TEMA ESCURO  <input className={darkTheme ? "checkbox" : "check"} type="checkbox" checked={darkTheme} readOnly></input></span>
+                        <span className="rota" onClick={() => setSair(true)}>SAIR</span>
                     </div>
                 </section>
             }

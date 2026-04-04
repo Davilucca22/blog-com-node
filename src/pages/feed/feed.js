@@ -80,6 +80,7 @@ export default function Feed() {
 
                 <div id="vazio" /* apenas preenche o espaço vazio atras do header no main, pro conteudo ficar pra baixo do header */></div>
                 <FeedDePosts  Posts={dados} name={nome} Foto={foto} MeuID={id} /> {/* conteiner do post */}
+                <div id="vazio" /* apenas preenche o espaço vazio atras do header no main, pro conteudo ficar pra baixo do header */></div>
             </main>
 
             <Menu />

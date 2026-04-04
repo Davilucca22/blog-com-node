@@ -1,6 +1,10 @@
+#conteinerPerfil{
+    height: 100dvh;
+}
+
 #Posts h1{
-    margin: 5px;
-    color: var(--CorSegundaria);
+    margin: 15px 5px;
+    color: var(--CorTexto);
     margin: 0 auto;
 }
 
@@ -49,37 +53,31 @@
 #divSair{
     position: fixed;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    background-color: var(--CorSegundaria);
-    width: 100%;
+    right: 0;
+    top: 0;
+    margin-right: 10px;
     height: 60px;
-    box-shadow: 1px 1px 3px black;
-    z-index: 1004;
-    color: var(--CorDoBotao);
+    z-index: 1000;
+    color: var(--CorTexto);
     font-size: 20px;
     font-weight: 700;
+    cursor: pointer;
 }
 
 #voltar{
     width: 40px;
     height: 40px;
     margin-left: 5px;
-    cursor: pointer;
 }
 
 hr{
     width: 90%;
-    border: 1px solid var(--CorSegundaria);
-    margin-bottom: 5px;
+    border: 1px solid var(--CorTexto);
+    margin: 5px;
 }
 
 @media (min-width:640px){
-
-    #conteinerZoom{
-        background-color: rgba(0, 0, 0, 0.6);
-        width: 100vw;
-    }
 
     hr{
         width: 80%;
@@ -92,6 +90,10 @@ hr{
     #conteinerPosts img{
         object-fit: cover;
         height: 350px;
+    }
+
+    #conteinerZoom{
+        align-content: center;
     }
 
     #divSair{

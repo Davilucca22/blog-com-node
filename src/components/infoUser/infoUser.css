@@ -1,7 +1,7 @@
 #infoUser {
     display: flex;
     flex-direction: row;
-}
+} 
 
 #contadores {
     display: flex;
@@ -13,7 +13,7 @@
 #contImg {
     margin-left: 10px;
     width: 100px;
-    height: 90px;
+    height: 100px;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 1px 1px 3px gray;
@@ -81,7 +81,7 @@
 #configVdesktop {
     display: none;
     background-color: var(--CorPrimaria);
-    color: var(--CorSegundaria);
+    color: var(--CorTexto);
     margin-left: 5px;
     cursor: pointer;
 }
@@ -119,10 +119,9 @@
     justify-content: center;
 }
 
-#botoes a{
-    color: var(--CorDoBotao);
+.rota{
+    color: var(--CorBranca);
     text-decoration: none;
-    
 }
 
 #back{
@@ -134,7 +133,6 @@
 
 #modal div span{
     background-color: var(--CorSegundaria);
-    color: var(--CorDoBotao);
     font-size: 15px;
     font-weight: 700;
     margin: 10px 20px;

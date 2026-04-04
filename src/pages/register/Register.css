@@ -46,7 +46,7 @@
 .inputForm{
     margin-bottom: 10px;
     background-color: whitesmoke;
-    color: var(--CorTexto);
+    color: var(--CorPreta);
     font-size: 14px;
     height: 20px;
     width: 60%;
@@ -64,7 +64,7 @@
 }
 
 #form1 label{
-    color: var(--CorSegundaria);
+    color: var(--CorTexto);
     font-weight: 500;
     display: block;
     width: 250px;
@@ -88,13 +88,13 @@
     margin-top: 10px;
     font-size: 16px;
     font-weight: 600;
-    color: var(--CorSegundaria);
+    color: var(--CorTexto);
 }
 
 #login a{
     text-decoration: none;
     font-weight: 800;
-    color: var(--CorSegundaria);
+    color: var(--CorTexto);
 }
 
 #divSenha{
@@ -113,7 +113,7 @@
     background-color: whitesmoke;
     width: 90%;
     padding: 0;
-    color: var(--CorTexto);
+    color: var(--CorPreta);
     font-size: 14px;
     font-weight: lighter;
 }

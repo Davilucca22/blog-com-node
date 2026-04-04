@@ -10,6 +10,10 @@
     --CorTexto: #312f2f;   
     --CorPrimaria:light-dark(#b8dbd9ff, #0e3533);
     --CorDoBotao:#f4f4f9ff;
+    --FundoFoto: rgb(2, 36, 34);
+    --CorTitulos: #00696d ;
+    --CorBranca: #ffffff ;
+    --CorPreta: #000e0c;
 }
 
 :root:has(.checkbox){
@@ -22,19 +26,27 @@ body.dark-theme {
     --CorSegundaria: #074e4e;
     --CorPrimaria: #0e3533;
     --CorDoBotao: #011e22;
-    --CorTexto: #fff;
+    --CorTexto: #ffffff;
+    --FundoFoto: rgb(9, 24, 23) ;
+    --CorTitulos: #a9f5ff ;
     background-color: var(--CorPrimaria);
     color: var(--CorTexto);
 }
 
 body.dark-theme main {
+    height: 100%;
     background-color: var(--CorPrimaria);
 }
 
 html{
     scroll-behavior: smooth;
-    height: max-content;
+    height: 100dvh;
     background-color: var(--CorPrimaria);
+}
+
+img{
+    width: 200px;
+    height: 200px;
 }
 
 *{
@@ -42,13 +54,11 @@ html{
     margin: 0;
     padding: 0;
     border: 0;
-    border: 1px solid red;
 }
 
 main{
     background-color: var(--CorPrimaria);
     height: 100%;
-    width: 100vw;
 }
 
 @media(min-width: 640px){
