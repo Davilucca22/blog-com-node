@@ -26,7 +26,7 @@ export default function Modal({publico, verModal, DevolveProPai}){
         }
     }
 
-    return(
+    return( 
         <aside >
         {Ver &&
             <nav className={mudaClasse ? "conteinerModalAtivo" :"conteinerModal"}>

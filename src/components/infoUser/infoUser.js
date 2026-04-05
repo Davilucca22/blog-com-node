@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import "./infoUser.css"
 
 export default function InfoUser({ objDados, Arrseguindo }) {
-
+ 
     const [dados, setDados] = useState(objDados || []) //dados do usuario no perfil
     const [meuId,setMeuId] = useState('') //id do dono da sessao
     const [arraySeguidores, setSeguidores] = useState(Arrseguindo || []) // seguidores do usuario

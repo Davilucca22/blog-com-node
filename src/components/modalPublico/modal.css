@@ -57,12 +57,18 @@
 }
 
 #divaleatoria{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  width: 90%;
+  margin: 5px 0;
+  display: flex;
+  flex-direction: row;
 }
 
+#sair{
+  width: 20px;
+  height: 20px;
+  margin-right: 100%;
+  cursor: pointer;    
+}
 #listaPublico{
     list-style: none;
     height: 450px;
@@ -88,11 +94,4 @@
 
 #tituloSeg{
     padding: 10px;
-}
-
-#sair{
-    width: 20px;
-    height: 20px;
-    margin-right: 100%;
-    cursor: pointer;    
 }
