@@ -1,13 +1,12 @@
 import { React, useState} from "react"
-import { replace, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify"
 import { IoEyeSharp  } from "react-icons/io5";
 
 import "./login.css"
+import { useLogin } from "../../Hooks/useLogin.js";
 
 export default function Login(){
 
-    const navigate = useNavigate()
+    const { login } = useLogin()
     const [email,setemail] = useState('')
     const [senha,setsenha] = useState('')
     const [showBTN,setShowBTN] = useState('')
@@ -17,26 +16,7 @@ export default function Login(){
 
         if(email && senha){
 
-            const res = await fetch(`${process.env.REACT_APP_URL_SITE}/login`,{
-                method:"POST",
-                headers:{ "Content-Type":"application/json" },
-                body:JSON.stringify({
-                    email:email.toUpperCase(),
-                    senha:senha
-                }) ,
-                credentials:'include'
-            })
-
-            if(!res.ok) throw new Error("erro ao enviar dados")
-
-            const data = await res.json()
-
-            if(data.msg){
-                toast.success(data.msg)
-                navigate('/feed',{replace:true}) //carrega o feed na mesma guia do login
-            }else{
-                toast.error(data.msgerr)
-            }
+            login({email:email.toUpperCase(), senha})
 
             setemail('')
             setsenha('')
