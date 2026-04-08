@@ -4,11 +4,12 @@ import "./Register.css"
 import { toast } from "react-toastify";
 import { IoEyeSharp  } from "react-icons/io5";
 import Loading from "../../components/loading/loading";
+import { useRegister } from "../../Hooks/useRegister";
 
 
 export default function Register() { 
  
-    const navigate = useNavigate()
+    const { Register } = useRegister()
     const [nome, setnome] = useState('')
     const [email, setemail] = useState('')
     const [senha, setsenha] = useState('')
@@ -72,38 +73,10 @@ export default function Register() {
                         if(foto instanceof File){
                             formData.append('foto',foto) //só envia a foto se tiver um arquivo real
                         }
-        
-                        //manda pro backend
-                        const res = await fetch(`${process.env.REACT_APP_URL_SITE}/register`, {
-                            method: 'POST', //metodo para mandar dados 
-                            body: formData, //manda todo o formulario pro back
-                            credentials:"include"
-                        })
-            
-                        if(!res.ok) throw new Error('Erro ao enviar dados'); //lança um novo erro caso o back retorne diferente de ok
-            
-                        const data = await res.json()
                         
-                        setmodal(true)
+                        Register({formData})
 
-                        if(data.msg === 'Email ja cadastrado'){
-
-                            setmodal(false)
-                            setemail('')
-                            toast.warning(data.msg)
-
-                        }else{
-
-                            setnome('')
-                            setemail('')
-                            setsenha('')
-                            setfoto(null)
-                            setNasc('')
-                            navigate('/feed',{replace:true})
-
-                        }
                     }
-
                 }
 
             }else{
