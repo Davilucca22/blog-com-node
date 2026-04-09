@@ -1,31 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import "./editInfo.css"
 import { IoArrowBackOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { FeedContext } from "../../context/FeedContext";
 
 export default function EditInfo() {
 
-    const [id,setid] = useState('')
-    const [email,setemail] = useState('')
-    const [dataNasc,setdataNasc] = useState('')
+    const {dadosSessao} = useContext(FeedContext)
+
+    const [email,setemail] = useState(dadosSessao.res?.email || '')
+    const [dataNasc,setdataNasc] = useState(dadosSessao.res?.dataNasc  || '')
     const [active,setactive] = useState(true)
     const [idade,setIdade] = useState('')
-
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL_SITE}/session`,{
-            method:"GET",
-            credentials:"include",
-            headers:{
-                'Content-Type':'application/json'
-            }
-        }).then(res => res.json())
-        .then(dados => {
-            setid(dados._id)
-            setemail(dados.email)
-            setdataNasc(dados.dataNasc)
-        })
-    },[])
 
     function formataData(e){
        let v = e.target.value.replace(/\D/g, "") //só numeros
@@ -88,7 +75,7 @@ export default function EditInfo() {
     return(
         <main id="conteinerInfo">
             <div id="backFeed">
-                <Link to={`/Perfil/${id}`}>
+                <Link to={`/Perfil/${dadosSessao.res?._id}`}>
                     <IoArrowBackOutline/>
                 </Link>
                 <span onClick={() => {

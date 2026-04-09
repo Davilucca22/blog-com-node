@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Menu from '../../components/menu/menu.js'
 import { FaSearch } from "react-icons/fa";
 import './buscaUser.css'
 import { Link } from "react-router-dom";
+import { FeedContext } from "../../context/FeedContext.js";
 
 export default function BuscaUser() {
-    const [meuId,setMeuId] = useState('')
+
+    const {dadosSessao} = useContext(FeedContext)
+
     const [nome,setName] = useState('')
-    const [resultado,setResultado] = useState(null) 
+    const [resultado,setResultado] = useState(null)
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_URL_SITE}/buscar?nome=${nome}`,{
@@ -20,14 +23,6 @@ export default function BuscaUser() {
         .then(dados => {
             setResultado(dados)
         })
-
-        fetch(`${process.env.REACT_APP_URL_SITE}/session`, {
-            method:'GET',
-            credentials:'include',
-            headers:{
-                'Content-Type':'application/json'
-            }
-        }).then(res => res.json()).then(lista => setMeuId(lista._id))
     },[nome])
 
     return(
@@ -43,7 +38,7 @@ export default function BuscaUser() {
             <div id="ContLista">
                 <ul id="listaUsers">
                     {nome &&
-                        resultado.filter(item => item._id !== meuId).map(user => (
+                        resultado.filter(item => item._id !== dadosSessao.res?._id).map(user => (
                             <li key={user._id} className="blocoPerfil">
                                 <Link className="LinkPerfil" to={`/details/${user._id}`}>
                                     <img className="FTuser" src={user.fotoPerfil} alt="foto user"></img>

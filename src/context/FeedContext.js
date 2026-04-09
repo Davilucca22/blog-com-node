@@ -4,6 +4,7 @@ export const FeedContext = createContext()
 
 export function FeedProvider({children}){
     const [dados, setDados] = useState([])
+    const [dadosSessao,setDadosSessao] = useState([])
     const [darkTheme, setDarkTheme] = useState(() => {
         // Carrega o tema do localStorage, padrão false
         const savedTheme = localStorage.getItem('darkTheme');
@@ -16,7 +17,7 @@ export function FeedProvider({children}){
     }, [darkTheme]);
 
     return(
-        <FeedContext.Provider value={{dados, setDados, darkTheme, setDarkTheme}}>
+        <FeedContext.Provider value={{dados, setDados, darkTheme, setDarkTheme, dadosSessao, setDadosSessao}}>
             {children}
         </FeedContext.Provider>
     )

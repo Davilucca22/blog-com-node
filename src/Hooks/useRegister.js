@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import FetchRegister from "../APIs/fechtRegister.js";
+import FetchRegister from "../APIs/fetchRegister.js";
 import { useNavigate } from "react-router-dom";
 
 export function useRegister(){

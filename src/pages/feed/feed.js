@@ -5,15 +5,23 @@ import { IoArrowBackOutline } from "react-icons/io5";
 import Menu from "../../components/menu/menu";
 import "./feed.css"
 import FeedDePosts from "../../components/feedDePosts/feedDePosts";
+import { USeSessao } from "../../Hooks/useSessao.js";
 
 export default function Feed() {
 
+    const {Sessao} = USeSessao()
+    const {dadosSessao} = useContext(FeedContext)
     const [nome, setNome] = useState('')
     const [foto, setFoto] = useState(null)
     const [id,setid] = useState('')
     const [modal, setmodal] = useState(false)
     const [sair, setSair] = useState(false)
     const {dados,setDados} = useContext(FeedContext)
+
+    useEffect(() => {
+        Sessao()
+    },[])
+
 
     useEffect(() => { //dados dos posts
         if(dados.length === 0){

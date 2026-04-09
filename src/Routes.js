@@ -10,7 +10,6 @@ import EditInfo from './pages/editInfo/editInfo.js'
 import EditSenha from './pages/editsenha/editsenha.js'
 import PerfilOutro from './pages/perfilOutro/perfilOutro.js'
 import BuscaUser from './pages/buscaUser/buscaUser.js'
-import MostraSeguidores from './pages/mostraSeguidores/mostraSeguidores.js'
 
 export default function AppRouter(){
     return(
@@ -25,7 +24,6 @@ export default function AppRouter(){
             <Route path='/editsenha' element={<EditSenha />} />
             <Route path='/details/:id' element={<PerfilOutro />} />
             <Route path='/busca' element={<BuscaUser />} />
-            <Route path='/seguidores/:id' element={<MostraSeguidores />} />
         </Routes>
     ) 
 }

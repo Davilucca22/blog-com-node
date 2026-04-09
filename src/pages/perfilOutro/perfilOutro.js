@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import InfoUser from '../../components/infoUser/infoUser'
 import FeedDePosts from '../../components/feedDePosts/feedDePosts'
@@ -7,6 +7,7 @@ import { IoArrowBackOutline } from "react-icons/io5";
 import { useParams } from 'react-router-dom';
 import './perfilOutro.css'
 import { CgClose } from "react-icons/cg";
+import { FeedContext } from '../../context/FeedContext'
 
 // pegar o id que foi mandado da outra tela e buscar no banco o usuario correspondente
 export default function PerfilOutro(){
@@ -16,27 +17,12 @@ export default function PerfilOutro(){
     const [posts,setposts] = useState([]) //posts do usuario clicado
     const [TempArray,setTempArray] = useState([]) //seguidores do usuario clicado
 
-    const [meuId,setMeuId] = useState('') //id do usuario da sessao
-    const [nome,setnome] = useState('') //nome do usuario da sessao
-    const [foto,setfoto] = useState('') //foto do usuario da sessao
+    const {dadosSessao} = useContext(FeedContext)
 
     const [zoomFT,setZoomFT] = useState(false) // define a montagem do componente de janela modal
     const [legendaSeg,setLegendaSeg] = useState('') //legenda que mostra se o usuario ja segue o outro
 
     useEffect(() => {
-
-        fetch(`${process.env.REACT_APP_URL_SITE}/session`,{ //dados da sessao
-            method:"GET",
-            credentials:"include",
-            headers:{
-                'Content-Type':'application/json'
-            }
-        }).then(res => res.json())
-        .then(item => { 
-            setnome(item.name)
-            setfoto(item.fotoPerfil)
-            setMeuId(item._id)
-        })
 
         fetch(`${process.env.REACT_APP_URL_SITE}/perfiloutro/${id}`,{ //busca dados do usuario clicado
             method:"GET",
@@ -63,20 +49,20 @@ export default function PerfilOutro(){
 
     useEffect(() => {
         
-    if(!meuId) return
+    if(!dadosSessao.res?._id) return
 
     const sera = TempArray.some( //checa se o id do usuario da sessao esta no array de seguidores do usuario clicado
-        item => item.IDseguidor === meuId
+        item => item.IDseguidor === dadosSessao.res?._id
     )
 
     setLegendaSeg(sera ? 'Seguindo...' : '+Seguir')
 
-    },[TempArray,meuId])
+    },[TempArray,dadosSessao.res?._id])
 
     function DeixarDeSeguir(){
         
         setTempArray(prev => 
-            prev.filter(item => item.IDseguidor !== meuId) //se eu ja seguir a pessoa, sou removido do array temporario
+            prev.filter(item => item.IDseguidor !== dadosSessao.res?._id) //se eu ja seguir a pessoa, sou removido do array temporario
         ) 
 
         setLegendaSeg("+ Seguir")
@@ -100,8 +86,8 @@ export default function PerfilOutro(){
     function Seguir(){
 
         setTempArray(prev => {
-            if(prev.some(item => item.IDseguidor === meuId)) return prev
-            return [...prev,{IDseguidor:meuId,nameSeguindo:nome,urlFoto:foto}] //impede de duplicar com clique duplo
+            if(prev.some(item => item.IDseguidor === dadosSessao.res?._id)) return prev
+            return [...prev,{IDseguidor:dadosSessao.res?._id,nameSeguindo:dadosSessao.res?.name,urlFoto:dadosSessao.res?.fotoPerfil}] //impede de duplicar com clique duplo
         })
         setLegendaSeg("Seguindo...")
 
@@ -125,7 +111,7 @@ export default function PerfilOutro(){
 
     function SegueOuNao() {
         const jaSegue = TempArray.some(
-            item  => item.IDseguidor === meuId
+            item  => item.IDseguidor === dadosSessao.res?._id
         )
 
         if(jaSegue){
@@ -142,7 +128,7 @@ export default function PerfilOutro(){
                     <div id="divSair">
                         <CgClose id="voltar" onClick={() => setZoomFT(false)}/>
                     </div>
-                    <FeedDePosts Posts={posts} name={nome} Foto={foto} />
+                    <FeedDePosts Posts={posts} name={dadosSessao.res?.name} Foto={dadosSessao.res?.foto} />
                 </nav>
                 }    
             <div id="contVoltaFeed">
