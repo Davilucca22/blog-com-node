@@ -9,7 +9,6 @@ export function USeSessao(){
     async function Sessao(){
         try{
             const res = await FetchSessao()
-            console.log('sessao:', res)
             setDadosSessao({res})
         }catch(e){
             console.log('erro:', e)

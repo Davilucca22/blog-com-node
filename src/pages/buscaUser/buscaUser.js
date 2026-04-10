@@ -4,25 +4,24 @@ import { FaSearch } from "react-icons/fa";
 import './buscaUser.css'
 import { Link } from "react-router-dom";
 import { FeedContext } from "../../context/FeedContext.js";
+import { useBusca } from "../../Hooks/useBusca.js";
 
 export default function BuscaUser() {
 
     const {dadosSessao} = useContext(FeedContext)
 
+    const {Busca} = useBusca()
     const [nome,setName] = useState('')
     const [resultado,setResultado] = useState(null)
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL_SITE}/buscar?nome=${nome}`,{
-            method:"GET",
-            credentials:"include",
-            headers:{
-                'Content-Type':'application/json'
+        async function chama() {
+            const res = await Busca({nome:nome})
+            if(res){
+                setResultado(res)
             }
-        }).then(res => res.json()) 
-        .then(dados => {
-            setResultado(dados)
-        })
+        }
+        chama()
     },[nome])
 
     return(
