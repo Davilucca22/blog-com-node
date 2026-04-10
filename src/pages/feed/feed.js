@@ -11,19 +11,15 @@ export default function Feed() {
 
     const {Sessao} = USeSessao()
     const {dadosSessao} = useContext(FeedContext)
-    const [nome, setNome] = useState('')
-    const [foto, setFoto] = useState(null)
-    const [id,setid] = useState('')
     const [modal, setmodal] = useState(false)
     const [sair, setSair] = useState(false)
     const {dados,setDados} = useContext(FeedContext)
 
-    useEffect(() => {
-        Sessao()
-    },[])
-
-
+    
     useEffect(() => { //dados dos posts
+
+        Sessao()
+
         if(dados.length === 0){
             fetch(`${process.env.REACT_APP_URL_SITE}/feed?page=1`, {
                 method: "GET",
@@ -34,16 +30,6 @@ export default function Feed() {
                 setDados(data)
             })
         }
-
-        fetch(`${process.env.REACT_APP_URL_SITE}/session`, { //dados apenas da sessao
-            method: "GET",
-            credentials: "include"
-        }).then(res => res.json())
-        .then(email => {
-            setNome(email.name)
-            setFoto(email.fotoPerfil)
-            setid(email._id)
-        })
 
     }, [])
 
@@ -76,8 +62,8 @@ export default function Feed() {
             }
             <header id="HeaderFeed">
                 <span>
-                    <img src={foto} alt="foto do usuario"></img>
-                    <p>{nome}</p>
+                    <img src={dadosSessao.res?.fotoPerfil} alt="foto do usuario"></img>
+                    <p>{dadosSessao.res?.name}</p>
                 </span>
                 <button id="BThamburguer" onClick={() => setmodal(true)}>
                     <FiMenu id="hamburguer" />
@@ -87,7 +73,7 @@ export default function Feed() {
             <main id="MainFeed">
 
                 <div id="vazio" /* apenas preenche o espaço vazio atras do header no main, pro conteudo ficar pra baixo do header */></div>
-                <FeedDePosts  Posts={dados} name={nome} Foto={foto} MeuID={id} /> {/* conteiner do post */}
+                <FeedDePosts  Posts={dados} name={dadosSessao.res?.name} Foto={dadosSessao.res?.fotoPerfil} MeuID={dadosSessao.res?._id} /> {/* conteiner do post */}
                 <div id="vazio" /* apenas preenche o espaço vazio atras do header no main, pro conteudo ficar pra baixo do header */></div>
             </main>
 
