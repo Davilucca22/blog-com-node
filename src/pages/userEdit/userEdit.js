@@ -1,17 +1,19 @@
-import react, { useEffect, useState } from "react";
+import react, { useContext, useEffect, useState } from "react";
 import { IoArrowBackOutline } from "react-icons/io5";
 import './userEdit.css'
 import { toast } from "react-toastify";
 import Loading from "../../components/loading/loading";
 import { Link } from "react-router-dom";
+import { FeedContext } from "../../context/FeedContext";
 
 export default function UserEdit(){
-    const [Id,SetId] = useState('')
-    const [nome,setnome] = useState('')
-    const [foto,setfoto] = useState('')
+
+    const {dadosSessao} = useContext(FeedContext)
+
+    const [nome,setnome] = useState(dadosSessao.res?.name || '')
+    const [previw,setpreview] = useState(dadosSessao.res?.fotoPerfil || '')
+    const [bio,setbio] = useState(dadosSessao.res?.biografia ||'')
     const [novafoto,setnovafoto] = useState(null)
-    const [previw,setpreview] = useState('')
-    const [bio,setbio] = useState('')
     const [load,setload] = useState(false)
 
     useEffect(() => {
@@ -19,20 +21,6 @@ export default function UserEdit(){
             previw && URL.revokeObjectURL(previw)
         }
     },[previw])
-
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL_SITE}/session`,{
-            method:"GET",
-            credentials:"include"
-        }).then(res => res.json())
-        .then(dados => {
-            SetId(dados._id)
-            setnome(dados.name)
-            setpreview(dados.fotoPerfil)
-            setfoto(dados.fotoPerfil)
-            setbio(dados.biografia)
-        })
-    },[])
 
     async function EnviaBack(e){
         e.preventDefault()
@@ -46,7 +34,7 @@ export default function UserEdit(){
             return
         }
         formadata.append("bio",bio)
-        formadata.append("foto",foto) //foto atual
+        formadata.append("foto",dadosSessao.res?.fotoPerfil) //foto atual
 
         if(novafoto){
             formadata.append("novafoto",novafoto) //se tiver uma nova foto, ela sera enviada para o banco de dados
@@ -77,7 +65,7 @@ export default function UserEdit(){
                <Loading /> //tela de load
             }
 
-            <div id="backtoFeed"><Link to={`/Perfil/${Id}`}><IoArrowBackOutline /></Link></div>
+            <div id="backtoFeed"><Link to={`/Perfil/${dadosSessao.res?._id}`}><IoArrowBackOutline /></Link></div>
             <form id="formularioUser" onSubmit={e => {
                 EnviaBack(e)
                 setload(true)
