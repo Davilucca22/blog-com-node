@@ -6,30 +6,23 @@ import Menu from "../../components/menu/menu";
 import "./feed.css"
 import FeedDePosts from "../../components/feedDePosts/feedDePosts";
 import { USeSessao } from "../../Hooks/useSessao.js";
+import UseFeed from "../../Hooks/useFeed.js";
 
 export default function Feed() {
 
     const {Sessao} = USeSessao()
+    const {Feed} = UseFeed()
+
     const {dadosSessao} = useContext(FeedContext)
+    const {dados} = useContext(FeedContext)
+
     const [modal, setmodal] = useState(false)
     const [sair, setSair] = useState(false)
-    const {dados,setDados} = useContext(FeedContext)
 
-    
-    useEffect(() => { //dados dos posts
+    useEffect(() => {
 
-        Sessao()
-
-        if(dados.length === 0){
-            fetch(`${process.env.REACT_APP_URL_SITE}/feed?page=1`, {
-                method: "GET",
-                credentials: "include"
-            })
-            .then(res => res.json())
-            .then(data => {
-                setDados(data)
-            })
-        }
+        Sessao() //pega dados do usuario da sessao
+        Feed() //feed do usuario
 
     }, [])
 
