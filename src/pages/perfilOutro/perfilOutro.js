@@ -1,17 +1,26 @@
 import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+
 import InfoUser from '../../components/infoUser/infoUser'
 import FeedDePosts from '../../components/feedDePosts/feedDePosts'
 import Menu from '../../components/menu/menu'
+
 import { IoArrowBackOutline } from "react-icons/io5";
 import { useParams } from 'react-router-dom';
-import './perfilOutro.css'
 import { CgClose } from "react-icons/cg";
+
+import './perfilOutro.css'
+
 import { FeedContext } from '../../context/FeedContext'
+
+import usePerfilOutro from '../../Hooks/usePerfilOutro' 
+import useFeedUser from '../../Hooks/useFeedUser'
 
 // pegar o id que foi mandado da outra tela e buscar no banco o usuario correspondente
 export default function PerfilOutro(){
 
+    const {OutroUSer} = usePerfilOutro()
+    const {FeedUser} = useFeedUser()
     const { id } = useParams() //id do usuario clicado
     const [dados,setDados] = useState([]) //dados do usuario clicado
     const [posts,setposts] = useState([]) //posts do usuario clicado
@@ -24,28 +33,21 @@ export default function PerfilOutro(){
 
     useEffect(() => {
 
-        fetch(`${process.env.REACT_APP_URL_SITE}/perfiloutro/${id}`,{ //busca dados do usuario clicado
-            method:"GET",
-            credentials:"include",
-            headers:{
-                'Content-Type':'application/json'
+        async function AtivaUse() {
+            const resp = await OutroUSer({id})
+            if(resp){
+                setDados(resp)
+                setTempArray(resp.seguidores)
             }
-        }).then(res => res.json())
-        .then(item => {
-            setDados(item) // todos os dados exceto login
-            setTempArray(item.seguidores) //seguidores do usuario clicado
-        })
-        
-        fetch(`${process.env.REACT_APP_URL_SITE}/feedUser/${id}`,{ //trata os posts do usuario clicado, retorna num formato mais dinamico
-            method:"GET",
-            credentials:"include",
-            headers:{
-                'Content-Type':'application/json'
+
+            const res = await FeedUser({id})
+            if(res){
+                setposts(res)
             }
-        }).then(res => res.json())
-        .then(lista => setposts(lista))
+        }
+        AtivaUse()
     
-    },[id]) // se der merda pode ser aqui
+    },[id])
 
     useEffect(() => {
         

@@ -20,10 +20,8 @@ export default function Feed() {
     const [sair, setSair] = useState(false)
 
     useEffect(() => {
-
         Sessao() //pega dados do usuario da sessao
         Feed() //feed do usuario
-
     }, [])
 
     return (
@@ -67,7 +65,7 @@ export default function Feed() {
 
                 <div id="vazio" /* apenas preenche o espaço vazio atras do header no main, pro conteudo ficar pra baixo do header */></div>
                 <FeedDePosts  Posts={dados} name={dadosSessao.res?.name} Foto={dadosSessao.res?.fotoPerfil} MeuID={dadosSessao.res?._id} /> {/* conteiner do post */}
-                <div id="vazio" /* apenas preenche o espaço vazio atras do header no main, pro conteudo ficar pra baixo do header */></div>
+                <div id="vazio" ></div>
             </main>
 
             <Menu />

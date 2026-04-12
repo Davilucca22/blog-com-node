@@ -16,7 +16,7 @@ export default function Login(){
 
         if(email && senha){
 
-            login({email:email.toUpperCase(), senha})
+            login({email:email, senha})
 
             setemail('')
             setsenha('')
