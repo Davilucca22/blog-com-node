@@ -1,18 +1,24 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./editInfo.css"
 import { IoArrowBackOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { FeedContext } from "../../context/FeedContext";
+import useEditInfo from "../../Hooks/useEdtaInfo";
 
 export default function EditInfo() {
 
     const {dadosSessao} = useContext(FeedContext)
 
+    const {EditaInfo} = useEditInfo()
     const [email,setemail] = useState(dadosSessao.res?.email || '')
     const [dataNasc,setdataNasc] = useState(dadosSessao.res?.dataNasc  || '')
     const [active,setactive] = useState(true)
     const [idade,setIdade] = useState('')
+
+    useEffect(() => {
+        CalcIdade(dataNasc) //calcula a idade assim que recebe a data de nascimento do BD
+    },[dataNasc])
 
     function formataData(e){
        let v = e.target.value.replace(/\D/g, "") //só numeros
@@ -38,34 +44,15 @@ export default function EditInfo() {
 
         let mes = hoje.getMonth() - nascimento.getMonth()
         if(mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) tempodevida--
-
         setIdade(tempodevida)
     }
 
     async function EnviaBack(e){
         e.preventDefault()
 
-        if(idade > 18){
-            const env = await fetch(`${process.env.REACT_APP_URL_SITE}/editinfo`,{
-                method:"PUT",
-                credentials:"include",
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify({
-                    email,
-                    dataNasc
-                })
-            })
-
-            const resp = await env.json()
-            if(resp.msg !== ''){
-                toast.success(resp.msg)
-                setactive(true)
-            }else{
-                toast.error(resp.erro)
-            }
-
+        if(idade >= 18){
+            EditaInfo({dataNasc,email})
+            setactive(true)
         }else{
             toast.warning('Voce precisa ser maior de idade para usar o app')
             return
@@ -86,7 +73,9 @@ export default function EditInfo() {
                     }
                 }}>EDITAR</span>    
             </div>
-            <form onSubmit={e => EnviaBack(e)} id="conteinerForm">
+            <form onSubmit={e => {
+                EnviaBack(e)
+                }} id="conteinerForm">
                 <label for="">DATA DE NASCIMENTO<input type="text" placeholder="DATA DE NASCIMENTO..." value={dataNasc} onChange={e => formataData(e)} disabled={active}></input></label>
                 <label for="">E-MAIL<input type="email" placeholder="SEU MELHOR EMAIL" value={email} onChange={e => setemail(e.target.value)} disabled={active}></input></label>
                 <button type="submit">SALVAR</button>

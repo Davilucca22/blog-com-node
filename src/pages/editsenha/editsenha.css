@@ -1,3 +1,7 @@
+#conteinerSenha{
+    height: 100dvh;
+}
+
 #formSenha{
     display: flex;
     flex-direction: column;

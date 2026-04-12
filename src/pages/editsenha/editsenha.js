@@ -5,9 +5,13 @@ import "./editsenha.css"
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { FeedContext } from "../../context/FeedContext";
+import useEditSenha from "../../Hooks/useSenha";
 
 export default function EditSenha(){
+    
+    
     const {dadosSessao} = useContext(FeedContext)
+    const {AttSenha} = useEditSenha()
     const [showA,setshowA] = useState(false)
     const [showB,setshowB] = useState(false)
     const [senhaAtual,setAtual] = useState('')
@@ -22,30 +26,12 @@ export default function EditSenha(){
             return
 
         }else{
-            const env = await fetch(`${process.env.REACT_APP_URL_SITE}/editsenha`,{
-                method:"PUT",
-                credentials:"include",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                body:JSON.stringify({
-                    senhaAtual,
-                    senhaNova
-                })
-            })
 
+            AttSenha({senhaAtual,senhaNova})
             setAtual('')
             setNova('')
-            
-            const resp = await env.json() //puxa a resposta do banco
 
-            if(resp.msg !== ''){
-                toast.success(resp.msg)
-            }else{
-                toast.warning(resp.erro)
-            }
         }
-
     }
 
     return(
