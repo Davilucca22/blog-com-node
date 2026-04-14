@@ -6,6 +6,7 @@ import  FeedDePosts from "../../components/feedDePosts/feedDePosts"
 import InfoUser from "../../components/infoUser/infoUser";
 import { Link, useParams } from "react-router-dom";
 import { FeedContext } from "../../context/FeedContext";
+import useFeedUser from "../../Hooks/useFeedUser";
 
 
 export default function PerfilUser() {
@@ -16,15 +17,18 @@ export default function PerfilUser() {
     const [posts, setPosts] = useState([])
     const [zoomFT,setZoomFT] = useState(false)
 
+    const {FeedUser} = useFeedUser()
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL_SITE}/feedUser/${id}`, {
-            method:"GET",
-            credentials:"include"
-        }).then(res => res.json())
-        .then(infos => {
-            setPosts(infos)
-        })
+        async function Ativause(){
+            const res = await FeedUser({id})
+            if(res){
+                setPosts(res)
+            }
+        }
+
+        Ativause()
+
     },[id])
 
     return (

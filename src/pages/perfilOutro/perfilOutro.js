@@ -15,12 +15,15 @@ import { FeedContext } from '../../context/FeedContext'
 
 import usePerfilOutro from '../../Hooks/usePerfilOutro' 
 import useFeedUser from '../../Hooks/useFeedUser'
+import useDeixaSeguir from '../../Hooks/useDeixaSeguir'
 
 // pegar o id que foi mandado da outra tela e buscar no banco o usuario correspondente
 export default function PerfilOutro(){
 
     const {OutroUSer} = usePerfilOutro()
     const {FeedUser} = useFeedUser()
+    const {DeixaSeguir} = useDeixaSeguir()
+
     const { id } = useParams() //id do usuario clicado
     const [dados,setDados] = useState([]) //dados do usuario clicado
     const [posts,setposts] = useState([]) //posts do usuario clicado
@@ -34,17 +37,19 @@ export default function PerfilOutro(){
     useEffect(() => {
 
         async function AtivaUse() {
-            const resp = await OutroUSer({id})
+
+            const resp = await OutroUSer({id}) //busca os dados do usuario baseado no id dele
             if(resp){
                 setDados(resp)
                 setTempArray(resp.seguidores)
             }
 
-            const res = await FeedUser({id})
+            const res = await FeedUser({id}) //puxa os posts do usuario
             if(res){
                 setposts(res)
             }
         }
+
         AtivaUse()
     
     },[id])
@@ -68,21 +73,8 @@ export default function PerfilOutro(){
         ) 
 
         setLegendaSeg("+ Seguir")
+        DeixaSeguir({id})
         
-        try{
-            fetch(`${process.env.REACT_APP_URL_SITE}/DeixarDeSeguir`,{ //deixa de seguir no banco
-                method:"PUT",
-                credentials:"include",
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify({
-                    IdOutro:id                   
-                })
-            })
-        }catch(e){
-            console.log(e)
-        }            
     }
 
     function Seguir(){

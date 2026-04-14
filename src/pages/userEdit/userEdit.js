@@ -42,9 +42,9 @@ export default function UserEdit(){
 
         try{
             const env = await fetch(`${process.env.REACT_APP_URL_SITE}/editperfil`,{
-            method:"PUT",
-                body:formadata,
-                credentials:"include"
+                method:"PUT",
+                credentials:"include",
+                body:formadata
             })
 
             setload(false) //esconde a janela de loading
