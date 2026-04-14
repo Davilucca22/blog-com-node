@@ -16,13 +16,14 @@ import { FeedContext } from '../../context/FeedContext'
 import usePerfilOutro from '../../Hooks/usePerfilOutro' 
 import useFeedUser from '../../Hooks/useFeedUser'
 import useDeixaSeguir from '../../Hooks/useDeixaSeguir'
+import useSeguir from '../../Hooks/useSeguir'
 
-// pegar o id que foi mandado da outra tela e buscar no banco o usuario correspondente
 export default function PerfilOutro(){
 
     const {OutroUSer} = usePerfilOutro()
     const {FeedUser} = useFeedUser()
     const {DeixaSeguir} = useDeixaSeguir()
+    const {SeguirUser} = useSeguir()
 
     const { id } = useParams() //id do usuario clicado
     const [dados,setDados] = useState([]) //dados do usuario clicado
@@ -74,7 +75,6 @@ export default function PerfilOutro(){
 
         setLegendaSeg("+ Seguir")
         DeixaSeguir({id})
-        
     }
 
     function Seguir(){
@@ -85,22 +85,11 @@ export default function PerfilOutro(){
         })
         setLegendaSeg("Seguindo...")
 
-        try{
-            fetch(`${process.env.REACT_APP_URL_SITE}/Seguir`,{
-                method:"PUT",
-                credentials:"include",
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify({
-                    IdOutro:id,
-                    nameSeguindo:dados.name,
-                    urlFoto:dados.fotoPerfil
-                })
-            })
-        }catch(e){
-            console.log(e)
-        }
+        const nomeUser = dados.name
+        const FotoUser = dados.fotoPerfil
+
+        SeguirUser({id,nomeUser,FotoUser})
+
     }
 
     function SegueOuNao() {
