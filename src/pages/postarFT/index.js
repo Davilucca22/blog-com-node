@@ -5,6 +5,7 @@ import "./index.css"
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loading from "../../components/loading/loading";
+import usePostar from "../../Hooks/usePostar";
 
 export default function PostaFT(){
 
@@ -12,6 +13,8 @@ export default function PostaFT(){
     const [coment,setcoment] = useState('')
     const [preview,setPreview] = useState(null)
     const [load,setload] = useState(false)
+
+    const {Postar} = usePostar()
 
         useEffect(() => {
             return () => preview && URL.revokeObjectURL(preview) //limpa a URL gerada
@@ -29,13 +32,8 @@ export default function PostaFT(){
                 if(img instanceof File){ //se img for do tipo file 
 
                     formadata.append("img",img)
-                    const env = await fetch(`${process.env.REACT_APP_URL_SITE}/postar`,{
-                        method:"PUT", //PUT por que vai atualizar o array de posts
-                        body: formadata,
-                        credentials:"include"
-                    })
 
-                    const data = await env.json()
+                    const data = await Postar({formadata})
 
                     if(data){
                         setImg(null)
@@ -45,7 +43,6 @@ export default function PostaFT(){
                         setload(false)  //esconde o load
                     }
                     
-                if(!env.ok) throw new Error("erro ao enviar dados")
 
                 }else{
                     toast.error("envie uma imagem")
