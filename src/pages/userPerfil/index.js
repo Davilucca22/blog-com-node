@@ -33,7 +33,7 @@ export default function PerfilUser() {
 
     return (
         <div id="conteinerPerfil">
-            <main>
+            <main id="mainPerfil">
 
                 {zoomFT &&
                 <nav id="conteinerZoom">
