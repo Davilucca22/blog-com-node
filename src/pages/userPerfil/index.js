@@ -6,7 +6,8 @@ import  FeedDePosts from "../../components/feedDePosts/feedDePosts"
 import InfoUser from "../../components/infoUser/infoUser";
 import { Link, useParams } from "react-router-dom";
 import { FeedContext } from "../../context/FeedContext";
-import useFeedUser from "../../Hooks/useFeedUser";
+import { useFeedUser } from "../../Hooks/useFeedUser";
+import { useSessao } from "../../Hooks/useSessao";
 
 
 export default function PerfilUser() {
@@ -17,10 +18,16 @@ export default function PerfilUser() {
     const [posts, setPosts] = useState([])
     const [zoomFT,setZoomFT] = useState(false)
 
+    const {Sessao} = useSessao()
     const {FeedUser} = useFeedUser()
 
     useEffect(() => {
-        async function Ativause(){
+        Sessao() //pega dados da sessao do usuario e passa para o contexto
+    },[])
+
+    useEffect(() => {
+
+        async function Ativause(){ // funçao apenas para pegar a resposta da requisiçao
             const res = await FeedUser({id})
             if(res){
                 setPosts(res)
@@ -41,7 +48,7 @@ export default function PerfilUser() {
                         <CgClose id="voltar" onClick={() => setZoomFT(false)}/> 
                     </div> 
 
-                    <FeedDePosts Posts={posts} name={dadosSessao.res?.name} Foto={dadosSessao.res?.fotoPerfil} MeuID={dadosSessao.res?._id} />
+                    <FeedDePosts Posts={posts}/>
                 </nav>
                 }
 

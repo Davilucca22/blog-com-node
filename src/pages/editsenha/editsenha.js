@@ -5,13 +5,13 @@ import "./editsenha.css"
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { FeedContext } from "../../context/FeedContext";
-import useEditSenha from "../../Hooks/useSenha";
+import { useSenha } from "../../Hooks/useSenha";
 
 export default function EditSenha(){
     
     
     const {dadosSessao} = useContext(FeedContext)
-    const {AttSenha} = useEditSenha()
+    const {AttSenha} = useSenha()
     const [showA,setshowA] = useState(false)
     const [showB,setshowB] = useState(false)
     const [senhaAtual,setAtual] = useState('')

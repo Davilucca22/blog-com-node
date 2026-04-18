@@ -1,7 +1,7 @@
 import { toast } from "react-toastify"
 import FetchDeixaSeguir from "../APIs/fetchDeixaSeguir"
 
-export default function useDeixaSeguir(){
+export function useDeixaSeguir(){
     async function DeixaSeguir({id}){
         try{
             const res = await FetchDeixaSeguir({id})

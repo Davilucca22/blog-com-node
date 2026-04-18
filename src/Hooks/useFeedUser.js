@@ -1,6 +1,6 @@
 import FetchFeedUser from "../APIs/fetchFeedUser";
 
-export default function useFeedUser(){
+export function useFeedUser(){
     async function FeedUser({id}){
         try{
 

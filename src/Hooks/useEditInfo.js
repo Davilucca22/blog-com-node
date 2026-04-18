@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import FetchEditInfo from "../APIs/fetchEditaInfo";
 
-export default function useEditInfo(){
+export function useEditInfo(){
     async function EditaInfo({dataNasc, email}){
         const res = await FetchEditInfo({dataNasc, email})
 

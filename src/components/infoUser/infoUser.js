@@ -9,16 +9,20 @@ import "./infoUser.css"
 
 export default function InfoUser({ objDados, Arrseguindo }) {
  
+    const { darkTheme, setDarkTheme } = useContext(FeedContext)
+    const {dadosSessao} = useContext(FeedContext)
+
+    const [meuId] = useState(dadosSessao?.res._id || '') //id do dono da sessao
+
     const [dados, setDados] = useState(objDados || []) //dados do usuario no perfil
-    const [meuId,setMeuId] = useState('') //id do dono da sessao
     const [arraySeguidores, setSeguidores] = useState(Arrseguindo || []) // seguidores do usuario
+    const [publico,setPublico] = useState([])
+
     const [modal, setmodal] = useState(false) // controla a janela modal das opçoes
     const [fechaModal,setFechaModal] = useState(false) // fecha o menu de opçoes
     const [sair, setSair] = useState(false) //cancela o logoff
     const [SairAtivo,setSairAtivo] = useState(false) //controla a classe do modal confirma sair
     const [modalseg,setModalSeg] = useState(false) //controla a janela modal do conteiner de seguidores/seguindo
-    const [publico,setPublico] = useState([])
-    const { darkTheme, setDarkTheme } = useContext(FeedContext)
 
     function RespostaDoMenu(resp){ // define modalseg como false
         return setModalSeg(resp)
@@ -28,17 +32,6 @@ export default function InfoUser({ objDados, Arrseguindo }) {
         setDados(objDados || [])
         setSeguidores(Arrseguindo || [])
     }, [objDados, Arrseguindo])
-
-    useEffect(() => { // pega o id do usuario para fazer a comparaçao com o id dos dados, se for diferente, esconde o botao de opçoes.
-        fetch(`${process.env.REACT_APP_URL_SITE}/session`,{
-            method:"GET",
-            credentials:"include",
-            headers:{
-                "Content-Type":"application/json"
-            }
-        }).then(res => res.json())
-        .then(res => setMeuId(res._id))
-    },[])
 
     return (
         <div> 

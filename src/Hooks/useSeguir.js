@@ -1,7 +1,7 @@
 import { toast } from "react-toastify"
 import FetchSeguir from "../APIs/fetchSeguir"
 
-export default function useSeguir(){
+export function useSeguir(){
     async function SeguirUser({id,nome,fotoPerfil}){
         try{
             await FetchSeguir({id,nome,fotoPerfil})

@@ -1,7 +1,7 @@
 import { toast } from "react-toastify"
 import FetchPostar from "../APIs/fetchPostar"
 
-export default function usePostar(){
+export function usePostar(){
     async function Postar({formadata}){
         try{
             const res = await FetchPostar({formadata})

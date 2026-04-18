@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { FeedContext } from "../context/FeedContext.js";
 import FetchSessao from "../APIs/fetchSessao.js"
 
-export function USeSessao(){
+export function useSessao(){
 
     const {setDadosSessao} = useContext(FeedContext)
 

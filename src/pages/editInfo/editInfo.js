@@ -4,7 +4,7 @@ import { IoArrowBackOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { FeedContext } from "../../context/FeedContext";
-import useEditInfo from "../../Hooks/useEdtaInfo";
+import { useEditInfo } from "../../Hooks/useEditInfo";
 
 export default function EditInfo() {
 

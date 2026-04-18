@@ -3,8 +3,8 @@ import { createContext, useState, useEffect } from "react";
 export const FeedContext = createContext()
 
 export function FeedProvider({children}){
-    const [dados, setDados] = useState([])
-    const [dadosSessao,setDadosSessao] = useState([])
+    const [dados, setDados] = useState([]) //dados passados em useFeed.js
+    const [dadosSessao,setDadosSessao] = useState({}) // <- Alterado de [] para {}
     const [darkTheme, setDarkTheme] = useState(() => {
         // Carrega o tema do localStorage, padrão false
         const savedTheme = localStorage.getItem('darkTheme');

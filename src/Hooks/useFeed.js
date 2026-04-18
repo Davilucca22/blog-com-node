@@ -2,7 +2,7 @@ import { useContext } from "react";
 import FetchFeed from "../APIs/fetchFeed";
 import { FeedContext } from "../context/FeedContext";
 
-export default function UseFeed(){
+export function useFeed(){
 
     const {setDados} = useContext(FeedContext)
 

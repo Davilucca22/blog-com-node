@@ -13,10 +13,10 @@ import './perfilOutro.css'
 
 import { FeedContext } from '../../context/FeedContext'
 
-import usePerfilOutro from '../../Hooks/usePerfilOutro' 
-import useFeedUser from '../../Hooks/useFeedUser'
-import useDeixaSeguir from '../../Hooks/useDeixaSeguir'
-import useSeguir from '../../Hooks/useSeguir'
+import { usePerfilOutro } from '../../Hooks/usePerfilOutro' 
+import { useFeedUser } from '../../Hooks/useFeedUser'
+import { useDeixaSeguir } from '../../Hooks/useDeixaSeguir'
+import { useSeguir } from '../../Hooks/useSeguir'
 
 export default function PerfilOutro(){
 
@@ -50,7 +50,6 @@ export default function PerfilOutro(){
                 setposts(res)
             }
         }
-
         AtivaUse()
     
     },[id])

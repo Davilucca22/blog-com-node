@@ -1,67 +1,75 @@
-import React, { useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 import './feedDePosts.css'
+
 import { IoIosHeart } from "react-icons/io";
 import { FaRegComment } from "react-icons/fa";
 import { CgMoreVerticalAlt } from "react-icons/cg";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
-import { toast } from "react-toastify";
+
+import { FeedContext } from "../../context/FeedContext";
+import { useAttDados } from "../../Hooks/useAttDados";
+import { useCurtir } from "../../Hooks/useCurtir";
+import { useComentario } from "../../Hooks/useComentario";
 import DeletaPost from "../DeletaPost/Deleta";
 
-export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
-
+export default function FeedDePosts({ Posts }) {
+    
+    const {dadosSessao} = useContext(FeedContext)
+    const {AttDados} = useAttDados()
+    const {Curtida} = useCurtir()
+    const {Comentar} = useComentario()
     const navigate = useNavigate()
-    const [dados, setDados] = useState(Posts || [])
+    
+    const [postagens, setPostagens] = useState(Posts || [])
+    const postagenRef = useRef(Posts || [])
+
     const [verComent, setverComent] = useState('')
     const [textComent, setTextComent] = useState('')
-    const [nome, setNome] = useState(name || '')
-    const [foto, setFoto] = useState(Foto || '')
-    const [ID, setID] = useState(MeuID || '')
-    const [Vdesktop, setVdesktop] = useState(false)
     const [del,setDel] = useState('')
 
-    useEffect(() => {
-        setDados(Posts || [])
-        setID(MeuID || '')
-        setNome(name || '')
-        setFoto(Foto || '')
-    }, [Posts, name, Foto, MeuID])
+    const [nome, setNome] = useState(dadosSessao.res?.name || '')
+    const [foto, setFoto] = useState(dadosSessao.res?.fotoPerfil || '')
+    const [ID, setID] = useState(dadosSessao.res?._id || '')
 
+    const [Vdesktop, setVdesktop] = useState(false)
 
     useEffect(() => {
-        if (dados.length > 0) {
-            const interval = setInterval(() => {//retorna os posts do feed atualizados a cada 5 segundos
-                fetch(`${process.env.REACT_APP_URL_SITE}/attdados`, {
-                    method: "PUT",
-                    credentials: "include",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(res => res.json())
-                    .then(resp => {
-                        setDados(resp)
-                    })
-            }, 5000)
+        setNome(dadosSessao.res?.name || '')
+        setFoto(dadosSessao.res?.fotoPerfil || '')
+        setID(dadosSessao.res?._id || '')
+    }, [dadosSessao])
 
-            return () => clearInterval(interval)
-        }
-    }, [dados])
+    useEffect(() => {
+        setPostagens(Posts || [])
+        postagenRef.current = Posts || []
+    }, [Posts])
+
+    useEffect(() => {
+        postagenRef.current = postagens
+    }, [postagens])
+
+    useEffect(() => {
+
+        const interval = setInterval(async () => {
+            if (postagenRef.current.length === 0) return
+            
+            const res = await AttDados({ postagens: postagenRef.current }) //atualiza comentarios a cada 8 segundos
+            if (Array.isArray(res)) {
+                setPostagens(res)
+            }
+        }, 8000)
+
+        return () => clearInterval(interval)
+    }, [])
 
     function curtir(id) {
 
-        fetch(`${process.env.REACT_APP_URL_SITE}/curtida`, {
-            method: "PUT",
-            credentials: "include",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                PostID: id,
-                UserID: ID
-            })
-        }).then(res => console.log(res.json().msg))
+        Curtida({PostID:id,UserID:ID}) // envia a curtida pro Banco de  Dados
 
-        setDados(prev => { //atualiza a curtida
+        setPostagens(prev => { //atualiza a curtida visualmente
             return prev.map(item => {
                 if (item.post._id === id) {
 
@@ -87,23 +95,11 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
         try {
             if(textComent !== ''){
 
-                fetch(`${process.env.REACT_APP_URL_SITE}/comentario`, { //atualiza comentario no back
-                    method: "PUT",
-                    credentials: "include",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        IDpost: id,
-                        nome: nome,
-                        foto: foto,
-                        comentario: textComent
-                    })
-                })
+                Comentar({IDpost:id,nome:nome,foto:foto,comentario:textComent}) //manda o comentario pro backend
                 
                 setTextComent('')
                 
-                setDados(prev => { //atualiza comentario no front
+                setPostagens(prev => { //atualiza comentario visualmente
                     return prev.map(item => {
                         if (item.post._id === id)
                             return {
@@ -145,7 +141,7 @@ export default function FeedDePosts({ Posts, name, Foto, MeuID }) {
 
     return (
         <div>
-            {dados.map((val, index) => (
+            {postagens.map((val, index) => (
                 <section key={val.post._id} className={Vdesktop ? "conteinerPost desk" :"conteinerPost"} id={`post-${index}`} >
                     {del.length > 0 &&
                         <DeletaPost postID={del} retorna={ZeraDel} />

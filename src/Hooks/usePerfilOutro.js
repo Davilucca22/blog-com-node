@@ -1,6 +1,6 @@
 import FetchOutroUser from "../APIs/fetchPerfilOutro";
 
-export default function usePerfilOutro(){
+export function usePerfilOutro(){
     
     async function OutroUSer({id}){
         try{

@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import FetchSenha from "../APIs/fetchSenha";
 
-export default function useEditSenha(){
+export function useSenha(){
 
     async function AttSenha({senhaAtual,senhaNova}){
         try{

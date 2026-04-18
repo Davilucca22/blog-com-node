@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import Loading from "../../components/loading/loading";
 import { Link } from "react-router-dom";
 import { FeedContext } from "../../context/FeedContext";
-import useEdit from "../../Hooks/useEdit";
+import { useEdit } from "../../Hooks/useEdit";
 
 export default function UserEdit(){
 

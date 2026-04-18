@@ -1,7 +1,7 @@
 import { toast } from "react-toastify"
 import FetchEdit from "../APIs/fetchEdit.js"
 
-export default function useEdit(){
+export function useEdit(){
     async function Editar({formdata}){
         try{
             const resp = await FetchEdit({formdata})

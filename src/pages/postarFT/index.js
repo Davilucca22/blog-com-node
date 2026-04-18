@@ -5,7 +5,7 @@ import "./index.css"
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loading from "../../components/loading/loading";
-import usePostar from "../../Hooks/usePostar";
+import { usePostar } from "../../Hooks/usePostar";
 
 export default function PostaFT(){
 
