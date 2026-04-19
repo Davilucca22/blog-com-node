@@ -1,9 +1,11 @@
+import { getAuthHeaders } from './auth.js';
+
 export default async function FetchDeixaSeguir({id}){
     const res = await fetch(`${process.env.REACT_APP_URL_SITE}/DeixarDeSeguir`,{
         method:"PUT",
-        credentials:"include",
         headers:{
-            'Content-Type':'application/json'
+            'Content-Type':'application/json',
+            ...getAuthHeaders()
         },
         body:JSON.stringify({
             IdOutro:id

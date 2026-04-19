@@ -1,9 +1,11 @@
+import { getAuthHeaders } from './auth.js';
+
 export async function FetchComentario({IDpost,nome,foto,comentario}){
     const res = await fetch(`${process.env.REACT_APP_URL_SITE}/comentario`,{
         method:"PUT",
-        credentials:"include",
         headers:{
-            'Content-Type':'application/json'
+            'Content-Type':'application/json',
+            ...getAuthHeaders()
         },
         body:JSON.stringify({
             IDpost,

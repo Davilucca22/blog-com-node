@@ -1,14 +1,16 @@
+import { getAuthHeaders } from './auth.js';
+
 export default async function FetchSessao(){
 
-    const el = await fetch(`${process.env.REACT_APP_URL_SITE}/session`,{
+    const res = await fetch(`${process.env.REACT_APP_URL_SITE}/session`,{
         method:"GET",
-        credentials:"include",
         headers:{
-            "Content-Type":"application/json"
+            "Content-Type":"application/json",
+            ...getAuthHeaders()
         }
     })
 
-    if(!el.ok) throw new Error("Erro ao buscar dados da sessao")
+    if(!res.ok) throw new Error("Erro ao buscar dados da sessao")
 
-    return el.json()
+    return res.json()
 }

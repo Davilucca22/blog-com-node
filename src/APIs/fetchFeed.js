@@ -1,10 +1,12 @@
+import { getAuthHeaders } from './auth.js';
+
 export default async function FetchFeed(){
 
     const res = await fetch(`${process.env.REACT_APP_URL_SITE}/feed?page=1`,{
         method:"GET",
-        credentials:"include",
         headers:{
-            'content-Type':'application/json'
+            'Content-Type':'application/json',
+            ...getAuthHeaders()
         }
     })
 

@@ -1,7 +1,8 @@
 import { createContext, useState, useEffect } from "react";
+import { logout as authLogout } from "../APIs/auth";
 
 export const FeedContext = createContext()
-
+ 
 export function FeedProvider({children}){
     const [dados, setDados] = useState([]) //dados passados em useFeed.js
     const [dadosSessao,setDadosSessao] = useState({}) // <- Alterado de [] para {}
@@ -16,8 +17,15 @@ export function FeedProvider({children}){
         localStorage.setItem('darkTheme', JSON.stringify(darkTheme));
     }, [darkTheme]);
 
+    const logout = () => {
+        authLogout();
+        setDadosSessao({});
+        // Opcional: redirecionar para login
+        window.location.href = '/login';
+    };
+
     return(
-        <FeedContext.Provider value={{dados, setDados, darkTheme, setDarkTheme, dadosSessao, setDadosSessao}}>
+        <FeedContext.Provider value={{dados, setDados, darkTheme, setDarkTheme, dadosSessao, setDadosSessao, logout}}>
             {children}
         </FeedContext.Provider>
     )

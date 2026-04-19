@@ -1,9 +1,10 @@
+import { getAuthHeaders } from './auth.js';
+
 export default async function FetchPostar({formadata}){
     const res = await fetch(`${process.env.REACT_APP_URL_SITE}/postar`,{
         method:"PUT",
-        credentials:"include",
         headers:{
-            'Content-Type':'application/json'
+            ...getAuthHeaders()
         },
         body:formadata
     })
