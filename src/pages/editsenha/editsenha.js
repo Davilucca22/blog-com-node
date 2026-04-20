@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext,useState } from "react";
 import { IoArrowBackOutline, IoEyeSharp  } from "react-icons/io5";
 import { FaLock } from "react-icons/fa";
 import "./editsenha.css"

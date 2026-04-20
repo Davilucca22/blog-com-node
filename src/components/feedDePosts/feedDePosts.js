@@ -49,7 +49,7 @@ export default function FeedDePosts({ Posts }) {
 
     useEffect(() => {
         postagenRef.current = postagens
-    }, [postagens])
+    }, [postagens]) 
 
     useEffect(() => {
 

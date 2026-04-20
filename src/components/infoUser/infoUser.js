@@ -5,6 +5,7 @@ import { FiMenu } from "react-icons/fi";
 import Modal from "../../components/modalPublico/modal"
 import { FeedContext } from "../../context/FeedContext";
 import { Link } from "react-router-dom";
+import { logout } from "../../APIs/auth";
 import "./infoUser.css"
 
 export default function InfoUser({ objDados, Arrseguindo }) {
@@ -49,7 +50,7 @@ export default function InfoUser({ objDados, Arrseguindo }) {
                                             setSairAtivo(false)
                                         },400);
                                     }}>Cancelar</button>
-                                    <button id="BTNconfirm"><a href="/" >Confirma</a></button>
+                                    <button id="BTNconfirm" onClick={() => logout()}><a href="/" >Confirma</a></button>
                                 </div>
                             </div>
                         </div>

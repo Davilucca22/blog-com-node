@@ -16,7 +16,6 @@ export function useFeed(){
         }catch(e){
             console.log(e)
         }
-
     }
 
     return {Feed}

@@ -1,5 +1,4 @@
 import React, { useState,useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "./Register.css"
 import { toast } from "react-toastify";
 import { IoEyeSharp  } from "react-icons/io5";
@@ -74,7 +73,11 @@ export default function Register() {
                             formData.append('foto',foto) //só envia a foto se tiver um arquivo real
                         }
                         
-                        Register({formData})
+                        const res = await Register({formData})
+                        setmodal(true)
+                        if(res.msgerr){
+                            setmodal(false)
+                        }
 
                     }
                 }

@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import { FetchCurtir } from "../APIs/fetchCurtir";
 
 export function useCurtir(){
