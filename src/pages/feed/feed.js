@@ -16,7 +16,7 @@ export default function Feed() {
     useEffect(() => {
         Sessao() //pega dados do usuario da sessao
         Feed() //feed do usuario
-    }, [])
+    },[])
 
     const [modal, setmodal] = useState(false)
     const [sair, setSair] = useState(false)

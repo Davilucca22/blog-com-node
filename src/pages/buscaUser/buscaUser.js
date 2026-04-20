@@ -22,7 +22,7 @@ export default function BuscaUser() {
             }
         }
         chama()
-    },[nome])
+    }, [nome])
 
     return(
         <main id="contBusca">

@@ -1,8 +1,8 @@
-import {React, useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Menu from "../../components/menu/menu";
 import "./index.css"
 import { CgClose } from "react-icons/cg";
-import  FeedDePosts from "../../components/feedDePosts/feedDePosts"
+import FeedDePosts from "../../components/feedDePosts/feedDePosts"
 import InfoUser from "../../components/infoUser/infoUser";
 import { Link, useParams } from "react-router-dom";
 import { FeedContext } from "../../context/FeedContext";
@@ -23,7 +23,7 @@ export default function PerfilUser() {
 
     useEffect(() => {
         Sessao() //pega dados da sessao do usuario e passa para o contexto
-    },[])
+    }, [])
 
     useEffect(() => {
 
@@ -36,7 +36,7 @@ export default function PerfilUser() {
 
         Ativause()
 
-    },[id])
+    }, [id])
 
     return (
         <div id="conteinerPerfil">
