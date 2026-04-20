@@ -63,7 +63,7 @@ export default function FeedDePosts({ Posts }) {
         }, 8000)
 
         return () => clearInterval(interval)
-    }, [])
+    }, [AttDados])
 
     function curtir(id) {
 

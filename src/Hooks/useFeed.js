@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import FetchFeed from "../APIs/fetchFeed";
 import { FeedContext } from "../context/FeedContext";
 
@@ -6,7 +6,7 @@ export function useFeed(){
 
     const {setDados} = useContext(FeedContext)
 
-    async function Feed(){
+    const Feed = useCallback(async () => {
         try{
             const resp = await FetchFeed()
 
@@ -16,7 +16,7 @@ export function useFeed(){
         }catch(e){
             console.log(e)
         }
-    }
+    },[setDados])
 
     return {Feed}
 }

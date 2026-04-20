@@ -52,7 +52,7 @@ export default function PerfilOutro(){
         }
         AtivaUse()
     
-    }, [id])
+    }, [id,OutroUSer,FeedUser])
 
     useEffect(() => {
         

@@ -1,7 +1,8 @@
+import { useCallback } from "react";
 import FetchFeedUser from "../APIs/fetchFeedUser";
 
 export function useFeedUser(){
-    async function FeedUser({id}){
+    const FeedUser = useCallback(async ({id}) => {
         try{
 
             const res = await FetchFeedUser({id})
@@ -10,7 +11,7 @@ export function useFeedUser(){
         }catch(e){
             console.log(e)
         }
-    }
+    },[])
 
     return {FeedUser}
 

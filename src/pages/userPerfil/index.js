@@ -23,7 +23,7 @@ export default function PerfilUser() {
 
     useEffect(() => {
         Sessao() //pega dados da sessao do usuario e passa para o contexto
-    }, [])
+    }, [Sessao])
 
     useEffect(() => {
 
@@ -36,7 +36,7 @@ export default function PerfilUser() {
 
         Ativause()
 
-    }, [id])
+    }, [id,FeedUser])
 
     return (
         <div id="conteinerPerfil">
