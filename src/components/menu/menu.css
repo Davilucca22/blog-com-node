@@ -8,7 +8,7 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    box-shadow: 2px 2px 3px black;
+    box-shadow: 2px 2px 3px 3px black;
 }
 
 #FooterFeed img{
@@ -16,8 +16,16 @@
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
+    box-shadow: 1px 1px 3px black;
 }
 
+#FooterFeed img:hover{
+   animation: subir forwards 1000ms;    
+}
+
+.contIcon{
+    text-decoration: none;
+}
 
 .icon{
     color: var(--CorBranca);
@@ -25,6 +33,25 @@
     margin-right: 25px;
     width: 40px;
     height: 40px;
+    filter: drop-shadow(1px 1px 3px black);
+}
+
+.icon:hover{
+   animation: subir forwards 1000ms;
+}
+
+@keyframes subir{
+    0%{
+        transform: translateY(-2px);
+    }
+
+    50%{
+        transform: translateY(-4px);
+    }
+
+    100%{
+        transform: translateY(-2px);
+    }
 }
 
 .link{
@@ -33,6 +60,7 @@
 
 @media(min-width:730px){
     #FooterFeed{
+        box-shadow: 2px 3px 3px black;  
         height: 100vh;
         width: 80px;
         justify-content: center;
@@ -45,6 +73,7 @@
         margin: auto 0;
         padding: 5px;
         cursor: pointer;
+        filter: drop-shadow(1px 1px 3px black);
     }
 
     #FooterFeed:hover{

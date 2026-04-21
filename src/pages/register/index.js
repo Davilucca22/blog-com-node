@@ -52,7 +52,7 @@ export default function Register() {
     }
 
 
-    async function EnviaBack(e) { //envia os dados para o backend
+    async function EnviaBack(e) { //envia os dados para o backend 
         e.preventDefault()
 
         try {
@@ -64,8 +64,8 @@ export default function Register() {
                         toast.warning('voce nao tem idade suficiente para usar o app')
                     }else{
                         const formData = new FormData()
-                        formData.append('nome',nome.toUpperCase())
-                        formData.append('email',email.toUpperCase())
+                        formData.append('nome',nome)
+                        formData.append('email',email)
                         formData.append('senha',senha)
                         formData.append('dataNasc',DataNasc)
         

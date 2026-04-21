@@ -34,7 +34,6 @@ export default function FeedDePosts({ Posts }) {
     const [foto, setFoto] = useState(dadosSessao.res?.fotoPerfil || '')
     const [ID, setID] = useState(dadosSessao.res?._id || '')
 
-    const [Vdesktop, setVdesktop] = useState(false)
 
     useEffect(() => {
         setNome(dadosSessao.res?.name || '')
@@ -63,7 +62,7 @@ export default function FeedDePosts({ Posts }) {
         }, 8000)
 
         return () => clearInterval(interval)
-    }, [AttDados])
+    }, [AttDados]) 
 
     function curtir(id) {
 
@@ -142,13 +141,13 @@ export default function FeedDePosts({ Posts }) {
     return (
         <div>
             {postagens.map((val, index) => (
-                <section key={val.post._id} className={Vdesktop ? "conteinerPost desk" :"conteinerPost"} id={`post-${index}`} >
+                <section key={val.post._id} className="conteinerPost" id={`post-${index}`} >
                     {del.length > 0 &&
                         <DeletaPost postID={del} retorna={ZeraDel} />
                     }
-                    <dl className={Vdesktop ? "comentarios desk" : "comentarios"}>
+                    <dl className="comentarios">
 
-                        <div className={Vdesktop ? "cabecalhoPost desk" :"cabecalhoPost"}>
+                        <div className="cabecalhoPost">
                             <div className="nomeEfoto">
                                 <img className="fotoP" src={val.fotoPerfil} alt="foto"></img>
                                 <span onClick={() => val.userId !== ID ? telaUser(val.userId) : ''}>{val.name}</span>
@@ -158,8 +157,8 @@ export default function FeedDePosts({ Posts }) {
                             }
                         </div>
 
-                        <div className={Vdesktop ? "conteinerPublicacao desk" : "conteinerPublicacao"}>
-                            <div className={Vdesktop ? "imgPost desk" :"imgPost"}>
+                        <div className="conteinerPublicacao">
+                            <div className="imgPost">
                                 <img src={val.post.imgURL} id={"post-" + val.post._id} alt={val.post.textoPost}></img>
                                 <div className="tres">
                                     <IoIosHeart onClick={e => curtir(val.post._id)} className={
@@ -170,21 +169,19 @@ export default function FeedDePosts({ Posts }) {
                                     <span className="numLikes" >{val.post.curtidas.length}</span>
                                     <Link to={`#post-${index}`} onClick={ () => {
                                         setverComent(index)
-                                        setVdesktop(true)
                                         }} ><FaRegComment className="iconeComentario"/>
                                     </Link>
                                 </div>
                                 {val.post.textoPost &&
                                     <div>
-                                        <span className={Vdesktop ? "comentPost desk" : "comentPost"}>{val.name}:{val.post.textoPost}</span>
+                                        <span className="comentPost">{val.name}:{val.post.textoPost}</span>
                                     </div>
                                 }
                             </div>
                             {verComent === index &&
-                                <div className={Vdesktop ? "conteinerComent desk" : "conteinerComent"}>
+                                <div className="conteinerComent">
                                     <button type="button" id="sairComent" onClick={() => {
                                         setverComent('')
-                                        setVdesktop(false)
                                     }}>
                                         <AiOutlineClose />
                                     </button>

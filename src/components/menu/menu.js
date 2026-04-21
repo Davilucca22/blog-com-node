@@ -9,7 +9,7 @@ import { FeedContext } from "../../context/FeedContext";
 export default function Menu() {
 
     const {dadosSessao} = useContext(FeedContext)
-
+ 
     return (
         <footer id="FooterFeed">
             <div>
