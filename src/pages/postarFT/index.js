@@ -58,7 +58,7 @@ export default function PostaFT(){
 
     return(
         <div>
-            <main>
+            <main id="mainPostar">
                 {load &&
                     <Loading />
                 }

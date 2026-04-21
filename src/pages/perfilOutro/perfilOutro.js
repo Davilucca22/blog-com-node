@@ -87,7 +87,7 @@ export default function PerfilOutro(){
         const nomeUser = dados.name
         const FotoUser = dados.fotoPerfil
 
-        SeguirUser({id,nomeUser,FotoUser})
+        SeguirUser({IdOutro:id,nameSeguindo:nomeUser,urlFoto:FotoUser})
 
     }
 
@@ -104,7 +104,7 @@ export default function PerfilOutro(){
     }
     
     return(
-        <main>
+        <main id='mainOutro'> 
                 {zoomFT &&
                 <nav id="conteinerZoom">
                     <div id="divSair">

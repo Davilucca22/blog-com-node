@@ -1,6 +1,6 @@
 import { getAuthHeaders } from './auth.js';
 
-export default async function FetchSeguir({id,nome,fotoPerfil}){
+export default async function FetchSeguir({IdOutro,nameSeguindo,urlFoto}){
     const res = await fetch(`${process.env.REACT_APP_URL_SITE}/Seguir`,{
         method:"PUT",
         headers:{
@@ -8,9 +8,9 @@ export default async function FetchSeguir({id,nome,fotoPerfil}){
             ...getAuthHeaders()
         },
         body:JSON.stringify({
-            IdOutro:id,
-            nameSeguindo:nome,
-            urlFoto:fotoPerfil
+            IdOutro,
+            nameSeguindo,
+            urlFoto
         })
     })
 

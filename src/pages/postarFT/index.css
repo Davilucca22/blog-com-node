@@ -1,3 +1,7 @@
+#mainPostar{
+    height: 100dvh;
+}
+
 #conteinerAddfoto{
     display: flex;
     flex-direction: column;

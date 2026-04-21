@@ -1,3 +1,7 @@
+#mainOutro{
+    height: 100dvh;
+}
+
 #contVoltaFeed{
     position: fixed;
     z-index: 1001;

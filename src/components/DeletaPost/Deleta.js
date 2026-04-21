@@ -18,7 +18,7 @@ export default function DeletaPost({postID, retorna}){
         if(resp){
             toast.success(resp.msg)
             setInterval(() => {
-                window.location.reload()
+                window.location.reload() 
             },1000)
         }
     }
