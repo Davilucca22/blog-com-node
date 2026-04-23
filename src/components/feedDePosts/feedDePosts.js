@@ -9,7 +9,7 @@ import { FaRegComment } from "react-icons/fa";
 import { CgMoreVerticalAlt } from "react-icons/cg";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 
-import { FeedContext } from "../../context/FeedContext";
+import { FeedContext } from "../../context/FeedContext"; 
 import { useAttDados } from "../../Hooks/useAttDados";
 import { useCurtir } from "../../Hooks/useCurtir";
 import { useComentario } from "../../Hooks/useComentario";

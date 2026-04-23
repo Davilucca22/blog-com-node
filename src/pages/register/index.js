@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Register.css"
 import { toast } from "react-toastify";
 import { IoEyeSharp  } from "react-icons/io5";
@@ -17,7 +18,7 @@ export default function Register() {
     const [Preview,setPreview] = useState('./assets/semfoto.jpeg')
     const [idade,setIdade] = useState('')
     const [modal,setmodal] = useState(false)
-    const [showBTN,setShowBTN] = useState(false)
+    const [showBTN,setShowBTN] = useState(false) 
 
     useEffect(() => {
         return () => Preview && URL.revokeObjectURL(Preview)
@@ -75,7 +76,7 @@ export default function Register() {
                         
                         const res = await Register({formData})
                         setmodal(true)
-                        if(res.msgerr){
+                        if(res){
                             setmodal(false)
                         }
 
@@ -144,7 +145,7 @@ export default function Register() {
                         </label>
                             <input className="inputForm" type="text" value={DataNasc} onChange={e => formataData(e) }></input>
                         <button id="botaoEnviar" type="submit">CRIAR CONTA</button>
-                        <span id="login">Ja tem uma Conta?<a href="/">Faça Login</a></span>
+                        <span id="login">Ja tem uma Conta?<Link to="/">Faça Login</Link></span>
                     </div>
                 </form>
                 <img id="imgDesktopVersion" src="./assets/foto1.jfif" alt="foto de paisagem"></img>

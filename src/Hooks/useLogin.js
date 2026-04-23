@@ -10,7 +10,7 @@ export function useLogin(){
 
     async function login({email, senha}) {
         try{
-            const res = await FetchLogin({email,senha});
+            const res = await FetchLogin({email,senha});  
 
             if(res.token){
                 // Armazenar dados da sessão
