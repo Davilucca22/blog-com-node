@@ -76,7 +76,7 @@ export default function Register() {
                         
                         const res = await Register({formData})
                         setmodal(true)
-                        if(res){
+                        if(res.msgerr){
                             setmodal(false)
                         }
 
