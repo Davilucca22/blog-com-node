@@ -1,6 +1,6 @@
 import { React, useState} from "react"
 import { IoEyeSharp  } from "react-icons/io5";
-
+import Loading from "../../components/loading/loading.js";
 import "./login.css"
 import { useLogin } from "../../Hooks/useLogin.js";
 
@@ -10,13 +10,18 @@ export default function Login(){
     const [email,setemail] = useState('')
     const [senha,setsenha] = useState('')
     const [showBTN,setShowBTN] = useState('')
+    const [modal,setModal] = useState(false)
 
     async function enviaBack(e){
         e.preventDefault()
 
         if(email && senha){
 
-            login({email:email, senha})
+            setModal(true)
+            const res = await login({email:email, senha})
+            if(res?.msgerr){
+                setModal(false)
+            }
 
             setemail('')
             setsenha('')
@@ -26,6 +31,9 @@ export default function Login(){
     return( 
         <main id="MainLogin">  
             <div id="telaPreta1">
+            {modal &&
+            <Loading />
+            }
             <div id="ConteinerForm">
                     <form id="form" onSubmit={e => enviaBack(e)}>
                             <label>Email:</label>

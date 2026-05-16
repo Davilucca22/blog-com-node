@@ -18,12 +18,12 @@ export function useRegister(){
                 navigate('/feed',{replace:true})
             }else{
                 toast.error(res.msgerr || 'Erro ao Criar Conta')
-                return
+                return res
             }
 
         }catch(e){
             toast.error("Erro ao criar usuario")
-            console.log(e)
+            return { msgerr: 'Erro ao criar usuario' }
         }
     }
     return { Register }

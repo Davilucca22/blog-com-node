@@ -24,7 +24,7 @@ export function FeedProvider({children}){
         window.location.href = '/login';
     };
 
-    return(
+    return( 
         <FeedContext.Provider value={{dados, setDados, darkTheme, setDarkTheme, dadosSessao, setDadosSessao, logout}}>
             {children}
         </FeedContext.Provider>

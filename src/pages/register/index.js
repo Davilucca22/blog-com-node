@@ -74,9 +74,9 @@ export default function Register() {
                             formData.append('foto',foto) //só envia a foto se tiver um arquivo real
                         }
                         
-                        const res = await Register({formData})
                         setmodal(true)
-                        if(res){
+                        const res = await Register({formData})
+                        if(res?.msgerr){
                             setmodal(false)
                         }
 

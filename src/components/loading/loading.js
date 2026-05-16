@@ -5,7 +5,7 @@ export default function Loading(){
     return(
         <div id="modalPost">
             <div id="loading"></div>
-            <p>ENVIANDO POST...</p>
+            <p>ENVIANDO...</p>
         </div>
     )
 }

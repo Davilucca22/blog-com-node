@@ -19,9 +19,11 @@ export function useLogin(){
                 navigate('/feed',{replace:true});
             }else{
                 toast.error(res.msgerr || 'Erro no login');
+                return res
             }
         }catch(e){
             toast.error('Falha no Login!');
+            return { msgerr: 'Falha no Login!' }
         }
     }
 
