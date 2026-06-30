@@ -1,217 +1,285 @@
-.cabecalhoPost{
-    height: 60px;
+.conteinerPost {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 24px;
+    padding: 0 10px;
+}
+
+.comentarios {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    background-color: var(--CorDoBotao);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.cabecalhoPost {
+    height: 64px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-top: 5px;
+    padding: 0 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.nomeEfoto img{
-    box-shadow: 1px 1px 3px solid black;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 5px;
+body.dark-theme .cabecalhoPost {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.nomeEfoto{
+.nomeEfoto {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    gap: 12px;
 }
 
-.tresPontos{
-    cursor: pointer;
-    width: 20px;
-    height: 20px;
-    margin-left: 5px;
-}
-
-.conteinerPost{
-    display: flex;
-    justify-content: center;
-    width: 100vw;
-    margin-bottom: 10px;
-}
-
-.comentarios{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.imgPost img{
-    box-shadow: 1px 1px 3px solid black;
-    width: 100%;
-    height: max-content;
-    object-fit: contain;
-    margin: 5px auto;
-    background-color: var(--FundoFoto);
-}
-
-.tres{
-    height: 30px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-@keyframes pular{
-    0% {scale: 1.1;}
-    50% {scale: 1.2;}
-    100%{scale: 1;}
-}
-
-.like{
-    width: 25px;
-    height: 25px;
-    margin: 0 2px;
-    cursor: pointer;
-}
-
-.like.ativo{
-    color: red;
-    animation: pular forwards 500ms;
-}
-
-.numLikes{
-    margin: 0 2px;
-}
-
-.iconeComentario{
-    width: 25px;
-    height: 25px;
-    color: var(--CorTexto);
-    margin-left: 5px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.iconeComentario:hover{
-    transform: scale(1.1);
-}
-
-.comentPost{
-    margin-left: 5px;
-    width: 100%;
-}
-
-.conteinerPublicacao{
-    position: relative;
-}
-
-.conteinerComent{
-    position: fixed;
-    background-color: var(--CorSegundaria);
-    width: 400px;
-    height: 500px;
-    margin: 0 auto;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 1010;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-#sairComent{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    background-color: var(--CorSegundaria);
-    width: 100%;
-    height: 40px;
-    padding: 5px 10px;
-    cursor: pointer;
-    flex-shrink: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-#sairComent svg{
-    width: 24px;
-    height: 24px;
-}
-
-#feedComent{
-    flex: 1;
-    overflow-y: auto;
-    padding: 15px 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.contComentario{
-    display: flex;
-    gap: 10px;
-}
-
-.fotoDonoComentario{
+.nomeEfoto img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 1px 1px 3px black;
-    flex-shrink: 0;
+    border: 2px solid var(--CorPrimaria);
 }
 
-.TextoComentario{
-    line-break: anywhere;
-    font-weight: 500;
-}
-
-.nomeDonoComentario{
-    color: var(--CorTitulos);
+.nomeEfoto span {
     font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    color: var(--CorTitulos);
 }
 
-#digitaComent{
-    position: absolute;
+.tresPontos {
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--CorTexto);
+    transition: transform var(--transition-fast);
+}
+
+.tresPontos:hover {
+    transform: scale(1.2);
+}
+
+.conteinerPublicacao {
+    position: relative;
+    padding-bottom: 16px;
+}
+
+.imgPost img {
+    width: 100%;
+    max-height: 600px;
+    object-fit: cover;
+    background-color: var(--FundoFoto);
+}
+
+.tres {
+    height: 48px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 16px;
+    gap: 8px;
+}
+
+@keyframes pular {
+    0% { transform: scale(1.1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+.like {
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.like:hover {
+    transform: scale(1.1);
+}
+
+.like.ativo {
+    color: #ff3b30; /* Vermelho moderno */
+    animation: pular forwards 400ms;
+}
+
+.numLikes {
+    font-weight: 600;
+    margin-right: 12px;
+}
+
+.iconeComentario {
+    width: 26px;
+    height: 26px;
+    color: var(--CorTexto);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.iconeComentario:hover {
+    transform: scale(1.1);
+}
+
+.comentPost {
+    display: block;
+    padding: 0 16px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.comentPost span.author {
+    font-weight: 600;
+    margin-right: 6px;
+}
+
+/* Comentários Bottom Sheet Overlay */
+.conteinerComent {
+    position: fixed;
+    background-color: var(--CorDoBotao);
+    width: 100%;
+    height: 70vh;
     bottom: 0;
     left: 0;
-    right: 0;
+    z-index: 1010;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-top-left-radius: var(--radius-lg);
+    border-top-right-radius: var(--radius-lg);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.2);
+    animation: slideUpModal 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+#sairComent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
     width: 100%;
-    height: 50px;
-    background-color: whitesmoke;
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    color: var(--CorTexto);
+}
+
+#sairComent svg {
+    width: 24px;
+    height: 24px;
+}
+
+#feedComent {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contComentario {
+    display: flex;
+    gap: 12px;
+}
+
+.fotoDonoComentario {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.infoComent {
+    background-color: rgba(0, 0, 0, 0.03);
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    border-top-left-radius: 4px;
+}
+
+body.dark-theme .infoComent {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.nomeDonoComentario {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.TextoComentario {
+    font-size: 0.9rem;
+    line-break: anywhere;
+}
+
+#digitaComent {
+    height: 60px;
+    background-color: var(--CorDoBotao);
     display: flex;
     align-items: center;
-    flex-shrink: 0;
+    padding: 10px 20px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
+    gap: 10px;
 }
 
-#digitaComent input{
+#digitaComent input {
     flex: 1;
-    height: 100%;
-    font-size: 12px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    padding: 0 16px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.03);
+    color: var(--CorTexto);
     outline: none;
-    padding-left: 10px;
-    border: none;
-    background-color: white;
+    transition: border-color var(--transition-fast);
 }
 
-#digitaComent button{
-    width: 50px;
-    height: 100%;
-    background-color: var(--CorPrimaria);
-    color: var(--CorTexto);
-    border: none;
+body.dark-theme #digitaComent input {
+    background-color: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.1);
+}
+
+#digitaComent input:focus {
+    border-color: var(--CorTerciaria);
+}
+
+#digitaComent button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--CorTerciaria);
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+    box-shadow: var(--shadow-sm);
 }
 
-@media (min-width:730px){
-    .comentarios{
-        width: 400px;
+#digitaComent button:hover {
+    background-color: var(--CorSegundaria);
+    transform: translateY(-2px);
+}
+
+@media (min-width: 768px) {
+    .conteinerPost {
+        margin-top: 24px;
     }
 
-    #digitaComent{
-        position: relative;
+    .conteinerComent {
+        width: 400px;
+        height: 600px;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        border-radius: var(--radius-lg);
+        animation: fadeInScale 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeInScale {
+        from { opacity: 0; transform: translate(-50%, 40%) scale(0.95); }
+        to { opacity: 1; transform: translate(-50%, 50%) scale(1); }
     }
 }

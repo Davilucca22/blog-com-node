@@ -1,56 +1,50 @@
-#conteinerInfo{
-    height: 100dvh;
-}
+/* Usando classes do userEdit.css para reaproveitar estilos (edit-page-container, edit-header, back-btn) já definidos se forem globais, mas aqui adicionaremos locais se precisar. */
 
-#conteinerForm{
-    margin: 150px auto;
-    width: 300px;
+#conteinerForm {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 24px;
+    max-width: 600px;
+    margin: 40px auto;
+    gap: 16px;
 }
 
-#conteinerForm label{
-    width: 100%;
-    font-size: 12px;
-    font-weight: 500;
-    margin-bottom: 5px;
-}
-
-#conteinerForm input{
-    width: 100%;
-    height: 20px;
-    padding: 5px;
-    background-color: var(--CorPrimaria);
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--CorDoBotao);
-    outline: none;
-}
-
-#conteinerForm button{
-    background-color: var(--CorSegundaria);
-    color: var(--CorDoBotao);
-    font-size: 20px;
-    height: 50px;
-    width: 250px;
-    border-radius: 10px;
-}
-
-#backFeed{
+.edit-toggle-btn {
+    margin-left: auto;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    gap: 6px;
+    background: transparent;
+    color: var(--CorTerciaria);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    transition: background-color var(--transition-fast);
 }
 
-#backFeed svg{
-    width: 20px;
-    height: 20px;
-    color: black;
+.edit-toggle-btn:hover {
+    background-color: rgba(184, 219, 217, 0.15); /* var(--CorPrimaria) com opacidade */
 }
 
-#backFeed span{
-    font-weight: 700;
-    cursor: pointer;
+.edit-toggle-btn svg {
+    font-size: 1.1rem;
+}
+
+#conteinerForm .btn-primary {
+    margin-top: 16px;
+    width: 100%;
+}
+
+.input-group {
+    width: 100%;
+}
+
+/* Quando desabilitado, deixa um pouco translúcido */
+.input-field:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: transparent;
+    border: 1px solid var(--CorPrimaria);
 }

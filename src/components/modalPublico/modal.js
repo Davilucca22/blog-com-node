@@ -19,39 +19,40 @@ export default function Modal({publico, verModal, DevolveProPai}){
         navigate(`/details/${id}`)
     }
 
-    function TrataDevolverProPai(){
-        if(Ver){
-            DevolveProPai(false)
-            setVer(false)
-        }
+    function fecharModal(){
+        setMudaclasse(true)
+        setTimeout(() => {
+            setMudaclasse(false)
+            if(Ver){
+                DevolveProPai(false)
+                setVer(false)
+            }
+        },300)
     }
 
     return( 
-        <aside >
-        {Ver &&
-            <nav className={mudaClasse ? "conteinerModalAtivo" :"conteinerModal"}>
-                <div id="divaleatoria">
-                    <span onClick={() => {
-                        setMudaclasse(true)
-                        setTimeout(() => {
-                            setMudaclasse(false)
-                            TrataDevolverProPai()
-                        },300)
-                    }}><GoX id="sair" /></span>
-                </div>
-                <ul id="listaPublico">
-                    {Pub.map(pessoa => (
-                        <li className="pessoa">
-                            <img className="imgSeg" src={pessoa.urlFoto} alt="foto de perfil do usuario"></img>
-                            <span onClick={() => {
-                                telaUser(pessoa.IDseguindo || pessoa.IDseguidor)
-                                TrataDevolverProPai()
-                        }}>{pessoa.nameSeguindo || pessoa.nameSeguidor}</span>
-                        </li>
-                    ))}
-                </ul>
-            </nav>
-        }
-       </aside> 
+        <>
+            {Ver && (
+                <>
+                    <div className={`modal-overlay-bg ${mudaClasse ? 'closing' : ''}`} onClick={fecharModal}></div>
+                    <aside className={mudaClasse ? "conteinerModalAtivo" :"conteinerModal"}>
+                        <div id="divaleatoria">
+                            <GoX id="sair" onClick={fecharModal} />
+                        </div>
+                        <ul id="listaPublico">
+                            {Pub.map((pessoa, index) => (
+                                <li className="pessoa" key={index} onClick={() => {
+                                    telaUser(pessoa.IDseguindo || pessoa.IDseguidor)
+                                    fecharModal()
+                                }}>
+                                    <img className="imgSeg" src={pessoa.urlFoto || "https://via.placeholder.com/150"} alt="foto de perfil do usuario"></img>
+                                    <span>{pessoa.nameSeguindo || pessoa.nameSeguidor}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </aside>
+                </>
+            )}
+        </>
     )
 }

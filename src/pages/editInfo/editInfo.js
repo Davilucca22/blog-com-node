@@ -1,47 +1,41 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./editInfo.css"
-import { IoArrowBackOutline } from "react-icons/io5";
+import { IoArrowBackOutline, IoCreateOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { FeedContext } from "../../context/FeedContext";
 import { useEditInfo } from "../../Hooks/useEditInfo";
 
 export default function EditInfo() {
-
     const {dadosSessao} = useContext(FeedContext)
-
     const {EditaInfo} = useEditInfo()
+    
     const [email,setemail] = useState(dadosSessao.res?.email || '')
     const [dataNasc,setdataNasc] = useState(dadosSessao.res?.dataNasc  || '')
     const [active,setactive] = useState(true)
     const [idade,setIdade] = useState('')
 
     useEffect(() => {
-        CalcIdade(dataNasc) //calcula a idade assim que recebe a data de nascimento do BD
+        CalcIdade(dataNasc) 
     },[dataNasc])
 
     function formataData(e){
-       let v = e.target.value.replace(/\D/g, "") //só numeros
-
-        if(v.length > 2) v = v.slice(0,2) + "/" + v.slice(2) //insere a barra a partir do 2 numero
-        if(v.length > 5) v = v.slice(0,5) + "/" + v.slice(5,9) //insere a barra a partir do 5 numero
+       let v = e.target.value.replace(/\D/g, "") 
+        if(v.length > 2) v = v.slice(0,2) + "/" + v.slice(2) 
+        if(v.length > 5) v = v.slice(0,5) + "/" + v.slice(5,9) 
         
-        const [dia, mes, ano] = v.split('/') //divide a data pelas barras
-
+        const [dia, mes, ano] = v.split('/') 
         if(ano && ano.length === 4){
             const data = new Date(ano, mes - 1, dia)
             CalcIdade(data)
         }
-
         setdataNasc(v)
     }
 
     function CalcIdade(data){
         const hoje = new Date()
         const nascimento = new Date(data)
-
         let tempodevida = hoje.getFullYear() - nascimento.getFullYear()
-
         let mes = hoje.getMonth() - nascimento.getMonth()
         if(mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) tempodevida--
         setIdade(tempodevida)
@@ -49,10 +43,10 @@ export default function EditInfo() {
 
     async function EnviaBack(e){
         e.preventDefault()
-
         if(idade >= 18){
             EditaInfo({dataNasc,email})
             setactive(true)
+            toast.success("Informações atualizadas com sucesso!")
         }else{
             toast.warning('Voce precisa ser maior de idade para usar o app')
             return
@@ -60,25 +54,29 @@ export default function EditInfo() {
     }
 
     return(
-        <main id="conteinerInfo">
-            <div id="backFeed">
-                <Link to={`/Perfil/${dadosSessao.res?._id}`}>
+        <main className="edit-page-container">
+            <div className="edit-header">
+                <Link to={`/Perfil/${dadosSessao.res?._id}`} className="back-btn">
                     <IoArrowBackOutline/>
                 </Link>
-                <span onClick={() => {
-                    if(active){
-                        setactive(false)
-                    }else{
-                        setactive(true)
-                    }
-                }}>EDITAR</span>    
+                <h2>Informações Pessoais</h2>
+                <button className="edit-toggle-btn" onClick={() => setactive(!active)}>
+                    <IoCreateOutline /> {active ? "EDITAR" : "CANCELAR"}
+                </button>
             </div>
-            <form onSubmit={e => {
-                EnviaBack(e)
-                }} id="conteinerForm">
-                <label for="">DATA DE NASCIMENTO<input type="text" placeholder="DATA DE NASCIMENTO..." value={dataNasc} onChange={e => formataData(e)} disabled={active}></input></label>
-                <label for="">E-MAIL<input type="email" placeholder="SEU MELHOR EMAIL" value={email} onChange={e => setemail(e.target.value)} disabled={active}></input></label>
-                <button type="submit">SALVAR</button>
+            
+            <form onSubmit={EnviaBack} id="conteinerForm">
+                <div className="input-group">
+                    <label>Data de Nascimento</label>
+                    <input className="input-field" type="text" placeholder="DD/MM/AAAA" value={dataNasc} onChange={e => formataData(e)} disabled={active}></input>
+                </div>
+                
+                <div className="input-group">
+                    <label>E-mail</label>
+                    <input className="input-field" type="email" placeholder="Seu melhor email" value={email} onChange={e => setemail(e.target.value)} disabled={active}></input>
+                </div>
+                
+                {!active && <button type="submit" className="btn-primary">SALVAR ALTERAÇÕES</button>}
             </form>
         </main>
     )

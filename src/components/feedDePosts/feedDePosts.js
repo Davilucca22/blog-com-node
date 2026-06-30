@@ -174,43 +174,49 @@ export default function FeedDePosts({ Posts }) {
                                 </div>
                                 {val.post.textoPost &&
                                     <div>
-                                        <span className="comentPost">{val.name}:{val.post.textoPost}</span>
+                                        <span className="comentPost">
+                                            <span className="author">{val.name}</span>
+                                            {val.post.textoPost}
+                                        </span>
                                     </div>
                                 }
                             </div>
                             {verComent === index &&
-                                <div className="conteinerComent">
-                                    <button type="button" id="sairComent" onClick={() => {
-                                        setverComent('')
-                                    }}>
-                                        <AiOutlineClose />
-                                    </button>
-                                    <div key={val._id} id="feedComent">
-                                        {val.post.textoPost &&
-                                            <div className="contComentario">
-                                                <img className="fotoDonoComentario" src={val.fotoPerfil} alt="foto do dono do comentario"></img>
-                                                <div className="infoComent">
-                                                    <dt className="nomeDonoComentario">{val.name}</dt>
-                                                    <dd className="TextoComentario">{val.post.textoPost}</dd>
+                                <>
+                                    <div className="modal-overlay-bg" onClick={() => setverComent('')}></div>
+                                    <div className="conteinerComent">
+                                        <button type="button" id="sairComent" onClick={() => {
+                                            setverComent('')
+                                        }}>
+                                            <AiOutlineClose />
+                                        </button>
+                                        <div key={val._id} id="feedComent">
+                                            {val.post.textoPost &&
+                                                <div className="contComentario">
+                                                    <img className="fotoDonoComentario" src={val.fotoPerfil} alt="foto do dono do comentario"></img>
+                                                    <div className="infoComent">
+                                                        <dt className="nomeDonoComentario">{val.name}</dt>
+                                                        <dd className="TextoComentario">{val.post.textoPost}</dd>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        }
-                                        {val.post.comentarios?.slice().reverse().map(item => (
-                                            <div className="contComentario" key={item._id || item.donoComentario}>
-                                                <img className="fotoDonoComentario" src={item.fotoDono} alt="foto do dono do comentario"></img>
-                                                <div className="infoComent">
-                                                    <dt className="nomeDonoComentario">{item.donoComentario}</dt>
-                                                    <dd className="TextoComentario">{item.textoComentario}</dd>
+                                            }
+                                            {val.post.comentarios?.slice().reverse().map(item => (
+                                                <div className="contComentario" key={item._id || item.donoComentario}>
+                                                    <img className="fotoDonoComentario" src={item.fotoDono} alt="foto do dono do comentario"></img>
+                                                    <div className="infoComent">
+                                                        <dt className="nomeDonoComentario">{item.donoComentario}</dt>
+                                                        <dd className="TextoComentario">{item.textoComentario}</dd>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        ))}
-                                        <div id="vazio"></div>
+                                            ))}
+                                            <div id="vazio"></div>
+                                        </div>
+                                        <form id="digitaComent" onSubmit={e => Addcomentario(e, val.post._id)}>
+                                            <input type="text" placeholder="Adicione um comentário..." value={textComent} onChange={e => setTextComent(e.target.value)} ></input>
+                                            <button type="submit"><AiOutlineCheck /></button>
+                                        </form>
                                     </div>
-                                    <form id="digitaComent" onSubmit={e => Addcomentario(e, val.post._id)}>
-                                        <input type="text" placeholder="digite aqui...." value={textComent} onChange={e => setTextComent(e.target.value)} ></input>
-                                        <button type="submit"><AiOutlineCheck /></button>
-                                    </form>
-                                </div>
+                                </>
                             }
                         </div>
                     </dl>

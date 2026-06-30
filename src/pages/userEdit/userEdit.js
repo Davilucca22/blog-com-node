@@ -10,7 +10,6 @@ import { useEdit } from "../../Hooks/useEdit";
 export default function UserEdit(){
 
     const {dadosSessao} = useContext(FeedContext)
-
     const {Editar} = useEdit()
 
     const [nome,setnome] = useState(dadosSessao.res?.name || '')
@@ -32,52 +31,63 @@ export default function UserEdit(){
         
         if(nome){
             formdata.append("nome",nome)
-            console.log(nome, "no formdata")
         }else{
             toast.warning("preencha o nome de usuario")
             return
         }
         
         formdata.append("bio",bio)
-        formdata.append("foto",dadosSessao.res?.fotoPerfil) //foto atual
-        console.log("bio e foto no formdata")
+        formdata.append("foto",dadosSessao.res?.fotoPerfil)
         
         if(novafoto){
-            formdata.append("novafoto",novafoto) //se tiver uma nova foto, ela sera enviada para o banco de dados
+            formdata.append("novafoto",novafoto)
         }
 
+        setload(true)
         const res = await Editar({formdata})
         if(res){
-            setload(false) //esconde a janela de loading
-            toast.success('dados enviados') 
+            setload(false)
+            toast.success('dados atualizados com sucesso') 
+        }else{
+            setload(false)
         }
     }
 
     return(
-        <main>
-            {load && 
-               <Loading /> //tela de load
-            }
+        <main className="edit-page-container">
+            {load && <Loading />}
 
-            <div id="backtoFeed"><Link to={`/Perfil/${dadosSessao.res?._id}`}><IoArrowBackOutline /></Link></div>
-            <form id="formularioUser" onSubmit={e => {
-                EnviaBack(e)
-                //setload(true)
-                }}>
+            <div className="edit-header">
+                <Link to={`/Perfil/${dadosSessao.res?._id}`} className="back-btn">
+                    <IoArrowBackOutline />
+                </Link>
+                <h2>Editar Perfil</h2>
+            </div>
+            
+            <form id="formularioUser" onSubmit={EnviaBack}>
                 <div id="conteinerFTuser">
-                        <img id="imgUser" src={previw} alt="foto do usuario"></img>
-                        <input type="file" onChange={e => {
-                            const file = e.target.files[0]
-                            setnovafoto(file) //mostra a janela de loading
-                            if(file){
-                                setpreview(URL.createObjectURL(file))
-                            }
-                        }}></input>
+                    <img id="imgUser" src={previw} alt="foto do usuario"></img>
+                    <input type="file" title="Alterar foto" onChange={e => {
+                        const file = e.target.files[0]
+                        setnovafoto(file) 
+                        if(file){
+                            setpreview(URL.createObjectURL(file))
+                        }
+                    }}></input>
                 </div>
+                
                 <div id="conteinerInputs">
-                    <input type="text" placeholder="nome de usuario" value={nome} onChange={e => setnome(e.target.value)}></input>
-                    <textarea id="biografia" type="text" placeholder="descreva a sua pessoa..." value={bio} onChange={e => setbio(e.target.value)}></textarea>
-                    <button type="submit">SALVAR</button>
+                    <div className="input-group">
+                        <label>Nome de Usuário</label>
+                        <input className="input-field" type="text" placeholder="Nome de usuário" value={nome} onChange={e => setnome(e.target.value)} />
+                    </div>
+                    
+                    <div className="input-group">
+                        <label>Biografia</label>
+                        <textarea className="input-field" id="biografia" placeholder="Descreva um pouco sobre você..." value={bio} onChange={e => setbio(e.target.value)}></textarea>
+                    </div>
+                    
+                    <button type="submit" className="btn-primary">SALVAR ALTERAÇÕES</button>
                 </div>
             </form>
         </main>
